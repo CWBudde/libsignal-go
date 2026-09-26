@@ -237,20 +237,27 @@ func TestCheckMiscselect(t *testing.T) {
 	}
 }
 
-// cdsiHandshake is the recorded CDSI attestation (cds2 ClientHandshakeStart
-// fields evidence = 2, endorsement = 3) with its time, MRENCLAVE and
-// accepted advisories.
-type cdsiHandshake struct {
+// recordedHandshake is a recorded attestation (cds2/svr2
+// ClientHandshakeStart fields evidence = 2, endorsement = 3) with its time,
+// MRENCLAVE and accepted advisories.
+type recordedHandshake struct {
 	evidence, endorsements []byte
 	now                    time.Time
 	mrenclave              [32]byte
 	advisories             []string
 }
 
-func loadCDSI(t *testing.T) cdsiHandshake {
+func loadCDSI(t *testing.T) recordedHandshake {
 	t.Helper()
-	var h cdsiHandshake
-	msg := readTestdata(t, "cdsi.handshakestart")
+	return loadHandshake(t, "cdsi")
+}
+
+// loadHandshake reads name.handshakestart, .timestamp, .mrenclave and
+// .advisories.
+func loadHandshake(t *testing.T, name string) recordedHandshake {
+	t.Helper()
+	var h recordedHandshake
+	msg := readTestdata(t, name+".handshakestart")
 	for len(msg) > 0 {
 		num, typ, n := protowire.ConsumeTag(msg)
 		if n < 0 {
@@ -272,10 +279,10 @@ func loadCDSI(t *testing.T) cdsiHandshake {
 			h.endorsements = v
 		}
 	}
-	ts := binary.BigEndian.Uint64(readTestdata(t, "cdsi.timestamp"))
-	h.now = time.Unix(int64(ts), 0) //nolint:gosec // G115: a recorded 2024 timestamp
-	h.mrenclave = [32]byte(readTestdata(t, "cdsi.mrenclave"))
-	h.advisories = strings.Split(string(readTestdata(t, "cdsi.advisories")), "\n")
+	ts := binary.BigEndian.Uint64(readTestdata(t, name+".timestamp"))
+	h.now = time.Unix(int64(ts), 0) //nolint:gosec // G115: a recorded timestamp
+	h.mrenclave = [32]byte(readTestdata(t, name+".mrenclave"))
+	h.advisories = strings.Split(string(readTestdata(t, name+".advisories")), "\n")
 	return h
 }
 

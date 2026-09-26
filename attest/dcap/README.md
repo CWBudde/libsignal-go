@@ -51,8 +51,9 @@ enclave's custom claims. The pieces:
   (`constants.rs`); raft configs and SVR-specific TCB exceptions are not here.
 - `AttestationMetrics`: the validity timestamps upstream reports.
 
-Not yet ported: upstream's test-only acceptance of TCB evaluation data number
-12 (`cds2_test`/`dcap_v3` blobs, 9.2 item 4) and the SVR2/CDS2 handshakes.
+Upstream's test-only acceptance of TCB evaluation data number 12 is an
+unexported switch that only this package's tests turn on. The SVR2/CDS2
+handshakes (Noise, raft config) are not here.
 
 Tests port every upstream test of these files under its upstream name
 (`sort_*`, `validate_*`, `valid_quote_from_disk`, `isv_sig_*`, `qe_sig_*`,
@@ -63,4 +64,7 @@ certificates, see `fakes_test.go`; the `test_verify_remote_attestation*`
 cases use the recorded CDSI handshake). `TestIntelPCKChain` validates the
 recorded Intel PCK chain against the recorded CRLs as `verify_certificates`
 does. Further cases cover MRENCLAVE and advisory policy, expiry boundaries,
-tampered blobs and the strict JSON decoding.
+tampered blobs and the strict JSON decoding. `TestRecordedVectors` runs every
+recorded blob of upstream's `tests/data` (`cds2_test` at the `test_clock_skew`
+times, `dcap_v3`, `dcap-expired`, `svr2`) with tampered quote, expiry and
+wrong measurement cases, each against the outcome upstream gives.
