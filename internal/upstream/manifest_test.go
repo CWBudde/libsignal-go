@@ -13,8 +13,8 @@ func TestManifestTracksRequiredUpstreamDomains(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Load: %v", err)
 	}
-	if manifest.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", manifest.UpstreamTag)
+	if manifest.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", manifest.UpstreamTag)
 	}
 
 	byName := manifest.ByDomain()
@@ -98,7 +98,7 @@ func TestManifestStructuralRowsDoNotOverclaim(t *testing.T) {
 
 func TestValidateRejectsOfficialAppInteropClaims(t *testing.T) {
 	err := Validate(Manifest{
-		UpstreamTag: "v0.96.4",
+		UpstreamTag: "v0.102.2",
 		Domains: []Domain{{
 			Name:                    "account-keys",
 			UpstreamPath:            "rust/account-keys",

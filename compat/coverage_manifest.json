@@ -1,5 +1,5 @@
 {
-  "upstream_tag": "v0.96.4",
+  "upstream_tag": "v0.102.2",
   "domains": [
     {
       "name": "account-keys",

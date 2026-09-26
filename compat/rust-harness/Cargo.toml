@@ -19,15 +19,15 @@ edition = "2021"
 members = ["."]
 
 [dependencies]
-# Pinned to the current Stage-2 mainline-compat target. v0.96.4 is the latest
-# upstream release reviewed on 2026-06-30. Its v0.96.0..v0.96.4 protocol-core
+# Pinned to the current Stage-2 mainline-compat target. v0.102.2 is the latest
+# upstream release reviewed on 2026-06-30. Its v0.96.0..v0.102.2 protocol-core
 # delta is limited to inactive ML-KEM-1024 parameter metadata; the rest is
 # net/client, bridge, and zkgroup API surface outside this module's protocol-core
 # scope. The rand stack must match upstream's (rand 0.9 family) so a seeded
 # ChaCha20Rng satisfies the rand_core 0.9 CryptoRng/RngCore bounds the libsignal
 # APIs take.
-libsignal-protocol = { git = "https://github.com/signalapp/libsignal", tag = "v0.96.4", package = "libsignal-protocol" }
-usernames = { git = "https://github.com/signalapp/libsignal", tag = "v0.96.4", package = "usernames" }
+libsignal-protocol = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "libsignal-protocol" }
+usernames = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "usernames" }
 rand = "0.9"
 rand_chacha = "0.9"
 rand_core = "0.9"
@@ -37,7 +37,7 @@ rand_core = "0.9"
 futures-util = "0.3"
 # Crypto primitives for the hkdf domain: the chain/root/message-key and
 # pqxdh-secret derivations are pub(crate) upstream, so the harness reproduces
-# them against the same crate versions, matching the v0.96.4 source exactly
+# them against the same crate versions, matching the v0.102.2 source exactly
 # (these version-stable formulas are unchanged from v0.91.0 — the hkdf vectors
 # are byte-identical across the re-pin).
 hkdf = "0.12"
@@ -51,7 +51,7 @@ uuid = "1"
 # store) to completion in the interop RPC dispatch and the groups vectors.
 futures = "0.3"
 # The incremental ML-KEM-768 KEM used by SPQR (the Stage-2 PQ ratchet). Pinned to
-# EXACTLY the version SPQR v1.5.1 pulls in transitively (see Cargo.lock), so the
+# EXACTLY the version SPQR v1.5.3 pulls in transitively (see Cargo.lock), so the
 # graph has a single copy and the harness exercises the same byte layout the Go
 # port targets. SPQR's own incremental_mlkem768 wrapper is pub(crate), so the
 # harness calls libcrux's public `mlkem768::incremental` API directly and
@@ -66,9 +66,9 @@ futures = "0.3"
 # EncapsState i16s in correct little-endian, so the generated fixture is
 # host-independent and free of the cryspen/libcrux#1275 byte-swap (which the Go
 # port handles defensively regardless — see gen_mlkem_incremental).
-libcrux-ml-kem = { version = "=0.0.8", default-features = false, features = ["incremental", "mlkem768", "alloc"] }
+libcrux-ml-kem = { version = "=0.0.10", default-features = false, features = ["incremental", "mlkem768", "alloc"] }
 # The SPQR crate itself, pinned to the SAME rev libsignal pulls in transitively
-# (git tag v1.5.1, rev f2589fe — unchanged between v0.91.0 and the v0.96.4 pin;
+# (git tag v1.5.3 at the v0.102.2 pin; v1.5.1 from v0.91.0 through v0.96.4;
 # see Cargo.lock), with `test-utils`
 # enabled. test-utils is a dependency-free feature flag that re-exports SPQR's
 # otherwise pub(crate) `encoding` module (GF16 + the polynomial chunk
@@ -76,4 +76,4 @@ libcrux-ml-kem = { version = "=0.0.8", default-features = false, features = ["in
 # and the GF16 Mul/Div operators to capture golden BE-u16 chunk byte vectors and
 # GF16 mul/div triples — oracle leg (c) for T27 Slice B, pinning the big-endian
 # wire that the erasure property test alone cannot catch.
-spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag = "v1.5.1", features = ["test-utils"] }
+spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag = "v1.5.3", features = ["test-utils"] }

@@ -10,8 +10,8 @@ func TestReportIncludesProofInventoryRows(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Report: %v", err)
 	}
-	if report.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", report.UpstreamTag)
+	if report.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", report.UpstreamTag)
 	}
 
 	rows := report.ByDomain()
@@ -57,7 +57,7 @@ func TestReportVectorBackedRowsIncludeFixtureDigestAndUpstreamTag(t *testing.T) 
 
 func TestReportStructuralRowsCannotClaimParity(t *testing.T) {
 	err := Validate(CompatibilityReport{
-		UpstreamTag: "v0.96.4",
+		UpstreamTag: "v0.102.2",
 		Rows: []Row{{
 			Domain:      "structural-example",
 			Status:      StatusStructural,
@@ -72,11 +72,11 @@ func TestReportStructuralRowsCannotClaimParity(t *testing.T) {
 
 func TestReportVectorBackedRowsDiagnoseMissingFixturePath(t *testing.T) {
 	err := Validate(CompatibilityReport{
-		UpstreamTag: "v0.96.4",
+		UpstreamTag: "v0.102.2",
 		Rows: []Row{{
 			Domain:        "missing-fixture",
 			Status:        StatusVectorBacked,
-			UpstreamTag:   "v0.96.4",
+			UpstreamTag:   "v0.102.2",
 			FixtureSHA256: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
 			ParityClaim:   true,
 		}},

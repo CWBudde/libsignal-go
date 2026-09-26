@@ -25,8 +25,8 @@ func TestCoverageManifestTracksSignalWorkflowDomains(t *testing.T) {
 	if err := json.Unmarshal(raw, &manifest); err != nil {
 		t.Fatalf("decode coverage manifest: %v", err)
 	}
-	if manifest.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", manifest.UpstreamTag)
+	if manifest.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", manifest.UpstreamTag)
 	}
 	byName := map[string]struct {
 		Status   string

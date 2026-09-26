@@ -10,7 +10,7 @@ Compatibility harness that wraps upstream
 behavioral reference oracle for the pure-Go port. It is a **dev/CI-only** crate:
 nothing in the Go module depends on it, and it is not published.
 
-The upstream dependency is pinned to a fixed tag, **`v0.96.4`** — the Stage-2
+The upstream dependency is pinned to a fixed tag, **`v0.102.2`** — the Stage-2
 mainline-compat target (T29 advanced it from the Stage-1 pin `v0.91.0`; see ADR
 0001). It lives in its own isolated Cargo workspace (`[workspace] members =
 ["."]`) so it is never pulled into a parent workspace, mirroring
@@ -36,9 +36,9 @@ If `protoc` is installed somewhere off `PATH`, point the build at it with the
 
 ## Toolchain
 
-`rust-toolchain.toml` pins `nightly-2026-03-23`, matching the toolchain
-upstream `v0.96.4` itself pins (the same nightly `v0.91.0` pinned, so the
-Stage-2 re-pin needed no toolchain change). `rustup` fetches it on demand.
+`rust-toolchain.toml` pins stable `1.98.1`, matching the toolchain upstream
+`v0.102.2` itself pins (up to v0.96.4 upstream pinned `nightly-2026-03-23`).
+`rustup` fetches it on demand. A re-pin must update it by hand.
 
 ## Usage
 
@@ -73,7 +73,7 @@ Domains:
 - `username-links` — username-link entropy, deterministic IV, encrypted username
   bytes (`IV || ciphertext || HMAC`), username reservation hash, and
   upstream-decrypted username from `rust/usernames`.
-- `mlkem-incremental` — byte-exact KATs for libcrux 0.0.8's incremental
+- `mlkem-incremental` — byte-exact KATs for libcrux 0.0.10's incremental
   ML-KEM-768 (the KEM SPQR uses): the keygen split (`pk1`/`pk2`/`dk`), two-phase
   encapsulation (`ct1`, `encaps_state`, `ct2`, `shared_secret`), and
   decapsulation. `encaps_state` is the raw libcrux state for this host's backend;
@@ -82,7 +82,7 @@ Domains:
   for the pure-Go `internal/mlkem768incr` incremental layer; the generated batch
   is committed at
   `internal/mlkem768incr/testdata/libcrux_incremental_mlkem768.json`.
-- `spqr-chunks` — golden byte vectors for SPQR v1.5.1's GF(2^16) chunked-transport
+- `spqr-chunks` — golden byte vectors for SPQR v1.5.3's GF(2^16) chunked-transport
   erasure code (the `test-utils` feature exposes its `encoding` module): a set of
   `chunk_at(i)` outputs (`cases`) pinning the BIG-endian u16 point/coefficient
   wire, plus GF16 `mul`/`div` triples (`gf_triples`) pinning the field
@@ -130,6 +130,6 @@ The chain-key / root-key / message-keys / pqxdh-secret derivations are
 `pub(crate)` upstream, so the harness reproduces them with the same pinned
 crate versions (`hkdf`, `hmac`, `sha2` — matching upstream's pins). The formulas
 are taken verbatim from `rust/protocol/src/ratchet/keys.rs` and `ratchet.rs` at
-the v0.96.4 tag, which remain the contract (these version-stable formulas are
+the v0.102.2 tag, which remain the contract (these version-stable formulas are
 unchanged from v0.91.0 — the hkdf vectors are byte-identical across the re-pin).
 Every other domain calls the genuine public API.

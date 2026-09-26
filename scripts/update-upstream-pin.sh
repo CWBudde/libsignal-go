@@ -63,6 +63,12 @@ perl -0pi -e 's/\Q$ENV{CURRENT_TAG}\E/$ENV{UPSTREAM_TAG}/g' \
 	compat/rust-harness/README.md \
 	compat/rust-harness/Cargo.toml \
 	compat/session_interop_test.go \
+	compat/proof_inventory_test.go \
+	internal/upstream/manifest.json \
+	internal/upstream/manifest_test.go \
+	svr/report_test.go \
+	svrb/report_test.go \
+	messagebackup/report_test.go \
 	.github/workflows/compat.yml \
 	.github/workflows/compat-drift.yml
 
@@ -76,8 +82,10 @@ harness="compat/rust-harness/target/release/rust-harness"
 for domain in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links; do
 	"$harness" gen-vectors "$domain" > "compat/vectors/$domain.json"
 done
+"$harness" gen-vectors mlkem-incremental > internal/mlkem768incr/testdata/libcrux_incremental_mlkem768.json
+"$harness" gen-vectors spqr-chunks > internal/spqr/chunked/testdata/spqr_chunks.json
 
-go test ./compat/ -v
+go test ./compat/ ./internal/mlkem768incr/ ./internal/spqr/chunked/ -v
 go test ./proofreport ./accountkeys ./usernames -run 'Report|Parity|Backup|SVR|Username' -v
 COMPAT_HARNESS_BIN="$PWD/$harness" go test ./compat/ -tags=interop -v
 

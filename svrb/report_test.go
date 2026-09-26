@@ -11,8 +11,8 @@ func TestReportNamesProductionParameterRefresh(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Report: %v", err)
 	}
-	if report.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", report.UpstreamTag)
+	if report.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", report.UpstreamTag)
 	}
 	if report.ParameterRefresh != "2026Q2 production parameter refresh" {
 		t.Fatalf("parameter refresh = %q", report.ParameterRefresh)

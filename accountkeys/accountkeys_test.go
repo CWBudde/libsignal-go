@@ -154,7 +154,7 @@ func TestProofReportTracksAccountBackupVectors(t *testing.T) {
 	if !slices.Contains(row.Packages, "accountkeys") {
 		t.Fatalf("packages = %v, want accountkeys", row.Packages)
 	}
-	if row.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", row.UpstreamTag)
+	if row.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", row.UpstreamTag)
 	}
 }

@@ -9,8 +9,8 @@ func TestProofInventoryTracksSignalProofAndBackupDomains(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ProofInventory: %v", err)
 	}
-	if inventory.UpstreamTag != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", inventory.UpstreamTag)
+	if inventory.UpstreamTag != "v0.102.2" {
+		t.Fatalf("upstream tag = %q, want v0.102.2", inventory.UpstreamTag)
 	}
 
 	rows := inventory.ByDomain()
@@ -101,7 +101,7 @@ func TestCoverageInventoryRejectsAmbiguousRows(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			err := CoverageInventory{
-				UpstreamTag: "v0.96.4",
+				UpstreamTag: "v0.102.2",
 				Rows:        []CoverageRow{tt.row},
 			}.Validate()
 			if err == nil {
