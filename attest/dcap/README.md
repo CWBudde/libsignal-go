@@ -51,9 +51,11 @@ enclave's custom claims. The pieces:
   (`constants.rs`); raft configs and SVR-specific TCB exceptions are not here.
 - `AttestationMetrics`: the validity timestamps upstream reports.
 
-Upstream's test-only acceptance of TCB evaluation data number 12 is an
-unexported switch that only this package's tests turn on. The SVR2/CDS2
-handshakes (Noise, raft config) are not here.
+Upstream's test-only acceptance of TCB evaluation data number 12 (its
+`test-util` feature) is a switch in `attest/internal/testhook`, which only
+packages under `attest/` can import and only their tests turn on. The CDS2
+handshake on top of this package is `attest/enclave`; SVR2 (raft config) is
+not ported.
 
 Tests port every upstream test of these files under its upstream name
 (`sort_*`, `validate_*`, `valid_quote_from_disk`, `isv_sig_*`, `qe_sig_*`,

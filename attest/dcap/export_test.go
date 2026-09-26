@@ -3,7 +3,11 @@
 
 package dcap
 
-import "crypto/x509"
+import (
+	"crypto/x509"
+
+	"github.com/cwbudde/libsignal-go/attest/internal/testhook"
+)
 
 // SortChain exposes upstream's CertChain::sort.
 func SortChain(certs []*x509.Certificate) error { return sortChain(certs) }
@@ -54,15 +58,10 @@ const (
 // file turned it on: its production value. Upstream accepts the very
 // expired test evaluation number in every cfg(test) build; so do this
 // package's tests.
-var VeryExpiredTestEvalNumberDefault = func() bool {
-	was := acceptVeryExpiredTestEvalNumber
-	acceptVeryExpiredTestEvalNumber = true
-	return was
-}()
+var VeryExpiredTestEvalNumberDefault = testhook.SetAcceptVeryExpiredEvalNumber(true)
 
 // SetAcceptVeryExpiredTestEvalNumber switches that test-only exception and
 // returns the previous setting. Tests using it must not run in parallel.
 func SetAcceptVeryExpiredTestEvalNumber(on bool) (was bool) {
-	was, acceptVeryExpiredTestEvalNumber = acceptVeryExpiredTestEvalNumber, on
-	return was
+	return testhook.SetAcceptVeryExpiredEvalNumber(on)
 }

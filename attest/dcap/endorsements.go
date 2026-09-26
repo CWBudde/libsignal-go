@@ -10,6 +10,8 @@ import (
 	"fmt"
 	"time"
 	"unicode/utf8"
+
+	"github.com/cwbudde/libsignal-go/attest/internal/testhook"
 )
 
 // TCBEvaluationDataNumberMin is the oldest TCB recovery event accepted in
@@ -22,14 +24,10 @@ const TCBEvaluationDataNumberMin = 21
 // SGX_TCB_EVALUATION_NUMBER_USED_ONLY_IN_TESTS_THAT_WILL_NEVER_VALIDATE_SINCE_IT_IS_VERY_EXPIRED).
 const veryExpiredTestEvalNumber = 12
 
-// acceptVeryExpiredTestEvalNumber is set only by this package's tests
-// (export_test.go); production builds never accept that number.
-var acceptVeryExpiredTestEvalNumber bool
-
 // evalNumberOK reports whether a TCB evaluation data number is recent enough.
 func evalNumberOK(n uint16) bool {
 	return n >= TCBEvaluationDataNumberMin ||
-		(acceptVeryExpiredTestEvalNumber && n == veryExpiredTestEvalNumber)
+		(n == veryExpiredTestEvalNumber && testhook.AcceptVeryExpiredEvalNumber())
 }
 
 // Open Enclave endorsements layout (oe_endorsements_t and
