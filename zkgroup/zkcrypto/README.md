@@ -1,10 +1,11 @@
-# zkgroup attribute primitives
+# zkgroup crypto primitives
 
 This package ports the UID/profile-key attribute, encryption, profile-key
 commitment and timestamp portion of `rust/zkgroup/src/crypto` at **v0.102.2**.
-It is the first step of go-signal PLAN.md Phase 8.2. It does not implement
-credential issuance/proofs, zkcredential, the versioned group/profile API, or
-the mautrix-signal shim.
+It also ports the legacy KVAC credentials, profile and receipt blinding requests,
+server signatures, and all active request/issuance/presentation proofs. Generic
+zkcredential, the versioned group/profile API and the mautrix-signal shim remain
+separate steps of go-signal PLAN.md Phases 8.2–8.4.
 
 The byte encodings match Rust's fixed-width, little-endian bincode fields.
 Ciphertexts here are two compressed Ristretto points (64 bytes); higher-level
@@ -36,3 +37,21 @@ changing upstream acceptance rules. Normal randomly generated profile keys
 round-trip and decrypt in both languages.
 
 See [CONSTANT_TIME.md](CONSTANT_TIME.md) for the source-level review.
+
+Credential key kinds retain all six historical layouts, including unused scalars
+consumed from SHO. Only expiring profile and receipt issuance is active, as in
+upstream. V1/V2 profile presentation types support deserialization only. Proof
+serialization includes the little-endian u64 length prefix around poksho bytes;
+parsing does not authenticate proofs. Verify request proofs before issuance and
+issuance proofs before unblinding. Receipt clients must check expected expiration
+and level, and higher-level APIs must enforce expiration and redemption policy.
+
+`compat/vectors/zkgroup-credentials.json` records 24 complete flows, including
+zero/max timestamps and receipt levels. Live tests cover fresh inputs, both
+verification directions, changed metadata, keys, ciphertexts and malformed proofs.
+The final SHO squeeze is also checked, detecting incorrect consumption boundaries.
+
+**Parsing boundary:** Go deliberately rejects trailing data. The pinned Rust
+`deserialize_in_place` accepts it despite configuring `reject_trailing_bytes`;
+`TestZKGroupCredentialTrailingDataPolicy` records this difference against the
+unmodified upstream decoder. Canonical serialized values match byte for byte.

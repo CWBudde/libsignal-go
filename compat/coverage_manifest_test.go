@@ -43,7 +43,7 @@ func TestCoverageManifestTracksSignalWorkflowDomains(t *testing.T) {
 		}{Status: domain.Status, Vector: domain.Vector, Reason: domain.Reason, Packages: domain.Packages}
 	}
 
-	for _, name := range []string{"account-keys", "svr-key", "backup-id", "username-links", "username-reserve-hash", "poksho", "zkgroup-crypto"} {
+	for _, name := range []string{"account-keys", "svr-key", "backup-id", "username-links", "username-reserve-hash", "poksho", "zkgroup-crypto", "zkgroup-credentials"} {
 		domain, ok := byName[name]
 		if !ok {
 			t.Fatalf("missing coverage domain %q", name)
@@ -74,7 +74,7 @@ func TestUpstreamPinAutomationRegeneratesAllVectorBackedDomains(t *testing.T) {
 		t.Fatalf("read update script: %v", err)
 	}
 	script := string(raw)
-	for _, domain := range []string{"username-links", "sealedsender", "poksho", "zkgroup-crypto"} {
+	for _, domain := range []string{"username-links", "sealedsender", "poksho", "zkgroup-crypto", "zkgroup-credentials"} {
 		if !strings.Contains(script, domain) {
 			t.Fatalf("update-upstream-pin.sh does not regenerate %s", domain)
 		}
@@ -149,6 +149,8 @@ func assertVectorHasCases(t *testing.T, filename string) {
 
 func readCoverageVector(filename string) ([]byte, error) {
 	switch filename {
+	case "zkgroup-credentials.json":
+		return os.ReadFile("vectors/zkgroup-credentials.json")
 	case "zkgroup-crypto.json":
 		return os.ReadFile("vectors/zkgroup-crypto.json")
 	case "poksho.json":

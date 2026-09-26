@@ -2,7 +2,7 @@
 // Copyright 2026 libsignal-go contributors.
 // SPDX-License-Identifier: AGPL-3.0-only
 
-// Package zkcrypto implements the UID, profile-key, commitment and timestamp
+// Package zkcrypto implements the attribute encryption and legacy credential
 // primitives of libsignal v0.102.2. These are crypto-layer encodings, without
 // the reserved version byte used by zkgroup's higher-level API types.
 package zkcrypto
@@ -20,7 +20,7 @@ import (
 // ErrEncoding indicates an invalid length or noncanonical scalar/point.
 var ErrEncoding = errors.New("zkgroup: invalid encoding")
 
-// ErrVerification indicates that a ciphertext failed authentication.
+// ErrVerification indicates a failed ciphertext, signature or credential proof check.
 var ErrVerification = errors.New("zkgroup: verification failed")
 
 func sho(label string, input []byte) *poksho.ShoHmacSha256 {

@@ -91,7 +91,16 @@
         "zkgroup/zkcrypto",
         "internal/ristrettolizard"
       ],
-      "notes": "UID/profile-key attributes, encryption, commitments, timestamps and reversible Ristretto maps at v0.102.2. Credential issuance, proofs, zkcredential and group API/shim are still deferred."
+      "notes": "UID/profile-key attributes, encryption, commitments, timestamps and reversible Ristretto maps at v0.102.2. Legacy credential proofs are covered separately in zkgroup-credentials; zkcredential and group API/shim remain deferred."
+    },
+    {
+      "name": "zkgroup-credentials",
+      "status": "vector-backed",
+      "vector": "vectors/zkgroup-credentials.json",
+      "packages": [
+        "zkgroup/zkcrypto"
+      ],
+      "notes": "Legacy KVAC key layouts, profile and receipt requests, blinded issuance, unblinding, request/issuance/presentation proofs and signatures at v0.102.2. Go rejects trailing bytes that the pinned Rust deserialize_in_place accepts. Generic zkcredential and group API/shim remain deferred."
     }
   ]
 }

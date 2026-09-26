@@ -1,6 +1,6 @@
 # Source-level timing review
 
-Reviewed: new attribute/encryption/commitment code, the reversible mapping,
+Reviewed: attribute/encryption/commitment and legacy credential/proof code, the reversible mapping,
 gtank/ristretto255 v0.2.0, edwards25519/field v1.2.0, and upstream
 curve25519-dalek 5.0.0 Lizard and zkgroup crypto code. This is a source review,
 not an independent cryptographic audit or a machine-code timing proof.
@@ -36,3 +36,20 @@ not an independent cryptographic audit or a machine-code timing proof.
 
 Returned encodings may contain secrets; Go cannot promise secure erasure of
 all heap copies. Callers must not log secret key pairs or commitment nonces.
+
+Legacy credential additions use the same constant-time Ristretto scalar and
+point operations, including basepoint multiplication, addition, subtraction and
+negation. Proof witnesses and potentially secret points pass through poksho's
+constant-time MultiScalarMult; no variable-time verification optimization is
+introduced. Iteration counts and statement names depend on public credential
+kinds, never on secret scalars. Profile and receipt blinding nonces consume
+separate scalar squeezes, and proof/signature randomness consumes exactly one
+32-byte squeeze. All constructors preserve upstream transcript order.
+
+Parsing branches on canonical encoding validity and public lengths. Proof Vec
+lengths are compared against the available bytes before copying; malformed
+lengths cannot cause an attacker-sized allocation. Structural parsing does not
+validate redundant key fields. Creation self-verification returns only a failure
+for inconsistent secret/public inputs. Unblinding alone does not authenticate a
+credential; callers must verify issuance first. These are low-level primitives,
+not a substitute for the higher-level issuance, expiry and redemption policies.

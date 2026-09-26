@@ -71,6 +71,17 @@
       "checksum_sha256": "21a8aee8632927b9929e2429d8e2adb6caf9757dbfc419cdefb0fb9a2b3b87bd",
       "official_app_interop_claim": false,
       "notes": "Phase 8.2 attribute/encryption primitives only, plus internal reversible Ristretto encoding from curve25519-dalek 5.0.0. Does not claim credential or Signal group-service interoperability."
+    },
+    {
+      "name": "zkgroup-credentials",
+      "upstream_path": "rust/zkgroup/src/crypto",
+      "local_path": "zkgroup/zkcrypto",
+      "report_path": "compat/coverage_manifest.json",
+      "coverage_status": "vector-backed",
+      "checksum_path": "compat/vectors/zkgroup-credentials.json",
+      "checksum_sha256": "9a0b974441d49820f9746e1d661ba35e1fb3142c39edfba7e35e96adc1c1323c",
+      "official_app_interop_claim": false,
+      "notes": "Legacy credential crypto and all active request/issuance/presentation proofs, tested against upstream APIs. Exact-length Go parsing intentionally rejects trailing data accepted by pinned Rust. Does not claim generic zkcredential or Signal group-service interoperability."
     }
   ]
 }

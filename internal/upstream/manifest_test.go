@@ -18,7 +18,7 @@ func TestManifestTracksRequiredUpstreamDomains(t *testing.T) {
 	}
 
 	byName := manifest.ByDomain()
-	for _, name := range []string{"message-backup", "account-keys", "svr2", "svrb", "usernames", "poksho", "zkgroup-crypto"} {
+	for _, name := range []string{"message-backup", "account-keys", "svr2", "svrb", "usernames", "poksho", "zkgroup-crypto", "zkgroup-credentials"} {
 		row, ok := byName[name]
 		if !ok {
 			t.Fatalf("missing upstream domain %q", name)

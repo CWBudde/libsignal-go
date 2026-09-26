@@ -140,7 +140,8 @@ deliberate non-goals for this module.
 | ML-KEM-1024 *activation* | ⛔ excluded | — | wire type `0x0A` parsing reserved only |
 | poksho | ✅ implemented | [`poksho`](poksho/) | v0.102.2 SHO, Ristretto Schnorr statements and signatures; committed Rust vectors and bidirectional live harness verification |
 | zkgroup attribute crypto | ✅ implemented | [`zkgroup/zkcrypto`](zkgroup/zkcrypto/) | UID/profile-key encryption, commitments and timestamps; Rust vectors and mutual decryption |
-| zkgroup credentials / zkcredential / group API | staged | — | Remaining go-signal Phases 8.2–8.4; credential proofs, API wrappers and group endorsements remain unimplemented |
+| zkgroup legacy credentials | ✅ implemented | [`zkgroup/zkcrypto`](zkgroup/zkcrypto/) | Profile/receipt blinded issuance, signatures and request/issuance/presentation proofs; pinned Rust vectors and live verification |
+| zkcredential / group API | staged | — | Remaining go-signal Phases 8.2–8.4; generic credentials, API wrappers and group endorsements remain unimplemented |
 | username proof, key transparency, SVR/svrb | 🚧 deferred | — | tracked in `compat.ProofInventory()` / `compat/coverage_manifest.json`; account-key/SVR-key and username reserve-hash derivations remain vector-backed here, proof-system semantics move to encrypted-spaces-go |
 | backup manifest, message backup, device transfer, media, net | 🚧 deferred / ⛔ excluded | — | backup/message-backup rows are tracked in `compat.ProofInventory()` with required upstream inputs; the remaining app/service surfaces are non-goals |
 | `incremental_mac`, HPKE, `session_cipher_legacy` | ⛔ excluded | — | upstream test-only |
@@ -154,8 +155,8 @@ guarantees beyond the documented Go posture are also out of scope.
 send and receive messages — 1:1 sessions (PQXDH), group messaging, sealed sender
 (v1 + v2), fingerprints, and the SPQR post-quantum ratchet — is ✅ implemented and
 interop-proven against mainline. The excluded rows are deliberate non-goals:
-server / credential / service surfaces beyond poksho (zkgroup, username proof, key
-transparency, SVR), app- and transport-layer features (device transfer, media,
+remaining server / service surfaces (username proof, key transparency, SVR),
+app- and transport-layer features (device transfer, media,
 message backup, net), upstream test-only code (`incremental_mac`, the HPKE test
 harness, `session_cipher_legacy`), language bindings (this module *is* the Go
 binding), or behaviors upstream v0.102.2 itself does not perform — v3 *session
