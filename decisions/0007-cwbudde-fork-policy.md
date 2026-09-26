@@ -45,6 +45,10 @@ CDSI, and HPKE.
   regenerate protos if a `.proto` changed, reset any harness pin change back to
   our tag, and run the full re-pin test set. Upstream re-pins to a newer tag are
   not taken over until libsignalgo moves to that tag.
+- **Tags.** Fork releases are pre-releases of the next upstream patch with a
+  `-cw.N` suffix (the first is `v0.7.1-cw.1`, on top of upstream v0.7.0), so
+  they never collide with tags fetched from `upstream`. Consumers pin them
+  explicitly.
 - **Additions.** Pure-Go zkgroup (`poksho`, `zkcredential`, `zkgroup` client
   side), SGX DCAP attestation, Noise NK/NKhfs and HPKE land here as new packages
   (go-signal Phases 8–9), each with harness vectors plus live interop. They are
