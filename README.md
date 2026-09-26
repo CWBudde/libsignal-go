@@ -136,6 +136,8 @@ deliberate non-goals for this module.
 | Sparse Post-Quantum Ratchet (SPQR) | ✅ implemented | [`spqr`](spqr/), [`internal/mlkem768incr`](internal/mlkem768incr/), [`internal/spqr/chunked`](internal/spqr/chunked/) | incremental ML-KEM-768 + GF(2^16) chunked transport + state machine, mixed into the session message keys; SPQR-negotiated interop both roles at v0.102.2 |
 | Account keys (entropy pool, SVR key, PIN hash, backup key derivations) | ✅ implemented | [`accountkeys`](accountkeys/) | v0.102.2 known vectors for account entropy, backup ID, PIN hash, and local PIN PHC |
 | Username validation, candidates, username links, and reservation hash | ✅ implemented | [`usernames`](usernames/) | v0.102.2 username-link and reserve-hash vectors; proof generation deferred to zk/poksho phase |
+| HSM enclave client (Noise NK, trusted code hashes) | ✅ implemented | [`attest/hsmenclave`](attest/hsmenclave/) | `hsm_enclave.rs` + the bridge's `HsmEnclaveClient`; live interop with snow's NK responder, reply errors checked against upstream |
+| Device transfer (RSA key, self-signed certificate) | ✅ implemented | [`devicetransfer`](devicetransfer/) | certificates byte-identical to upstream's for the same key and second; BoringSSL reads Go's keys and certificates |
 | X3DH v3 session *initiation* | ⛔ excluded | — | v3 *decrypt*/state compat retained; v0.102.2 cannot initiate v3 |
 | ML-KEM-1024 *activation* | ⛔ excluded | — | wire type `0x0A` parsing reserved only |
 | poksho | ✅ implemented | [`poksho`](poksho/) | v0.102.2 SHO, Ristretto Schnorr statements and signatures; committed Rust vectors and bidirectional live harness verification |
@@ -144,7 +146,7 @@ deliberate non-goals for this module.
 | zkcredential | vector-backed | 52 complete Rust flows + live interop | Generic attributes, both credential modes, issuance/presentations and batch endorsements |
 | group API | staged | — | Remaining go-signal Phases 8.3–8.4; API wrappers and group endorsement integration remain unimplemented |
 | username proof, key transparency, SVR/svrb | 🚧 deferred | — | tracked in `compat.ProofInventory()` / `compat/coverage_manifest.json`; account-key/SVR-key and username reserve-hash derivations remain vector-backed here, proof-system semantics move to encrypted-spaces-go |
-| backup manifest, message backup, device transfer, media, net | 🚧 deferred / ⛔ excluded | — | backup/message-backup rows are tracked in `compat.ProofInventory()` with required upstream inputs; the remaining app/service surfaces are non-goals |
+| backup manifest, message backup, media, net | 🚧 deferred / ⛔ excluded | — | backup/message-backup rows are tracked in `compat.ProofInventory()` with required upstream inputs; the remaining app/service surfaces are non-goals |
 | `incremental_mac`, HPKE, `session_cipher_legacy` | ⛔ excluded | — | upstream test-only |
 | Language bridges (Java / Swift / Node) | ⛔ excluded | — | deleted from this fork, not ported |
 
@@ -157,8 +159,8 @@ send and receive messages — 1:1 sessions (PQXDH), group messaging, sealed send
 (v1 + v2), fingerprints, and the SPQR post-quantum ratchet — is ✅ implemented and
 interop-proven against mainline. The excluded rows are deliberate non-goals:
 remaining server / service surfaces (username proof, key transparency, SVR),
-app- and transport-layer features (device transfer, media,
-message backup, net), upstream test-only code (`incremental_mac`, the HPKE test
+app- and transport-layer features (media, message backup,
+net), upstream test-only code (`incremental_mac`, the HPKE test
 harness, `session_cipher_legacy`), language bindings (this module *is* the Go
 binding), or behaviors upstream v0.102.2 itself does not perform — v3 *session
 initiation* (v3 *decrypt* is retained) and ML-KEM-1024 *activation* (wire type

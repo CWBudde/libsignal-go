@@ -52,7 +52,7 @@ See `rust-harness/README.md` for full harness/toolchain details.
 # from compat/
 cargo build --release --manifest-path rust-harness/Cargo.toml
 BIN=rust-harness/target/release/rust-harness
-for d in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho; do
+for d in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho noise; do
   "$BIN" gen-vectors "$d" > "vectors/$d.json"
 done
 ```
@@ -191,6 +191,33 @@ CGO_ENABLED=0 go test ./poksho ./compat
 cd compat/rust-harness && cargo build --release && cd ../..
 COMPAT_HARNESS_BIN="$PWD/compat/rust-harness/target/release/rust-harness" \
   go test -tags interop ./compat -run Poksho
+```
+
+## noise (go-signal Phase 9.1)
+
+`vectors/noise.json` comes from snow 0.10.0, the version libsignal v0.102.2
+locks, with `rust/attest/src/snow_resolver.rs`'s resolver (snow's X25519,
+SHA-256 and ChaChaPoly; "Kyber1024" is libcrux ML-KEM-1024). Its randomness is
+a seeded ChaCha20 stream instead of OsRng, and each case records the bytes each
+side drew (`initiator_random`: e, e1 key pair; `responder_random`: e, ekem1
+encapsulation). Nine cases cover NK and NKhfs with empty and random handshake
+payloads, transport messages in both directions, and one plaintext that
+`ClientConnection` splits into two Noise messages.
+
+`TestNoiseVectors` replays the initiator byte for byte and the responder up to
+NKhfs's randomized encapsulation; `noise.TestSnowResponderKAT` covers that with
+a derandomized ML-KEM hook. `TestNoiseInterop` runs fresh handshakes with Go as
+initiator and as responder: `noise.initiator` and `noise.responder` are
+stateless, rebuilding snow's side from a 32-byte `seed` on each call and
+returning its handshake message, the handshake hash, decrypted `inbound` and
+encrypted `outbound` transport messages. It also checks that both sides reject
+tampered or truncated messages and a wrong static key.
+`TestNoiseVectorRegeneration` compares two regenerations with the fixture.
+
+```sh
+CGO_ENABLED=0 go test ./noise ./compat
+COMPAT_HARNESS_BIN="$PWD/compat/rust-harness/target/release/rust-harness" \
+  go test -tags interop ./compat -run Noise
 ```
 
 ## zkgroup attribute crypto (Phase 8.2)

@@ -68,7 +68,7 @@ futures = "0.3"
 # EncapsState i16s in correct little-endian, so the generated fixture is
 # host-independent and free of the cryspen/libcrux#1275 byte-swap (which the Go
 # port handles defensively regardless — see gen_mlkem_incremental).
-libcrux-ml-kem = { version = "=0.0.10", default-features = false, features = ["incremental", "mlkem768", "alloc"] }
+libcrux-ml-kem = { version = "=0.0.10", default-features = false, features = ["incremental", "mlkem768", "mlkem1024", "alloc"] }
 # The SPQR crate itself, pinned to the SAME rev libsignal pulls in transitively
 # (git tag v1.5.3 at the v0.102.2 pin; v1.5.1 from v0.91.0 through v0.96.4;
 # see Cargo.lock), with `test-utils`
@@ -90,3 +90,7 @@ libsignal-core = { git = "https://github.com/signalapp/libsignal", tag = "v0.102
 
 zkcredential = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "zkcredential" }
 bincode = "1"
+
+# Phase 9.1 Noise oracle: the snow version libsignal v0.102.2 locks, with the
+# hfs modifier rust/attest enables. ML-KEM-1024 comes from libcrux above.
+snow = { version = "=0.10.0", features = ["hfs"] }

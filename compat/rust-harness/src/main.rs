@@ -24,6 +24,7 @@
 //! `pub(crate)` upstream, against the same pinned crate versions (`hkdf`,
 //! `hmac`, `sha2`) so the bytes match upstream exactly.
 
+mod noise_compat;
 mod poksho_compat;
 mod zkcredential_compat;
 mod zkgroup_api_compat;
@@ -200,6 +201,13 @@ fn gen_vectors(domain: &str) -> Result<(), String> {
     if domain == "zkgroup-crypto" {
         let mut out = io::stdout().lock();
         serde_json::to_writer_pretty(&mut out, &zkgroup_crypto_compat::vectors())
+            .map_err(|e| e.to_string())?;
+        writeln!(out).map_err(|e| e.to_string())?;
+        return Ok(());
+    }
+    if domain == "noise" {
+        let mut out = io::stdout().lock();
+        serde_json::to_writer_pretty(&mut out, &noise_compat::vectors(VECTOR_SEED))
             .map_err(|e| e.to_string())?;
         writeln!(out).map_err(|e| e.to_string())?;
         return Ok(());
@@ -1979,6 +1987,7 @@ fn dispatch(method: &str, params: &Value) -> Result<Value, String> {
         "zkgroup.credentials.verify" => zkgroup_credentials_compat::verify(params),
         method if method.starts_with("zkgroup.") => zkgroup_crypto_compat::dispatch(method, params),
         method if method.starts_with("poksho.") => poksho_compat::dispatch(method, params),
+        method if method.starts_with("noise.") => noise_compat::dispatch(method, params),
         "ping" => Ok(json!({ "pong": true })),
 
         // curve.sign: { private_key: hex, message: hex } -> { signature, public_key }
