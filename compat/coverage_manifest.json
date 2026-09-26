@@ -84,6 +84,13 @@
       "notes": "Both SHO variants, scalar/point conversions, Schnorr signatures and multi-equation proofs at v0.102.2; bidirectional live Rust interoperability. Does not implement zkgroup, zkcredential, or username proofs."
     },
     {
+      "name": "noise",
+      "status": "vector-backed",
+      "vector": "vectors/noise.json",
+      "packages": ["noise"],
+      "notes": "Noise_NK_25519_ChaChaPoly_SHA256 and Noise_NKhfs_25519+Kyber1024_ChaChaPoly_SHA256 (ML-KEM-1024) as rust/attest drives them on snow 0.10.0, both roles, with ClientConnection's transport chunking; bidirectional live Rust interoperability. SGX attestation and the CDSI client state are separate."
+    },
+    {
       "name": "zkgroup-crypto",
       "status": "vector-backed",
       "vector": "vectors/zkgroup-crypto.json",

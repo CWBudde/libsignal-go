@@ -157,6 +157,8 @@ func readCoverageVector(filename string) ([]byte, error) {
 		return os.ReadFile("vectors/zkgroup-crypto.json")
 	case "poksho.json":
 		return os.ReadFile("vectors/poksho.json")
+	case "noise.json":
+		return os.ReadFile("vectors/noise.json")
 	case "account-keys.json":
 		return os.ReadFile("vectors/account-keys.json")
 	case "username-links.json":
