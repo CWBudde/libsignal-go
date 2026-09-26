@@ -2,9 +2,11 @@
 # Copyright 2026 libsignal-go contributors.
 # SPDX-License-Identifier: AGPL-3.0-only
 #
-# Weekly upstream release monitor. When signalapp/libsignal publishes a newer
-# release than the pinned compat harness, this workflow refreshes the harness
-# tag/lock/vectors and opens an auto-merge PR. A green PR means the pure-Go port
+# Weekly pin monitor (cwbudde fork). The harness follows the libsignal tag that
+# go-signal's libsignalgo expects, read from the purego branch of
+# cwbudde/mautrix-signal (pkg/libsignalgo/signalversion), not upstream's latest
+# release; compat-drift.yml still reports upstream main. When that tag moves,
+# this workflow refreshes the harness tag/lock/vectors and opens an auto-merge PR. A green PR means the pure-Go port
 # still agrees with upstream on the covered compatibility surface; a red PR is
 # the work queue for required porting changes.
 
@@ -17,7 +19,7 @@ on:
   workflow_dispatch:
     inputs:
       upstream_tag:
-        description: "Optional signalapp/libsignal tag to pin, for example v0.96.4"
+        description: "Optional signalapp/libsignal tag to pin, for example v0.102.2 (default: the tag libsignalgo expects)"
         required: false
         type: string
 
@@ -54,11 +56,25 @@ jobs:
             exit 1
           fi
 
+      - name: resolve pin
+        env:
+          INPUT_TAG: ${{ inputs.upstream_tag }}
+          SIGNALVERSION_URL: https://raw.githubusercontent.com/cwbudde/mautrix-signal/purego/pkg/libsignalgo/signalversion/version.go
+        run: |
+          tag="${INPUT_TAG:-}"
+          if [ -z "$tag" ]; then
+            tag="$(curl -fsSL "$SIGNALVERSION_URL" | sed -nE 's/^const Version = "([^"]+)"$/\1/p')"
+          fi
+          if [ -z "$tag" ]; then
+            echo "::error::could not resolve the libsignal tag libsignalgo expects"
+            exit 1
+          fi
+          echo "UPSTREAM_TAG=$tag" >> "$GITHUB_ENV"
+
       - name: update compat harness pin
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UPSTREAM_TAG: ${{ inputs.upstream_tag }}
-        run: scripts/update-upstream-pin.sh
+        run: scripts/update-upstream-pin.sh "$UPSTREAM_TAG"
 
       - name: create compatibility PR
         id: cpr
@@ -68,14 +84,14 @@ jobs:
           branch: automation/upstream-libsignal-pin
           delete-branch: true
           commit-message: "chore: re-pin compat harness to upstream libsignal"
-          title: "chore: re-pin compat harness to latest upstream libsignal"
+          title: "chore: re-pin compat harness to the libsignal tag libsignalgo expects"
           body: |
             Automated upstream compatibility refresh.
 
             This PR was produced by `.github/workflows/upstream-pin.yml`.
 
             The updater:
-            - refreshes `compat/rust-harness` to the latest `signalapp/libsignal` release tag
+            - refreshes `compat/rust-harness` to the `signalapp/libsignal` tag that cwbudde/mautrix-signal's libsignalgo expects
             - updates `compat/rust-harness/Cargo.lock`
             - regenerates all committed `compat/vectors/*.json`
             - runs vector consumption tests and live Rust-harness interop tests
