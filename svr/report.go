@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/GoCodeAlone/libsignal-go/proofreport"
+	"github.com/cwbudde/libsignal-go/proofreport"
 )
 
 const parameterRefresh = "2026Q2 production parameter refresh"

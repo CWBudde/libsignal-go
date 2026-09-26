@@ -7,8 +7,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/protocol"
 	googleproto "google.golang.org/protobuf/proto"
 )
 

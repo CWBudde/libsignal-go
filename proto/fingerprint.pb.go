@@ -140,7 +140,7 @@ const file_fingerprint_proto_rawDesc = "" +
 	"\x14CombinedFingerprints\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\rR\aversion\x12Y\n" +
 	"\x11local_fingerprint\x18\x02 \x01(\v2,.signal.proto.fingerprint.LogicalFingerprintR\x10localFingerprint\x12[\n" +
-	"\x12remote_fingerprint\x18\x03 \x01(\v2,.signal.proto.fingerprint.LogicalFingerprintR\x11remoteFingerprintB+Z)github.com/GoCodeAlone/libsignal-go/proto"
+	"\x12remote_fingerprint\x18\x03 \x01(\v2,.signal.proto.fingerprint.LogicalFingerprintR\x11remoteFingerprintB'Z%github.com/cwbudde/libsignal-go/proto"
 
 var (
 	file_fingerprint_proto_rawDescOnce sync.Once

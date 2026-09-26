@@ -8,8 +8,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
-	"github.com/GoCodeAlone/libsignal-go/spqr"
+	"github.com/cwbudde/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/spqr"
 )
 
 // seedPQRState builds an initialized SessionState carrying a fresh SPQR state

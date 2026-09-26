@@ -7,13 +7,13 @@ import (
 	"io"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/proto"
-	"github.com/GoCodeAlone/libsignal-go/ratchet"
-	"github.com/GoCodeAlone/libsignal-go/spqr"
-	"github.com/GoCodeAlone/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/ratchet"
+	"github.com/cwbudde/libsignal-go/spqr"
+	"github.com/cwbudde/libsignal-go/stores"
 )
 
 // Store is the session store interface. It lives here rather than in stores/

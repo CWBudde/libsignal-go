@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
 )
 
 // ctrHmacMACLen is the truncated HMAC-SHA256 tag length appended by the

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/proofreport"
+	"github.com/cwbudde/libsignal-go/proofreport"
 )
 
 func TestParseValidUsernames(t *testing.T) {

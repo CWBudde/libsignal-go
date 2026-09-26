@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/protocol"
 )
 
 // sealTestFixture builds a sender identity, recipient identity, and a valid USMC

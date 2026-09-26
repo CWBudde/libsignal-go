@@ -7,7 +7,7 @@ syntax = "proto3";
 
 package signal.proto.storage;
 
-option go_package = "github.com/GoCodeAlone/libsignal-go/proto";
+option go_package = "github.com/cwbudde/libsignal-go/proto";
 
 message SessionStructure {
   message Chain {

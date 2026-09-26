@@ -7,7 +7,7 @@ syntax = "proto2";
 
 package signal.proto.sealed_sender;
 
-option go_package = "github.com/GoCodeAlone/libsignal-go/proto";
+option go_package = "github.com/cwbudde/libsignal-go/proto";
 
 message ServerCertificate {
     message Certificate {

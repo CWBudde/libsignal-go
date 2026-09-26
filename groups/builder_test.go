@@ -6,8 +6,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
 )
 
 func testAddress(t *testing.T, name string, device uint32) address.ProtocolAddress {

@@ -2610,7 +2610,7 @@ const file_pq_ratchet_proto_rawDesc = "" +
 	"\x03V_1\x10\x01*!\n" +
 	"\tDirection\x12\t\n" +
 	"\x05A_2_B\x10\x00\x12\t\n" +
-	"\x05B_2_A\x10\x01B+Z)github.com/GoCodeAlone/libsignal-go/protob\x06proto3"
+	"\x05B_2_A\x10\x01B'Z%github.com/cwbudde/libsignal-go/protob\x06proto3"
 
 var (
 	file_pq_ratchet_proto_rawDescOnce sync.Once

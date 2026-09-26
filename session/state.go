@@ -23,10 +23,10 @@ import (
 
 	googleproto "google.golang.org/protobuf/proto"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/proto"
-	"github.com/GoCodeAlone/libsignal-go/ratchet"
-	"github.com/GoCodeAlone/libsignal-go/spqr"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/ratchet"
+	"github.com/cwbudde/libsignal-go/spqr"
 )
 
 // Bounds from rust/protocol/src/consts.rs. These cap unbounded growth of the

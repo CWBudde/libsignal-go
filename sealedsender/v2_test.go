@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // v2Recipient bundles a recipient's identity key pair with the ServiceID/device

@@ -8,8 +8,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/spqr/chunked"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/spqr/chunked"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 func testAuthKey() []byte {

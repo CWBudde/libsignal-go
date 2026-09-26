@@ -36,13 +36,13 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/session"
-	"github.com/GoCodeAlone/libsignal-go/stores"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/session"
+	"github.com/cwbudde/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
 )
 
 // Ciphertext type tags, matching CiphertextMessageType (protocol.rs) and the

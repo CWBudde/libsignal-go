@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // Errors returned by sealed-sender message decryption.

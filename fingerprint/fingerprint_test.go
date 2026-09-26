@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // The hard-coded KATs from rust/protocol/src/fingerprint.rs (testVectorsVersion1

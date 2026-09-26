@@ -26,8 +26,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/mlkem768incr"
-	"github.com/GoCodeAlone/libsignal-go/internal/spqr/chunked"
+	"github.com/cwbudde/libsignal-go/internal/mlkem768incr"
+	"github.com/cwbudde/libsignal-go/internal/spqr/chunked"
 )
 
 // SCKA key-derivation: the raw KEM shared secret is run through HKDF with this

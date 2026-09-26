@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/GoCodeAlone/libsignal-go/proto"
+	pb "github.com/cwbudde/libsignal-go/proto"
 )
 
 func u32(v uint32) *uint32 { return &v }

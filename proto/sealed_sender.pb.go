@@ -644,7 +644,7 @@ const file_sealed_sender_proto_rawDesc = "" +
 	"\vContentHint\x12\x0e\n" +
 	"\n" +
 	"RESENDABLE\x10\x01\x12\f\n" +
-	"\bIMPLICIT\x10\x02\"\x04\b\x00\x10\x00B+Z)github.com/GoCodeAlone/libsignal-go/proto"
+	"\bIMPLICIT\x10\x02\"\x04\b\x00\x10\x00B'Z%github.com/cwbudde/libsignal-go/proto"
 
 var (
 	file_sealed_sender_proto_rawDescOnce sync.Once

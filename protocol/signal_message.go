@@ -8,8 +8,8 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	pb "github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/curve"
+	pb "github.com/cwbudde/libsignal-go/proto"
 )
 
 // macLength is the truncated HMAC-SHA256 length appended to a SignalMessage,

@@ -7,8 +7,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
 )
 
 // groupOf3 sets up a sender that has distributed its sender key to two

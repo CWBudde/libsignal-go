@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/stores"
 )
 
 // --- in-test store fakes implementing the builder's store interfaces ---

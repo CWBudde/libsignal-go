@@ -5,8 +5,8 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	pb "github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/curve"
+	pb "github.com/cwbudde/libsignal-go/proto"
 )
 
 // PreKeySignalMessage is the initial message of a session, carrying the prekey

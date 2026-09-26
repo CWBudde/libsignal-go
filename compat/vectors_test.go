@@ -17,16 +17,16 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/accountkeys"
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/fingerprint"
-	"github.com/GoCodeAlone/libsignal-go/groups"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/ratchet"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
-	"github.com/GoCodeAlone/libsignal-go/usernames"
+	"github.com/cwbudde/libsignal-go/accountkeys"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/fingerprint"
+	"github.com/cwbudde/libsignal-go/groups"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/ratchet"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/usernames"
 )
 
 // loadVectors reads and JSON-decodes compat/vectors/<domain>.json into dst.

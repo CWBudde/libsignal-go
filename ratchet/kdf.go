@@ -6,7 +6,7 @@
 package ratchet
 
 import (
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
 )
 
 // HKDF info strings and seed bytes, from rust/protocol/src/ratchet/keys.rs and

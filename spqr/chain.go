@@ -14,8 +14,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // chainKeyLen is the byte length of a chain "next" key and a per-message key.

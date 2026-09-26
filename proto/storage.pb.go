@@ -1089,7 +1089,7 @@ const file_storage_proto_rawDesc = "" +
 	"\x06public\x18\x01 \x01(\fR\x06public\x12\x18\n" +
 	"\aprivate\x18\x02 \x01(\fR\aprivate\"u\n" +
 	"\x18SenderKeyRecordStructure\x12Y\n" +
-	"\x11sender_key_states\x18\x01 \x03(\v2-.signal.proto.storage.SenderKeyStateStructureR\x0fsenderKeyStatesB+Z)github.com/GoCodeAlone/libsignal-go/protob\x06proto3"
+	"\x11sender_key_states\x18\x01 \x03(\v2-.signal.proto.storage.SenderKeyStateStructureR\x0fsenderKeyStatesB'Z%github.com/cwbudde/libsignal-go/protob\x06proto3"
 
 var (
 	file_storage_proto_rawDescOnce sync.Once

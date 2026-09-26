@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // randomPublicKey draws a fresh signing public key, mirroring the Rust tests'

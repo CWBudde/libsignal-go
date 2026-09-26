@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/mlkem768incr"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/mlkem768incr"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // readFixture loads a committed SPQR state fixture. The two issue1275_*.in files

@@ -3,8 +3,8 @@ package ratchet
 import (
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
 )
 
 // ChainKey is a symmetric chain key in the Double Ratchet sending or receiving

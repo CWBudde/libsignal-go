@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // defaultParams returns a fresh ChainParams with proto-default (zero) fields, so

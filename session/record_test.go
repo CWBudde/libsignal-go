@@ -7,9 +7,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/proto"
-	"github.com/GoCodeAlone/libsignal-go/ratchet"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/ratchet"
 )
 
 // fixedReader yields deterministic bytes for reproducible key generation.

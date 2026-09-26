@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/GoCodeAlone/libsignal-go/compat"
+	"github.com/cwbudde/libsignal-go/compat"
 )
 
 // Status classifies report rows by their upstream evidence strength.

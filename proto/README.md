@@ -16,7 +16,7 @@ The five `.proto` files map 1:1 to the upstream sources:
 | `sealed_sender.proto` | `sealed_sender.proto` | proto2 | `signal.proto.sealed_sender` |
 | `fingerprint.proto` | `fingerprint.proto` | proto2 | `signal.proto.fingerprint` |
 
-All five set `option go_package = "github.com/GoCodeAlone/libsignal-go/proto";`
+All five set `option go_package = "github.com/cwbudde/libsignal-go/proto";`
 so the generated Go types share this single package. The upstream proto
 `package` declarations are preserved unchanged.
 

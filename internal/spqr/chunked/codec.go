@@ -27,7 +27,7 @@
 package chunked
 
 import (
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // ptSize is the serialized size of one decoder point: BE16 x ‖ BE16 y.

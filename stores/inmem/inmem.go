@@ -17,10 +17,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/session"
-	"github.com/GoCodeAlone/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/session"
+	"github.com/cwbudde/libsignal-go/stores"
 )
 
 // Errors returned when a record is not present, mirroring upstream's

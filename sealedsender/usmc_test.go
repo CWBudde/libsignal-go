@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/protocol"
 )
 
 // usmcSenderCert builds a valid embedded-signer sender certificate for USMC tests.

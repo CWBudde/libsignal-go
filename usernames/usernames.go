@@ -18,7 +18,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
 	"github.com/gtank/ristretto255"
 	"google.golang.org/protobuf/encoding/protowire"
 )

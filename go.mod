@@ -1,4 +1,4 @@
-module github.com/GoCodeAlone/libsignal-go
+module github.com/cwbudde/libsignal-go
 
 go 1.26
 

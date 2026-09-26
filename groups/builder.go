@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/stores"
 )
 
 // CreateSenderKeyDistributionMessage builds the SKDM that announces sender's

@@ -26,8 +26,8 @@ package spqr
 import (
 	"errors"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/spqr/chunked"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/spqr/chunked"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // ErrMsgDecode is returned when a serialized v1 message is malformed (wrong

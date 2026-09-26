@@ -5,11 +5,11 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/session"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/session"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
 )
 
 // Example_sessionRoundTrip shows a PQXDH handshake and the first message.

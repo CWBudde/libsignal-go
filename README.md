@@ -1,10 +1,10 @@
 # libsignal-go
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/GoCodeAlone/libsignal-go.svg)](https://pkg.go.dev/github.com/GoCodeAlone/libsignal-go)
-[![CI](https://github.com/GoCodeAlone/libsignal-go/actions/workflows/go.yml/badge.svg)](https://github.com/GoCodeAlone/libsignal-go/actions/workflows/go.yml)
-[![compat](https://github.com/GoCodeAlone/libsignal-go/actions/workflows/compat.yml/badge.svg)](https://github.com/GoCodeAlone/libsignal-go/actions/workflows/compat.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/GoCodeAlone/libsignal-go)](https://goreportcard.com/report/github.com/GoCodeAlone/libsignal-go)
-[![Release](https://img.shields.io/github/v/release/GoCodeAlone/libsignal-go?sort=semver)](https://github.com/GoCodeAlone/libsignal-go/releases)
+[![Go Reference](https://pkg.go.dev/badge/github.com/cwbudde/libsignal-go.svg)](https://pkg.go.dev/github.com/cwbudde/libsignal-go)
+[![CI](https://github.com/cwbudde/libsignal-go/actions/workflows/go.yml/badge.svg)](https://github.com/cwbudde/libsignal-go/actions/workflows/go.yml)
+[![compat](https://github.com/cwbudde/libsignal-go/actions/workflows/compat.yml/badge.svg)](https://github.com/cwbudde/libsignal-go/actions/workflows/compat.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/cwbudde/libsignal-go)](https://goreportcard.com/report/github.com/cwbudde/libsignal-go)
+[![Release](https://img.shields.io/github/v/release/cwbudde/libsignal-go?sort=semver)](https://github.com/cwbudde/libsignal-go/releases)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 
 A pure-Go implementation of the Signal client protocol core, wire-compatible
@@ -173,7 +173,7 @@ remotely by tag and remains in the repo.
 ## Installation
 
 ```shell
-go get github.com/GoCodeAlone/libsignal-go
+go get github.com/cwbudde/libsignal-go
 ```
 
 Requires Go 1.26 or newer. The module pins `toolchain go1.26.4`; a matching
@@ -206,8 +206,8 @@ Runnable examples live alongside the packages they document (Go renders them in
 Browse the full API with:
 
 ```shell
-go doc github.com/GoCodeAlone/libsignal-go
-go doc github.com/GoCodeAlone/libsignal-go/session
+go doc github.com/cwbudde/libsignal-go
+go doc github.com/cwbudde/libsignal-go/session
 ```
 
 ## Development

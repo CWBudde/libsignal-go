@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/stores"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/stores"
 )
 
 // Error sentinels returned by Encrypt/Decrypt, wrapped with %w so callers can

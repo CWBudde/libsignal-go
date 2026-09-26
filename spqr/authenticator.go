@@ -13,8 +13,8 @@ import (
 	"crypto/subtle"
 	"errors"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // authMACSize is the authenticator MAC length (32 bytes). Mirrors

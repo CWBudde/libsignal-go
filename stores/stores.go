@@ -22,8 +22,8 @@ package stores
 import (
 	"context"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // Direction is the role an identity is being checked for when deciding trust.

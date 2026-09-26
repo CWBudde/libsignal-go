@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/sealedsender"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/sealedsender"
 )
 
 // Example_sealedSender shows the sealed-sender v1 flow: a sender holding a

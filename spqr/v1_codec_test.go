@@ -9,9 +9,9 @@ import (
 
 	googleproto "google.golang.org/protobuf/proto"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/mlkem768incr"
-	"github.com/GoCodeAlone/libsignal-go/internal/spqr/chunked"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/mlkem768incr"
+	"github.com/cwbudde/libsignal-go/internal/spqr/chunked"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // rtV1 round-trips a v1State through proto and asserts the proto bytes are stable

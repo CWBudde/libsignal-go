@@ -31,8 +31,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/internal/spqr/chunked"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/internal/spqr/chunked"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // ErrV1StateDecode is returned when a proto.V1State cannot be decoded into a

@@ -6,7 +6,7 @@
 syntax = "proto2";
 package signalservice;
 
-option go_package = "github.com/GoCodeAlone/libsignal-go/proto";
+option go_package = "github.com/cwbudde/libsignal-go/proto";
 
 message Content {
     optional bytes /* DataMessage */ data_message = 1;

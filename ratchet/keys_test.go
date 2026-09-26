@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 // hkdfVectors mirrors compat/vectors/hkdf.json, the committed upstream-generated

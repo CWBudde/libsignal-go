@@ -204,7 +204,7 @@ const file_service_proto_rawDesc = "" +
 	"\vratchet_key\x18\x01 \x01(\fR\n" +
 	"ratchetKey\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\x04R\ttimestamp\x12\x1b\n" +
-	"\tdevice_id\x18\x03 \x01(\rR\bdeviceIdB+Z)github.com/GoCodeAlone/libsignal-go/proto"
+	"\tdevice_id\x18\x03 \x01(\rR\bdeviceIdB'Z%github.com/cwbudde/libsignal-go/proto"
 
 var (
 	file_service_proto_rawDescOnce sync.Once

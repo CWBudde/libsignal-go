@@ -43,13 +43,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/groups"
-	"github.com/GoCodeAlone/libsignal-go/kem"
-	"github.com/GoCodeAlone/libsignal-go/protocol"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
-	"github.com/GoCodeAlone/libsignal-go/usernames"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/groups"
+	"github.com/cwbudde/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/protocol"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/usernames"
 )
 
 // callTimeout bounds a single request/response exchange. The watchdog guards

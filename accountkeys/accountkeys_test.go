@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/proofreport"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/proofreport"
 )
 
 func mustHex32(t *testing.T, s string) [32]byte {

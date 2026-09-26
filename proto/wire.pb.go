@@ -394,7 +394,7 @@ const file_wire_proto_rawDesc = "" +
 	"\titeration\x18\x03 \x01(\rR\titeration\x12\x1b\n" +
 	"\tchain_key\x18\x04 \x01(\fR\bchainKey\x12\x1f\n" +
 	"\vsigning_key\x18\x05 \x01(\fR\n" +
-	"signingKeyB+Z)github.com/GoCodeAlone/libsignal-go/proto"
+	"signingKeyB'Z%github.com/cwbudde/libsignal-go/proto"
 
 var (
 	file_wire_proto_rawDescOnce sync.Once

@@ -6,7 +6,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/curve"
 )
 
 func repeatByte(b byte, n int) []byte {

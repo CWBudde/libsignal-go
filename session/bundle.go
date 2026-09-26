@@ -1,8 +1,8 @@
 package session
 
 import (
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/kem"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/kem"
 )
 
 // PreKeyBundle is the set of public key material a server hands an initiator so

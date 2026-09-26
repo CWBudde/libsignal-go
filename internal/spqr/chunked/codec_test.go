@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // makeMsg builds a deterministic even-length test message.

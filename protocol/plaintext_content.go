@@ -3,7 +3,7 @@ package protocol
 import (
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 	googleproto "google.golang.org/protobuf/proto"
 )
 

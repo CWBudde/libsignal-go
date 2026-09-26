@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/sealedsender"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/sealedsender"
 )
 
 // TestSealedSenderVectors decrypts each committed sealed v1 message with the

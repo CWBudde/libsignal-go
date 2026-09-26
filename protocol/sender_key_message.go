@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/proto"
 	googleproto "google.golang.org/protobuf/proto"
 )
 

@@ -7,7 +7,7 @@ syntax = "proto2";
 
 package signal.proto.fingerprint;
 
-option go_package = "github.com/GoCodeAlone/libsignal-go/proto";
+option go_package = "github.com/cwbudde/libsignal-go/proto";
 
 message LogicalFingerprint {
   optional bytes content = 1;

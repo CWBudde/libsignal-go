@@ -7,7 +7,7 @@ syntax = "proto2";
 
 package signal.proto.wire;
 
-option go_package = "github.com/GoCodeAlone/libsignal-go/proto";
+option go_package = "github.com/cwbudde/libsignal-go/proto";
 
 message SignalMessage {
   optional bytes  ratchet_key       = 1;

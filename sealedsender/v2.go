@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/curve"
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto"
-	"github.com/GoCodeAlone/libsignal-go/internal/crypto/gcmsiv"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/curve"
+	"github.com/cwbudde/libsignal-go/internal/crypto"
+	"github.com/cwbudde/libsignal-go/internal/crypto/gcmsiv"
 	"google.golang.org/protobuf/encoding/protowire"
 )
 

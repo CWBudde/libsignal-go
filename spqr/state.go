@@ -21,7 +21,7 @@ import (
 
 	googleproto "google.golang.org/protobuf/proto"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // DefaultMaxJump is the SPQR Chain's default cap on how far ahead of the current

@@ -5,9 +5,9 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	"github.com/GoCodeAlone/libsignal-go/address"
-	"github.com/GoCodeAlone/libsignal-go/groups"
-	"github.com/GoCodeAlone/libsignal-go/stores/inmem"
+	"github.com/cwbudde/libsignal-go/address"
+	"github.com/cwbudde/libsignal-go/groups"
+	"github.com/cwbudde/libsignal-go/stores/inmem"
 )
 
 // Example_groupMessaging shows the sender-key group flow: a sender distributes

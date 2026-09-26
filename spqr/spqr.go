@@ -27,7 +27,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/GoCodeAlone/libsignal-go/proto"
+	"github.com/cwbudde/libsignal-go/proto"
 )
 
 // SerializedMessage is a SPQR message in wire form (the v1 message codec bytes;
