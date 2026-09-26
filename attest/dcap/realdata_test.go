@@ -24,19 +24,11 @@ func TestIntelPCKChain(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	blob := readTestdata(t, "dcap.endorsements")
-	pckCRL, err := dcap.ParseRevocationList(endorsementField(t, blob, fieldCRLPCKCert))
+	en, err := dcap.ParseEndorsements(readTestdata(t, "dcap.endorsements"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	rootCRL, err := dcap.ParseRevocationList(endorsementField(t, blob, fieldCRLPCKProcCA))
-	if err != nil {
-		t.Fatal(err)
-	}
-	crlChain, err := dcap.ParseCertChainPEM(endorsementField(t, blob, fieldPCKCRLIssuerChain))
-	if err != nil {
-		t.Fatal(err)
-	}
+	pckCRL, rootCRL, crlChain := en.PCKIssuerCRL, en.RootCRL, en.PCKIssuerCRLChain
 	pck := e.Quote.Support.PCKCertChain
 	root := pck.Root()
 	if len(pck.Certificates()) != 3 {

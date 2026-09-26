@@ -29,3 +29,23 @@ func ReadU64U32U16(b []byte) (a uint64, c uint32, d uint16, rest []byte, ok bool
 
 // UnsortedChain builds a chain without sorting (upstream's CertChain { certs }).
 func UnsortedChain(certs []*x509.Certificate) *CertChain { return &CertChain{certs: certs} }
+
+// Attest exposes attest (dcap.rs attest_impl) with a chosen root key.
+var Attest = attest
+
+// CheckPolicy exposes the MRENCLAVE and advisory checks of
+// VerifyRemoteAttestation.
+func (a *Attestation) CheckPolicy(mrenclave [32]byte, acceptable []string) (map[string][]byte, error) {
+	return a.check(mrenclave, acceptable)
+}
+
+// Report body and quote layout offsets.
+const (
+	RBMiscSelect          = rbMiscSelect
+	RBAttributes          = rbAttributes
+	RBMRSigner            = rbMRSigner
+	RBISVSVN              = rbISVSVN
+	RBReportData          = rbReportData
+	QuoteReportBodyOffset = 48
+	QuoteQEVendorIDOffset = 12
+)

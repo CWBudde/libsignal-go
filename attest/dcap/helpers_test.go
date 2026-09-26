@@ -9,7 +9,6 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"crypto/x509/pkix"
-	"encoding/binary"
 	"math/big"
 	"os"
 	"path/filepath"
@@ -26,31 +25,6 @@ func readTestdata(t testing.TB, name string) []byte {
 		t.Fatal(err)
 	}
 	return b
-}
-
-// Endorsement fields (endorsements.rs SgxEndorsementField).
-const (
-	fieldCRLPCKCert        = 3
-	fieldCRLPCKProcCA      = 4
-	fieldPCKCRLIssuerChain = 5
-)
-
-// endorsementField extracts one field of an Open Enclave endorsements blob.
-// Parsing endorsements properly is the next 9.2 item; this only locates the
-// CRLs and their issuer chain.
-func endorsementField(t testing.TB, blob []byte, field int) []byte {
-	t.Helper()
-	const header = 16
-	n := int(binary.LittleEndian.Uint32(blob[12:]))
-	offsets := make([]int, n)
-	for i := range offsets {
-		offsets[i] = int(binary.LittleEndian.Uint32(blob[header+4*i:]))
-	}
-	data := blob[header+4*n:]
-	if field == n-1 {
-		return data[offsets[field]:]
-	}
-	return data[offsets[field]:offsets[field+1]]
 }
 
 // testCert is upstream's cert_chain::testutil::TestCert.

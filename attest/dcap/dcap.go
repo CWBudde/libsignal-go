@@ -4,11 +4,14 @@
 // Package dcap parses and verifies Intel SGX DCAP attestation evidence,
 // ported from rust/attest/src/dcap and cert_chain.rs at libsignal v0.102.2.
 //
-// This part covers the evidence itself: the v3 quote (header, report bodies,
-// ECDSA signatures, QE report), the Open Enclave custom claims, the SGX PCK
-// certificate extension, and certificate chains validated with CRLs against a
-// trust store rooted in Intel's pinned SGX root key. Everything here handles
-// public data; nothing needs constant-time treatment.
+// VerifyRemoteAttestation is the entry point. It covers the evidence (the
+// v3 quote with its report bodies, ECDSA signatures and QE report, the Open
+// Enclave custom claims, the SGX PCK certificate extension), the
+// endorsements (TCB info, QE identity, CRLs and their issuer chains),
+// certificate chains validated with CRLs against Intel's pinned SGX root
+// key, the TCB status policy, and the caller's MRENCLAVE and advisory
+// policy. Everything here handles public data; nothing needs constant-time
+// treatment.
 package dcap
 
 import (
@@ -29,6 +32,14 @@ var (
 	ErrRevoked      = errors.New("dcap: certificate revoked")
 	ErrCRL          = errors.New("dcap: invalid or missing CRL")
 	ErrUntrustedKey = errors.New("dcap: not signed by the trusted root key")
+
+	ErrExpired       = errors.New("dcap: attestation expired")
+	ErrEnclaveSource = errors.New("dcap: quoting enclave not trusted")
+	ErrTCB           = errors.New("dcap: platform TCB not trusted")
+	ErrClaims        = errors.New("dcap: custom claims do not match the report")
+	ErrDebug         = errors.New("dcap: debug enclave")
+	ErrMREnclave     = errors.New("dcap: unexpected MRENCLAVE")
+	ErrAdvisory      = errors.New("dcap: unaccepted security advisory")
 )
 
 func malformed(format string, args ...any) error {

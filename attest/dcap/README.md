@@ -4,7 +4,9 @@ Pure-Go port of libsignal **v0.102.2** `rust/attest/src/dcap` and
 `cert_chain.rs` (go-signal PLAN.md Phase 9.2), on the standard library's
 `crypto/x509` and `crypto/ecdsa`.
 
-So far this covers the evidence and the certificate layer:
+`VerifyRemoteAttestation(evidence, endorsements, mrenclave, advisories, now)`
+is the entry point (`dcap.rs verify_remote_attestation`); it returns the
+enclave's custom claims. The pieces:
 
 - `ParseEvidence` / `ParseQuote` / `ParseQuoteSupport`: the SGX v3 ECDSA
   quote (header, report bodies as wire bytes, raw r‖s signatures, QE report,
@@ -26,12 +28,39 @@ So far this covers the evidence and the certificate layer:
   BoringSSL; `RootTrustStore` checks the root and root CRL against Intel's
   pinned key (`IntelRootKey`).
 
-Not yet ported: endorsements (TCB info, QE identity), the TCB status policy,
-MRENCLAVE/config checks and the top-level `verify_remote_attestation`.
+- `ParseEndorsements`: the Open Enclave collateral blob (header, offsets,
+  nine fields). TCB info and QE identity signatures are checked over the raw
+  JSON bytes with the leaf keys of their issuer chains before decoding.
+  `ParseTCBInfo` / `ParseEnclaveIdentity` decode the JSON as upstream's serde
+  derives do, not as `encoding/json` would: exact key match, duplicate known
+  keys and missing fields rejected, unknown keys ignored, no nulls for numbers
+  or strings, exact hex lengths, u8/u16 ranges, and the untagged v2/v3 TCB
+  layout. Stricter than serde in two corners no signed Intel collateral uses:
+  structs written as JSON arrays and enum variants written as `{"Name": null}`
+  are rejected.
+- Attestation (`attest_impl`): expiry of the evidence and collateral (TCB
+  evaluation data number ≥ `TCBEvaluationDataNumberMin` = 21), all four chains
+  and both CRLs against Intel's key, the quoting enclave against the QE
+  identity (Intel vendor ID, MRSIGNER, ISVPRODID, masked MISCSELECT and
+  attributes, QE TCB level up to date), the report signatures, the TCB level
+  lookup (first level the platform's SVNs reach; `UpToDate` or
+  `SWHardeningNeeded` with advisory IDs, anything else fails), the claims hash
+  and the debug flag. `VerifyRemoteAttestation` then requires every advisory
+  of a hardening-needed level to be accepted and the expected MRENCLAVE.
+- `SWAdvisories` and the `EnclaveID*` MRENCLAVE constants of v0.102.2
+  (`constants.rs`); raft configs and SVR-specific TCB exceptions are not here.
+- `AttestationMetrics`: the validity timestamps upstream reports.
+
+Not yet ported: upstream's test-only acceptance of TCB evaluation data number
+12 (`cds2_test`/`dcap_v3` blobs, 9.2 item 4) and the SVR2/CDS2 handshakes.
 
 Tests port every upstream test of these files under its upstream name
 (`sort_*`, `validate_*`, `valid_quote_from_disk`, `isv_sig_*`, `qe_sig_*`,
 `qe_report_*`, `deserialize_*`, evidence and util tests,
-`test_deserialization`), plus `TestIntelPCKChain`, which validates the
+`test_deserialization`), all of `endorsements.rs` and all 25 of `dcap.rs`
+(the `FakeAttestation` cases re-sign the recorded blobs with test
+certificates, see `fakes_test.go`; the `test_verify_remote_attestation*`
+cases use the recorded CDSI handshake). `TestIntelPCKChain` validates the
 recorded Intel PCK chain against the recorded CRLs as `verify_certificates`
-does.
+does. Further cases cover MRENCLAVE and advisory policy, expiry boundaries,
+tampered blobs and the strict JSON decoding.
