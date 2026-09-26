@@ -3,6 +3,7 @@ package session
 import (
 	"crypto/subtle"
 	"fmt"
+	"time"
 
 	googleproto "google.golang.org/protobuf/proto"
 
@@ -190,4 +191,38 @@ func (r *SessionRecord) PromoteMatchingSession(version uint32, baseKey []byte) (
 		}
 	}
 	return false, nil
+}
+
+// HasUsableSenderChain reports whether the current session can be used to send
+// at now: it has a sender chain, is not a stale unacknowledged session, was set
+// up with PQXDH, and runs SPQR. Mirrors SessionRecord::has_usable_sender_chain
+// with the NotStale, EstablishedWithPqxdh and Spqr requirements, as
+// libsignal's bridge asks for them.
+func (r *SessionRecord) HasUsableSenderChain(now time.Time) bool {
+	s := r.current
+	if s == nil || s.structure.GetSenderChain() == nil {
+		return false
+	}
+	if pending := s.structure.GetPendingPreKey(); pending != nil {
+		if isStaleUnacked(pending.GetTimestamp(), func() time.Time { return now }) {
+			return false
+		}
+	}
+	// A stored version of 0 means 2 (session_version in state/session.rs).
+	if v := s.SessionVersion(); v <= preKeyMessageVersionX3DH {
+		return false
+	}
+	return len(s.PQRatchetState()) != 0
+}
+
+// Clone returns a deep copy of the record.
+func (r *SessionRecord) Clone() *SessionRecord {
+	out := &SessionRecord{previousSessions: make([][]byte, len(r.previousSessions))}
+	for i, b := range r.previousSessions {
+		out.previousSessions[i] = cloneBytes(b)
+	}
+	if r.current != nil {
+		out.current = r.current.Clone()
+	}
+	return out
 }

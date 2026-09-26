@@ -55,6 +55,9 @@ var (
 	// semantically rejected (e.g. a v4 PreKeySignalMessage missing its Kyber
 	// payload).
 	ErrInvalidMessage = errors.New("protocol: invalid message")
+	// ErrInvalidArgument is returned for an argument the operation cannot use,
+	// such as an unknown message type.
+	ErrInvalidArgument = errors.New("protocol: invalid argument")
 )
 
 // encodeVersionByte builds the leading version byte of a serialized message:

@@ -133,3 +133,21 @@ are taken verbatim from `rust/protocol/src/ratchet/keys.rs` and `ratchet.rs` at
 the v0.102.2 tag, which remain the contract (these version-stable formulas are
 unchanged from v0.91.0 — the hkdf vectors are byte-identical across the re-pin).
 Every other domain calls the genuine public API.
+
+## poksho
+
+`gen-vectors poksho` emits deterministic v0.102.2 SHO, conversion, signature,
+and linear-relation proof vectors by calling the pinned upstream crate.
+`src/poksho_compat.rs` contains this test-only adapter.
+
+RPC methods are `poksho.sho`, `poksho.prove`, `poksho.verify`, `poksho.sign`,
+and `poksho.verify_signature`. Byte fields are hex strings, including empty
+strings. SHO requests carry `variant` (`hmac` or `sha`), `label`, and ordered
+`ops` (`absorb`, `ratchet`, `absorb_and_ratchet`, `squeeze`, `clone`), returning
+`outputs`. Proof requests carry ordered `equations` (`lhs`, ordered `terms`
+with `scalar`/`point` names), `scalars` and `points` maps, `message`, and 32-byte
+`randomness`; verification uses `proof` instead of witnesses/randomness.
+Signature requests use singular `scalar` and `point`. Creation returns
+`proof`; verification returns `verified`. The committed fixture demonstrates
+the request shapes. Invalid builder inputs and SHO transitions produce errors
+before calling upstream APIs that would panic.

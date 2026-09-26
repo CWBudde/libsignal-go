@@ -24,6 +24,8 @@
 //! `pub(crate)` upstream, against the same pinned crate versions (`hkdf`,
 //! `hmac`, `sha2`) so the bytes match upstream exactly.
 
+mod poksho_compat;
+
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::io::{self, BufRead, Write};
@@ -162,6 +164,12 @@ fn gen_vectors(domain: &str) -> Result<(), String> {
     // Every batch carries a {domain, seed} header. Most domains add a flat
     // `cases` array; hkdf instead adds a `subdomains` object keyed by
     // sub-domain name (the T12 gate inspects `.subdomains | keys`).
+    if domain == "poksho" {
+        let mut out = io::stdout().lock();
+        serde_json::to_writer_pretty(&mut out, &poksho_compat::vectors()).map_err(|e| e.to_string())?;
+        writeln!(out).map_err(|e| e.to_string())?;
+        return Ok(());
+    }
     let mut batch = json!({
         "domain": domain,
         "seed": format!("{VECTOR_SEED:#018x}"),
@@ -1920,6 +1928,7 @@ fn error_response(id: Value, message: &str) -> Value {
 /// Unknown methods return `Err`, surfaced as an error response (not a crash).
 fn dispatch(method: &str, params: &Value) -> Result<Value, String> {
     match method {
+        method if method.starts_with("poksho.") => poksho_compat::dispatch(method, params),
         "ping" => Ok(json!({ "pong": true })),
 
         // curve.sign: { private_key: hex, message: hex } -> { signature, public_key }

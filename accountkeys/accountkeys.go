@@ -337,3 +337,17 @@ func array64(in []byte) (out [64]byte) {
 	copy(out[:], in)
 	return out
 }
+
+// MessageBackupKeyLen is the length of each half of a message backup key.
+const MessageBackupKeyLen = 32
+
+// DeriveMessageBackupKey derives the HMAC and AES keys that protect a message
+// backup, for backups without a forward-secrecy token (MessageBackupKey::derive
+// in rust/message-backup/src/key.rs, with backup_nonce None).
+func (k BackupKey) DeriveMessageBackupKey(id BackupID) (hmacKey, aesKey [MessageBackupKeyLen]byte) {
+	info := append([]byte("20241007_SIGNAL_BACKUP_ENCRYPT_MESSAGE_BACKUP:"), id[:]...)
+	out := mustHKDF(k[:], nil, info, 2*MessageBackupKeyLen)
+	copy(hmacKey[:], out[:MessageBackupKeyLen])
+	copy(aesKey[:], out[MessageBackupKeyLen:])
+	return hmacKey, aesKey
+}

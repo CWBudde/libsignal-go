@@ -52,7 +52,7 @@ See `rust-harness/README.md` for full harness/toolchain details.
 # from compat/
 cargo build --release --manifest-path rust-harness/Cargo.toml
 BIN=rust-harness/target/release/rust-harness
-for d in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links; do
+for d in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho; do
   "$BIN" gen-vectors "$d" > "vectors/$d.json"
 done
 ```
@@ -166,3 +166,29 @@ serialized `SenderKeyRecord` through each call so its dispatch stays stateless.
   for account entropy parsing, SVR key derivation, backup key and backup ID
   derivation, Argon2id PIN hash access keys, and Argon2i PHC local PIN hash
   verification.
+
+## poksho (go-signal Phase 8.1)
+
+`vectors/poksho.json` comes from the v0.102.2 `poksho` crate's public APIs.
+Its 43 cases cover both SHO variants, upstream known-answer signatures and
+multi-equation proofs, shared witnesses, repeated terms, and the base-point
+LHS; 16 conversion cases cover scalar reduction, canonical encodings,
+base-point multiplication, and uniform Ristretto mapping. Empty inputs and
+block-boundary SHO schedules are included. Inputs are fixed byte sequences,
+recorded in full; `source` and `upstream_tag` identify their provenance.
+
+`TestPokshoVectors` consumes the fixture without Rust. `TestPokshoInterop`
+uses fresh random messages and randomness to compare proof bytes, verify both
+directions, and check rejection of tampered messages and malformed proofs.
+`TestPokshoVectorRegeneration` runs the generator twice and compares both
+outputs byte-for-byte with the fixture. The normal `compat` workflow runs all
+three when the harness is available. This is local Rust interoperability,
+not a claim of live Signal group or profile support.
+
+```sh
+# From the module root:
+CGO_ENABLED=0 go test ./poksho ./compat
+cd compat/rust-harness && cargo build --release && cd ../..
+COMPAT_HARNESS_BIN="$PWD/compat/rust-harness/target/release/rust-harness" \
+  go test -tags interop ./compat -run Poksho
+```

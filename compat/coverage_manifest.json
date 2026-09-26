@@ -46,8 +46,8 @@
     {
       "name": "username-hash-proof",
       "status": "deferred",
-      "reason": "Requires zkgroup/poksho proof-system surfaces not carried by libsignal-go; tracked in encrypted-spaces-go proof parity work.",
-      "next_upstream_input": "Upstream username hash/proof vectors or a carried Go proof-system package boundary.",
+      "reason": "The poksho primitive is available, but username-specific proof generation and verification are not yet ported.",
+      "next_upstream_input": "Upstream username proof vectors and the username-specific statement/transcript implementation.",
       "packages": ["usernames"]
     },
     {
@@ -75,6 +75,13 @@
       "status": "deferred",
       "reason": "Key-transparency checkpoint and search proof verification require upstream transparency fixtures and a proof-system boundary outside the protocol core.",
       "next_upstream_input": "Stable upstream key-transparency checkpoint/search proof vectors and the hash/proof primitives needed to consume them."
+    },
+    {
+      "name": "poksho",
+      "status": "vector-backed",
+      "vector": "vectors/poksho.json",
+      "packages": ["poksho"],
+      "notes": "Both SHO variants, scalar/point conversions, Schnorr signatures and multi-equation proofs at v0.102.2; bidirectional live Rust interoperability. Does not implement zkgroup, zkcredential, or username proofs."
     }
   ]
 }

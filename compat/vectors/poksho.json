@@ -1,0 +1,2188 @@
+{
+  "cases": [
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "617364",
+        "ops": [
+          {
+            "input": "617364617364",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "hmac"
+      },
+      "result": {
+        "outputs": [
+          "392cb9449373037fa0c11aebed69cca3b7d3bc9790878f341729c65d5506442f04986cb5c9098f277c3ea640a4dc6e90372b433a90af9aea7072eaba3398c4fe"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "617364",
+        "ops": [
+          {
+            "input": "617364617364",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "hmac"
+      },
+      "result": {
+        "outputs": [
+          "392cb9449373037fa0c11aebed69cca3b7d3bc9790878f341729c65d5506442f04986cb5c9098f277c3ea640a4dc6e90372b433a90af9aea7072eaba3398c4fe7a"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "",
+        "ops": [
+          {
+            "input": "616263",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          },
+          {
+            "input": "646566",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "hmac"
+      },
+      "result": {
+        "outputs": [
+          "c9163e4ab2cc30998d95a660c6a1018e0e42f201abf3b7b59d87eb965ee367bd82511edf16087d2fe19d6b9f99e4367b6da1709387d0e800e9fa08540ae2f2",
+          "9e7b055eec4c06dbce47afd007db15d50b8b98c7f174647edd56e42a5165c5a46e3a00beef0c72e994663ee8dbf105de8cdeccd6070e7cc4830d45fd738b4efc",
+          "35844686c247f6276fc8bd66c4d06bb9aab26024a65df769e7328fdb620046e89cf224a4d4f2f4214859cc707d68ce839523b62bb0b995dff65745c3db632b97c0",
+          "5bd414837d3c2755cdf5f37269be3b0cd2c2e1b74517dae1ec0c7e06e59c47a88ff701903e8e24b42c0e4e056945e75fbddb99919ec5c8955bbc49fa475f85c71fb66b3783a2b1d116a0d17aeed18615b2ce526fe75575efc0fd774db965c0226e208da196f0b59c59aa36803164b6c0cda1edc4eee5ffee826ff5dd290f85",
+          "6339f7b4330347b7a4376e09f6ca52cbbcf99a42fd52e020dc20cf1c91ce3662876bb7559e123c5695350dbd9fe235fbdf6db97b84d4918b3bae44614473a01d82c593b63afed9892a4609a3116bbba412bf2a40aec2251a4944b38bbc27b57120ff457e4a6f1b09c0a3cc99ae28710a59a477da1cdb0546ab22ecd9fd9b3e36",
+          "878cca92662abf854e07830748f96322baf128ce79db2fdfb7703f6c8cdaeccfb09780bfa0881309305dcd11f3deb0ed98f41fe56cd424495e279ff929724bc52c955c7468099fc3d74bc27f9ed951702672052e6e2c06c95c7859fe8c427b3c322e4f49f5128a7371fff7f2267f79b08dfcc01d481cdc5f6359107d15fbf99456",
+          "c5c13bcc6596c25fc4514eac9269dd6e3e57ef70f4bfb8d67fd3082ed9732d7790d8d2686f19eb2533a65c94bb8ceda0a068e1b615c81bb26e411889da9fb7"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "626f756e646172696573",
+        "ops": [
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 0,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 0,
+            "op": "squeeze"
+          },
+          {
+            "input": "07",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 1,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 1,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 31,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 31,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 32,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 32,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324252627",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 33,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 33,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243444546",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4041424344454647",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f80818283848586",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f8081828384858687",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "hmac"
+      },
+      "result": {
+        "outputs": [
+          "",
+          "",
+          "02",
+          "88",
+          "11414e85e7ade93725bffb4e3e11053f951ec954d15577ebbe1c6970fd5385",
+          "88bb9158688cb672c44eba5fda780d42ea90ad37a63cce6adf5acd24ae948e",
+          "3df4a40d72125e1c98b502366735645c8b6a3edbf69be80524d362443012a16d",
+          "e587acf4632babd5cdb5accc19cb775df4d749a9411d828df8d712b99f0fd725",
+          "957b49fe684ccf0ed81869f8f7b994366586a9205ce704eb16bd59963e21e6dff3",
+          "7c745f83d2a21cbdf88a7466f2c523d7c1cd0a88127953fac22b33a33e92d3867a",
+          "525480e07a8dfc5df47930ca9f18d18319260cf050a51373c7e89ca371e5e3de83b1f21849f29de070ffeb1d75d13f05d3453690366c2b686fe99cde41c013",
+          "c831bd3af1193cada41b9de8e18b9edbf3efba07ec537e6527945b117df844eec5b2722effbb5d3a4f5705b03324778a6c184199c658bccfb0be8119b95431",
+          "b5a668bcbac0f9e9ce265e272eaf5f754cb56e5fd22162af25f2dcf378fe19d492f3406c76bd15ceacaf14eece93a3baaee8c0939644a1257d1b26c60ff3885c",
+          "e2b4bcd348285f5c903e3ec2c38a68db97ffbed48b70f9e59683c879fa99c7dd9bab33d0ec00b66dfe605177407f093acd5a81731b69d52053abddafd328b985",
+          "2edfa1b1f46187edb1458869437c8d9b77fb741cc541978f518e7cc49d5a11a412539e7da810a8a4d97cf2d9b902e1c7ba6894184c5cf7b5d77c5719531e37cdfe",
+          "0e3f59ed300859a4ec9fd1a767ff18b7658dba0886ba9d96cf830d5fa9101b4e8987214e35401b39ac3fd26887d58ffe4a308de78e0c749466cc173cdf934adc00",
+          "bf964a7555e9ae217404b0270d6c3a0781c1dddd52311a215df7afc5ddad22d6b5c6ba222b0c35f0e55a26c746ed7f5eee809416ec62ad3606d84153aab9757b22f054601a23416568abf47d9a2571ac55ceeafadeda98a01c486821e29d4e312c701e2bc6434e4d6a4cf8704eb8a6cc6a53f8b5596dc52f8067f385ab59dc",
+          "5ca8b4f1539c2cbd478aefd380776cb5bc775d6ed14749474407052f748ebb521cac56ea8a5f9a91424180b9ebec61dd7bb050b43cef40262b47c18bfca206566ed11e59ea18e3ca29e7758b29d261fa1b6cc764d6af7e3e7b2ec6ab4ec04acaa2ad6fa2007ca9170dd5e4e70706f5e84b94449ceb0e0eeba8d70cace5a019",
+          "13392e75fbad553baffaa5ce0cc528e71920128b1f9a83f5d0a0a7ca281abedb0f83c424460cbf9c2ed7216a778e71ef676105cbda2fae4bb4f7f5bc5b5121a4fc93368a18aead31646b1ffd25ce1838b10a8848ae23f8565fa8ed75f9fbf3acec1eef0fbbfe3ea986fab138db189be962394db5b2042214cc78c15c8d95d2e6",
+          "ae7409d9a9b38546064dced4ba36bbc29a317ed3b9ca12469e5b822285bb699322bf69beb1c7d66654ced617612d1cf07e8cde99d794c996be15cabf30bc253e820c49eddc25007b2d33a4ffd38bad3c612cb0e775e01e21bd2c2714fd2e9e15cdf4f0a400d90e71883c7ea3d03c9a4a4c0bef1fb4031c1c5a00abe4b8f69699",
+          "33e29f7f27d24d7a4ddeeee2d65e5bd3eb1ce6b14d483a639d56bd2195db1205598a2725324970bf244a0ebccf7971c6ba749477bebd0928a93799b07e764aff3a650ed56f036e8e7dfad0530cc038d600e40c91bffa91a38d2f0ec633f8dea2b4b987464338552d5cc17139da98a403ae4664bb929718cbc7250fa5974dd2d5dc",
+          "3ea27e5db9fa81820131ebb7a5b7586bc200b7069e505d4aa07dd786a06b22ed61ea4828f5f87d3389061f02433c6cd705c5fc5e3ae0dba368a75ea5832ca4a3c890d514796072d84ba3a04350e346bf24226790c23dd5b0b7c810dceed1ffc1453f2a798c9253b808bfc777094923404087dd7b45958e2b87297e1483977cd4e6"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "617364",
+        "ops": [
+          {
+            "input": "617364617364",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "sha"
+      },
+      "result": {
+        "outputs": [
+          "ebe4ef29e18aa54137edd89c23f8bfeac2731c9f675da20e7c67d5ad68d7ee2d40a45232b599552d46b520082fb2705971f07b3158b072b63ab0934a05e6af64"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "617364",
+        "ops": [
+          {
+            "input": "617364617364",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "sha"
+      },
+      "result": {
+        "outputs": [
+          "ebe4ef29e18aa54137edd89c23f8bfeac2731c9f675da20e7c67d5ad68d7ee2d40a45232b599552d46b520082fb2705971f07b3158b072b63ab0934a05e6af6448"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "",
+        "ops": [
+          {
+            "input": "616263",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "input": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          },
+          {
+            "input": "646566",
+            "op": "absorb_and_ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "sha"
+      },
+      "result": {
+        "outputs": [
+          "5bddc29ac27fd88bf682b07dd5c496b065f6ce11fd7aa77d1e13c609d77b9b2fed21b470f71a7f1fdfbfa895060c51302e782f440305d12ec85a492635dd3a",
+          "0ad17fc123d823548447b16ebebc8c21243dc4c59dd95525b7321c3b92a58e30156ec8c8e70987ed1483d2be84e89d2be5813fb1b8ab82119608120a2694a425",
+          "24c2dd727512cfa8e00e7a972a390abf90a39bcd233c017dba63cf3bfe7032da7b5a73a160652ca31e87d7ab003985fc95f06c1c75f39def734bef8e6317e5a9f1",
+          "914675c24656b7e1dafaf9c7459987fd0107bf17918e22dfe23a5c41b2ddf345b41bc7344d38690b906958062c157d0bc1324abfad5c672ba84bdabdff82848159811516099cffa264238c3b1d6422e5e449de1a4c0ceb9fd5ffaa77b24e053b79cc0e0acbc3f16f366bb515aa37402715165366a67f07216f49ded105675b",
+          "8c6b7dee6b0fdd915c4b7942293591344e39bdfe408f69f99f47077893270a00c60931505f78e477160f5e84504c511046da439c75a2ca9f86cade247cfa8d86a2a7a30e3a4b615cba4f557d32333df43be1d11492b03431ab3e49a461266b4ca777dada9f37ff98f885b5668729136934ecab9893ce05de8679d74b93373609",
+          "d021a4c0f6c0815e6020846d5ed03b024dab1bee935fd18560df09ef5bc76eef53174668e545379fc2c1a97234e273eb9ca97ee01f647c9100b7fa7e2e0a57d76a6cdadd0a8bef0332b99beb392e7d262861004002cb3c1e94d3be3abd5bfb9e604d4900c759b5fffaf4083742f4200d1d6dbad0314ae10227770613b9b01e1004",
+          "0ddeea973f3210f7725a3cdb2473f873aeab8feb32b80dee67f0cde7954e929a4e787aefee6dbe91d3fff1621aab8d0d29194f8af986d6f357add0150df7d9"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sho",
+      "params": {
+        "label": "626f756e646172696573",
+        "ops": [
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 0,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 0,
+            "op": "squeeze"
+          },
+          {
+            "input": "07",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 1,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 1,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 31,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 31,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 32,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 32,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324252627",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 33,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 33,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 63,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243444546",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 64,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4041424344454647",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 65,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 127,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f80818283848586",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 128,
+            "op": "squeeze"
+          },
+          {
+            "input": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f8081828384858687",
+            "op": "absorb"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "input": "",
+            "op": "absorb"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "op": "ratchet"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          },
+          {
+            "op": "clone"
+          },
+          {
+            "length": 129,
+            "op": "squeeze"
+          }
+        ],
+        "variant": "sha"
+      },
+      "result": {
+        "outputs": [
+          "",
+          "",
+          "03",
+          "f3",
+          "2b48e6fa64d3a124c4488150f213d2673e175e13e97d62c2f4ade7699a7569",
+          "859aec0f884a1564a93ed1e893e66176ef154b5dda33cf7c29a95ee2e70afe",
+          "832b0226b4c4b1e09dbdfa972b2a6a8771b9065ecf73c31640f772d6280d00c9",
+          "0310b7fb51f7f6ad34d66103de92b381c265972d43398111d07875d5c1df5c1d",
+          "4de6295d481490b53a482fa520b7eb5ac91f4ce4d5dc44217fe74c76bdccad3ad9",
+          "78719e1214916a72629c1bc75941a1bc8652ee5d744eb33ad4a1d94baeced6180f",
+          "41e3bf166700b63fa17079480ce42c36c04175802f78f34ef12b9fe75d69ed37b1a0f1f1f19f663935206c77c843f466b347886f26ad520dbf9d69bb10a32c",
+          "83616e82035fd3a4ab308e2d3e18f625e7764ad2cf2d237910f324ad0051d555faf36e6eb3561fef63384d185d7088237733728e6ea366aee489ec3de2146c",
+          "fb64ca96edb44f44bd11768be41768287931c5b4841b6f0237d162877f280ba932c8e4083e4a4a883354edede213eb65c2eee45fb974a307035b838722b3e288",
+          "dd8e47200445cd807357d98593ede4372b5768cf9e9de18f6054651d67e29451608e8c6c141a593c3130a6b2c3d82130d0110df360791d6cb8c2332aafe143a9",
+          "1cd7dbb27300f5e02fd1f6073a804876c9c26d1de9cb7d78de2b8e148c450b45b8fa612efe31aafec78af7df2ab9f3ffe16239f25736665fef095ce73b664c8f11",
+          "d03ff7c86eb99d486b20d266701eb95e7e2676de27982e37180cdaf743a4648f987e166e9f56225c491d3b92f3765673261fa4ac68c7ed2b45101d1a2f5337b957",
+          "cf3697bb350c858a25cab96fe24b655c69d65ec2a47b46f1e973345c8c86d43a6d4a995f16108395ae7d147507bbe84f376f75112ee1d9d7403d655c2ee50a46cb225c5dff1fa61e97aedeb9fee391c300387c45a60c459c6a879e0890911514149980fe4ec6b230ab8674191364c8f637edc76ab7696e031e244dae2f2c08",
+          "3a003ba2d25ef211877072ba7f1ffdeb84ac069f87517fdc90e664efc95671cac088e7d73f021f2b7a4e2e2af7bf4808d3ae37216fc9aaf3761ebded11275047654a86a2b497d367c7280d276dad6e7f12c7ca25ec0e9562c84c1c1b9c9b6810b10ce1b64671d19085dc65bccdd706ce494275cbdad8f28108ad7c9b396727",
+          "d4256db783edc7b59e0eda26219b7854fef1ff09585cc9218f99ff1369736a0e7b49b44e83bb2aa6c3a4c241fb113c5bbe7ccd12c26d72091e8d2016d3bba835f483231cf78fdfa647484381bd7db8f016c2a788c7ee6f3503a53d13a2d00295be8fca23091aba434e8bdd3549180d592c06ca910804d8ae2fa136196d205035",
+          "f99b96d7bd3d5147ae968e596427b251f23532babecde02606729f5ad112b3a00f4170c1506799eddfd5e3760e88e88d265f689009ba8c0fc6dc869998f7326d12ad068cdbabc27ad7a97f2c19a4ec9bf18c85b31da44f302c932d38f1d6b6f074eff39aa8188a21ff2d1493968881ac87e8a37b295369fb44476d14c42d0171",
+          "fbfd381022a51a08fed48aadba542a26c1179ea31891e375e50adb4a3fe0d895126348f4aea85a0b53878f8111fb1019e5b527ea94ed8acfc7e149f966eb1560ab43832610758bb0316aa148f22563e14440e85e19ade97eb53f36100045a02acaef6c02545a89b3824bcf3426536918244a571f594e26f80d2dfe67d8b4f5c19e",
+          "114892728a15ed4990d007db38220ede2a0ee436d102ec0ee07b2a00ef12fdb39cda8bd48729f924d555dce6d6014bbafa9673845469ff0c20a7a37634f00f9476e02a7ee9b611d4854cceed2f76850f65017d68cbb47c6ca9f3e49282239a71df503b601985b71a2737c05876cd79d2638f88bf0c5e8854bf42be2718618697da"
+        ]
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f60616263",
+        "point": "7c107ed2840904ea12ce0be6d4d774a14c00b91c21f71dc96c1de2b087a33228",
+        "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "scalar": "7a3c6282f02d37a05023b60d5428e6cc5961d4c31221937adae0b574e4d07205"
+      },
+      "result": {
+        "proof": "a08f6b34a282dd4c7cfc40b918f224a6b631ca5f6480a10b42bd1408602a7e008a23a1e32479befb5e26b9f0f4fe0e9e9e9ec9afad269143acb03a22c6364f03"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "",
+        "points": {
+          "A": "ce8cc81438b12763ef06a8462fa2530377951393a406d636c6bf6aea559a2355",
+          "B": "746c2eabd5eabcf268da9f5ddd1848048fb04ada54659108552de9193f0e7527",
+          "H": "1ed268c0343940b1d57adc75c0a664b498ffe67b53a60236fc1d2db43cd7627e",
+          "I": "344371c8efaa7a155d5af696de6a3ffee7ea2f55d5bca38b66b841cc7af85d77"
+        },
+        "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "scalars": {
+          "a": "c997059a6609bb7d3635597f4f184018a43b15152fb7ecbeb4b4a388e546ec0a",
+          "b": "2b1fb354c2812c0346aa044e6c0ebb4eee1556664b4d46038f88919ce6bc6500",
+          "c": "7a7a566c385db0e02bbca7bf67fe149a38f096b767e39f47695c7fb0e732df05",
+          "d": "c9d5f983ae3834be11ce4a3163ee6ee582cad7088479f98b43306dc4e8a8580b"
+        }
+      },
+      "result": {
+        "proof": "8efc676c33e6b2d0670ed5461a507f6a4bc9153e261db80fa438f3cd80a5c909b113cc0d7990ad616d0a2fc4b831d06357a5ee5d36d44b3427c7901061180c0fb1798c51680fe21b9f98e97955b1597c49314725c1546a369328cf54daae710bfc4a9911422aa77ed6d7231de3003ba5ae9d9fd0c53ced7ad782e29b04684a07221a6ef47ce61d817f01117cf59df69ac35b5bb590f1f7b6d029717bc1a62501"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f10",
+        "point": "0658581492fc518700663ef15975326c4ed345998f4fa16255348bc3ebdc5111",
+        "randomness": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+        "scalar": "c91e0907d114fd83c1edc396490bb2dafa43c19815b0354e70dc80c317c3cb0a"
+      },
+      "result": {
+        "proof": "4362501a8d0068b58dd5b31231d83eba09e4feb1a53d64d541e2fe9e8e9a130789fcef3d0df265c15c85e6e1e8588328e5e6e516bdcc9be8f5dfc1ec0bbd0f06"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112",
+        "points": {
+          "A": "5686739c07be8542f3328168e56dca05b489122c86796e451b083dccb9f07e36",
+          "B": "34329429881e3232766b3c4376d9a85b6190286ac988979a644e7e2018720748",
+          "H": "5406a14856d6b9258bd14c9b2b591111ab965c93e961ac5aa8451b0ce0d43037",
+          "I": "ca5c0ba540afdea75b506ad3037fc5cc2d3184f2e319cdcd719f9370664c7d4c"
+        },
+        "randomness": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20",
+        "scalars": {
+          "a": "2ba6b6c12c8d6e09d1626f6566012d11451e02ea31468f924ab06ed718394500",
+          "b": "7a015ad9a268f2e6b67412d761f1865c8ff8423b4edce8d624845ceb19afbe05",
+          "c": "c95cfdf0184476c49c86b5485de1e0a7d9d2838c6a72421bff574aff1a25380b",
+          "d": "2be4aaab74bce749acfb60177ad75bde23adc4dd86089c5fd92b38131c9bb100"
+        }
+      },
+      "result": {
+        "proof": "93ded1648d0781be7781894edf11988cadd7a1eeb7f653a565b3bf7edce01b0cb598686e55ff60aa9f6cff67cea5f0641ec2ebf62e34faba5c9466b1d2fdd607237b20bd477444e15788feeff2a587539a751179e0f78b67d197718fd4c2f907298941fc0df9fa561e619a2bc846ce019a8ec642343843dac5bb195a47866a0cf21c7d93b25464854fe847615ec9e000fba1a1ffbc02789eeea39a01b0b3e300"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021",
+        "point": "4a27f27edc39e0d48c190c0d3c5df9bad40fed223ae1d50035407f79343c1c7b",
+        "randomness": "02030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021",
+        "scalar": "2b2dba2e9798b00f5c1bda7c60f49ed39b26ae6d183fd82106d84b124bb52400"
+      },
+      "result": {
+        "proof": "510d73187f87eb1e9f6310a246af6afe8a715bb41fb61354b93f705afffdd40199b02380cc1a155dc90846196705c4be918478749a79b773fe79f9b49fd7ea0e"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425",
+        "points": {
+          "A": "286898f91bec820b81ec362e05f82b1ce914103c6f12cb319f6d15f8d5cb843c",
+          "B": "7a1257fad1dcb1f9ff2d67d4c619e70e7d2fbfac676498d96ff5cef2e4f92a5c",
+          "H": "104b3849b761dee3e78487696b23cc842b509f228ba48ff882a0f1b121d86833",
+          "I": "b8e9c06230b58b348a0d783ce70628a537eb7e26b9cc473a7a8ce0bb8d603c68"
+        },
+        "randomness": "02030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021",
+        "scalars": {
+          "a": "7a885d460d7434ed412d7dee5be4f81ee600efbe34d53166e0ab39264c2b9e05",
+          "b": "c9e3005e834fb8ca273f206057d4526a30db2f10516b8baaba7f273a4da1170b",
+          "c": "2b6bae18dfc7295037b4cb2e74cacda07ab570616d01e5ee9453154e4e179100",
+          "d": "7ac6513055a3ad2d1dc66ea06fba27ecc48fb1b289973e336f2703624f8d0a06"
+        }
+      },
+      "result": {
+        "proof": "1bba87b7081a4ae86acd29473412b74ada3a7a5e1af4b98997c923d11224e3005c5b609508077c1244f45f117bc948d8f1012cae6d90c46688f8ffc95f63080a8589257bc4946260f0fdb6bfce1f8b15f42f913a994172933849827da55fbb059d7f5b9ef59d0fa3f313b26da5ce8d30f51b6e902bf035ffd3947ee2305856072a157f99cd9c4e4942faeddc5956bffd2740973e71b78559bcd46828ef81910e"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132",
+        "point": "b4f9c7b4f9f17c3ad170d7ee9b0be6b8dbfb967f3b81311f12d3d7611528df7e",
+        "randomness": "030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122",
+        "scalar": "7a0f61b3777f76f3cce5e70556d76ae13c099b421bce7af59bd316617ea77d05"
+      },
+      "result": {
+        "proof": "7a1930df8dc415fbcc19a3069b3d49e81836ddf68ca24913899767a94088dc002f21c87c75b9ae6235a6031150526aec7423a29ddf7e8a053d6503f87361c808"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738",
+        "points": {
+          "A": "b4b4f637b7b867fec2ec7a9245d259ed943409b136567e780aac5d81a4806b6e",
+          "B": "3ccf5d13982c1a57d6c26c34f416810379eab8c3f16ff7062b8adef7c4edb35f",
+          "H": "52489b4b369faed000ca32140c239f09ce9fdce0865a2e83720c19aa3de5f205",
+          "I": "c4889d57fd47616a4ee34352df9e1bc4d4d6358948910be0b0f339b907558807"
+        },
+        "randomness": "030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122",
+        "scalars": {
+          "a": "c96a04cbed5afad0b2f78a7751c7c42c87e3db933764d43976a704757f1df70a",
+          "b": "2bf2b18549d36b56c26c36466ebd3f63d1bd1ce553fa2d7e507bf28880937000",
+          "c": "7a4d559dbfaeef33a87ed9b769ad99ae1b985d36709087c22a4fe09c8109ea05",
+          "d": "c9a8f8b4358a73118e907c29659df3f965729e878c26e1060523ceb0827f630b"
+        }
+      },
+      "result": {
+        "proof": "55c363150fa240cef636c4a90ecdccc058b50121d82cc8ba40578d566fd8f80c96385f58200b763583d7f658155c1e95209444fd7cf6a446534c7384a45d150cb9cd58859b8735de2cc4136a92455213b8c6158c9fd94c05830f6197cdc68309d73207dce1ade18f01e664a4967001502c35212acb6b2cb11dd9bb2ee7e0a00b7b959eb8b349ea2ce505c646c74a1cae67c8fecd486cd1ca713670efeccb330b"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243",
+        "point": "32268cef32e62f096c80bd5210c6298902fa07606a6bd4d12759f80be7d6d91f",
+        "randomness": "0405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223",
+        "scalar": "c9f1073858663cd73db0f58e4bba36efddeb87171e5d1dc931cfe1afb199d60a"
+      },
+      "result": {
+        "proof": "1d15300c14f3f2a446dad75c393f3f16d837effa9f19a314349ca92462f269009d50e9071f32d751435b34fcbe4d9087897f1e6098da293b385b5c8e9393ce0e"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b",
+        "points": {
+          "A": "2cfcf99dbab4a1d3d899a47532be927b358c5e4513fc9ccd1c2b77890acf4308",
+          "B": "1ef5dba7e739a54d81523aa31e637a8488170f154c614e0f92035fc1caeff175",
+          "H": "d017b68a30baeebd6f1728bcbf327d96925c3ee8bbf3888ec9ac16f55ed7534a",
+          "I": "80f6b1ff345ef1e118d637131ebabdb81ec1c8daf93d7cbce42505fb0f948e4f"
+        },
+        "randomness": "0405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223",
+        "scalars": {
+          "a": "2b79b5f2b3dead5c4d25a15d68b0b12528c6c8683af3760d0ca3cfc3b20f5000",
+          "b": "7ad4580a2aba313a333744cf63a00b7172a009ba5689d051e676bdd7b385c905",
+          "c": "c92ffc21a095b5171949e7405f9065bcbc7a4a0b731f2a96c04aabebb4fb420b",
+          "d": "2bb7a9dcfb0d279d28be920f7c86e0f206558b5c8fb583da9a1e99ffb571bc00"
+        }
+      },
+      "result": {
+        "proof": "529ed31a4947eece862378daf16f0c8e4ca6b390b42a64dca90320b379895f07178bfe74cbd2305faaec234637822ca4f59e48f54494a48cadbcb3a53083a4049c464350e34e523c9f01938e5dfb6a4eeb5f4e1fb4250ab8c015a6a93c99680b620b4abdeb02a53788d380c7a6de2e78d48a436c81217ef64d3203adabb95d0a7df4557edd7ccae18046c8b973aaa539753c6212e910367f3734fe6629ec470f"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f5051525354",
+        "point": "503bff723799897dbb1ad1882cdb0c55c13906f2467fd6486b35be67c3d4701c",
+        "randomness": "05060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324",
+        "scalar": "2b00b95f1eeaef62d8dd0b7562a323e87ece74ec20ecbf9cc7caacfee48b2f00"
+      },
+      "result": {
+        "proof": "807e1fe6d76269f100dd3c571caaeacd2f1ea2ea6a21a531916094698e310e049785f1ece0b2be874e72ebbf6269ce7c3a61f92efc55462df7396f40dcbb390a"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e",
+        "points": {
+          "A": "029ca448c0fd6d2d782dce08884e84fd5011e958906c879841179392d0fe6340",
+          "B": "b6d9cdece1a465115f13152a8fa273bc703b72898943b5865049aee33690ee77",
+          "H": "8ca7ac7dc13d7ded3b2d42fed18d16c850d2b91bc37ee987b0ded3bcc3a5830a",
+          "I": "5ae23ac3aaf5b59f874fda7c78f48188cd327dbac912bff50ba919fbaf33ee0f"
+        },
+        "randomness": "05060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324",
+        "scalars": {
+          "a": "7a5b5c7794c57340beefaee65d937d33c9a8b53d3d8219e1a19e9a12e601a905",
+          "b": "c9b6ff8e0aa1f71da40152585983d77e1383f68e591873257c728826e777220b",
+          "c": "2b3ead49661969a3b376fd26767952b55d5d37e075aecc695646763ae8ed9b00",
+          "d": "7a995061dcf4ec809988a0987169ac00a8377831924426ae301a644ee9631506"
+        }
+      },
+      "result": {
+        "proof": "ce95f76d2461511187a52f1474102eaf46306b9b41799fb83dfbdac2ae982c0b4b472ad971b46313c638c62b07a8418c0e84fbb4026244bff51148ce1c79170cede1889334c925171bb94d34beffd1f05c4d72758e1f5881f9084c9abc00d90f8c99472881e1d9b84bb24f442f7e82ec764bca00542d60ce51d59c11d8ebd2001627418af52387ee5af76c3c113e8e4156101181e000e41a642670971722c302"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465",
+        "point": "9a74371ef8705c1e1b2aabd0d9bebccb6427cc57805aea02b28d054a487ceb00",
+        "randomness": "060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425",
+        "scalar": "7ae25fe4fed0b54649a819fe5786eff51fb161c1237b62705dc6774d187e8805"
+      },
+      "result": {
+        "proof": "417151b6ca3a4e129f8e358aad8c2ad0abf8de9fd7cee32b8490b3384409090e1be9b1c647cfbe7e01595be536a3e8398c462844b80b4639b89ed5de5c8dd402"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f7071",
+        "points": {
+          "A": "f05a06deb3fb8f6b898b19e609b87bde212ccc7279c8f6cf03fc05a6fa1dd420",
+          "B": "901dfda95df5c463620277ee5e160099486cac6eba34971e522bf05e7d319856",
+          "H": "b0638f92bafd545726988ab73445e67a0ab48c75962ec723c434fb44b74ff85b",
+          "I": "fc06695ecc3b6cf1fb2d6c4a27ccfe32a3ba11e49a5701947ee721b0e6b35921"
+        },
+        "randomness": "060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425",
+        "scalars": {
+          "a": "c93d03fc74ac39242fbabc6f537649416a8ba2124011bcb4379a656119f4010b",
+          "b": "2bc5b0b6d024aba93e2f683e706cc477b465e3635ca715f9116e53751a6a7b00",
+          "c": "7a2054ce46002f8724410bb06b5c1ec3fe3f24b5783d6f3dec4141891be0f405",
+          "d": "c97bf7e5bcdbb2640a53ae21674c780e491a650695d3c881c6152f9d1c566e0b"
+        }
+      },
+      "result": {
+        "proof": "cdfb8c023750694d3cdcfda1517204ed962cbd959814c55005d06ee13d936c0ff9a206cad0b5670f15ee2f47ac698dae381209f416c2e232c43047167ecd490856453acb9935dbaeec8bc2d41a0b5c44138f75f79aa0a104b79036dcc8949308178f4b8476a9a53e1a7aecb2ea842e08021d6e3c7582a62b5161ac2d1362730725f169dd16afd8c3e3f91bea85a4c281b03c72671dc20e3a7e6615d975c8e000"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f70717273747576",
+        "point": "b692d3bdf426a7ee09f329d17ce06abb39987c2f68e0cf5d0fa3c736797bd777",
+        "randomness": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526",
+        "scalar": "c9c40669dfb77b2aba7227874d69bb03c1934e96260a0544f3c1429c4b70e10a"
+      },
+      "result": {
+        "proof": "114ecdf92284779d8b104f09319d25260c48b1baa826e24335eccb3f35703108ad2b4a85c88fac48e61cbd675f16f10d1ea5c5f004f46e608fffb356f09e4b03"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f8081828384",
+        "points": {
+          "A": "70eb1beb039df8b02033c2e1b792e147128bb719373f92ce0966432b29a28443",
+          "B": "7c7b712aaff65ee5611e6614b13ecb609addcf2d5ffb6a6712f676b1170a2229",
+          "H": "18483b53b2f6480b0448a0f4aaeb6e08d9a305112a0c578e630361310fd1c86d",
+          "I": "507827d91a5419130ccedac44b81ca305e3d69af1dc1f27df67aed95df5f0235"
+        },
+        "randomness": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526",
+        "scalars": {
+          "a": "2b4cb4233b30edafc9e7d2556a5f363a0b6e8fe742a05e88cd9530b04ce65a00",
+          "b": "7aa7573bb10b718daff975c7654f90855548d0385f36b8cca7691ec44d5cd405",
+          "c": "c902fb5227e7f46a950b1939613fead09f22118a7bcc1111823d0cd84ed24d0b",
+          "d": "2b8aa80d835f66f0a480c4077e356507eafc51db97626b555c11faeb4f48c700"
+        }
+      },
+      "result": {
+        "proof": "26db019f1cba9ce0c6051ece1e021fb16fd09e1be96296c55dcaa53e70d82a0270d089ba673fefd70e08da0138aba4d98d1f14356f4f1a484792d5e05ef4140044f846dfa5766eabc732a6c4715c23cf70e20df422f2a1abfe90ad4a7fbffb00e4182302fb5afedae7b0de6c20b2428df8aa1f598eb192b0ce2dfed4fcb51e0dc4521a1be06c7f431c9e754f201891a6100147dbf3042515fac38bb4e4bf6d04"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f8081828384858687",
+        "point": "3444055d7321a270b912535e125f8941765589cc096ee72ebc41fe0fd5dc6964",
+        "randomness": "08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324252627",
+        "scalar": "2bd3b790a53b2fb654a03d6d6452a8fc61763b6b2999a71789bd0deb7e623a00"
+      },
+      "result": {
+        "proof": "4cf9b76f6b4548afe54be7311ef449a621d32303a0d293842eb974565320970ed7cb796bea881b04c3c7446d8b86ee70a28db68d7065d824c7d0a919747abf02"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f9091929394959697",
+        "points": {
+          "A": "da2923adee2e49beef169f8108316162b8674d64f9658b6e3bc3de9dd55d397c",
+          "B": "b8d6f6a64064fb200a0c39908c531ff3cdfcbbf59f950b5e64f50b49e7f1455d",
+          "H": "f2d3913dcfb91577ca39c145db54debb237113c9d9555fa64dfecae79b090f13",
+          "I": "dccd8a0af834355d366f7118cc9c0773f15570af68cd53a584750591bf8b6335"
+        },
+        "randomness": "08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f2021222324252627",
+        "scalars": {
+          "a": "7a2e5ba81b17b3933ab2e0de5f420248ac507cbc452f015c6391fbfe7fd8b305",
+          "b": "c989febf91f2367120c483505b325c93f62abd0d62c55aa03d65e912814e2d0b",
+          "c": "2b11ac7aed6aa8f62f392f1f7828d7c94005fe5e7e5bb4e41739d72682c4a600",
+          "d": "7a6c4f9263462cd4154bd290731831158bdf3eb09af10d29f20cc53a833a2006"
+        }
+      },
+      "result": {
+        "proof": "e660978eef53545b59ea9dace4dd46c2562a7068be3a53babaa3c8d2b90f8708993a469c0f687039f443bbfed1638e23ba1ee6af50f997430bd4a9f4fbd66f0fcfeea35a5d692bbd25f8622f832192288cbff47b2b9cb870eef7c9f184394108bd23c574eb9a005bb444b3fae45352c16d5db32c6e9cee6e60dc30e025d41b07a7bce52bca805ab4cfad13ac40f6a423c167a4c2ab00bffb8f5bf11bad186301"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798",
+        "point": "3cdd44b7a1379e3f7fdfbd0677f8e4debc6ee6f7835704d606012636a6330b58",
+        "randomness": "090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728",
+        "scalar": "7ab55e158622f599c56a4bf65935740a035928402c284aeb1eb9d839b2549305"
+      },
+      "result": {
+        "proof": "6367ddbc68da8ce091f237835d63b9dcaa51db1f27ba40f4859bb57465b7320665fe10048c8858d333305f15b22739c9f6f0ae8981a050d864d80bf517d90a01"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aa",
+        "points": {
+          "A": "c03a5861093d1ab065dd8b7a37c16af425d670b68e0e238cf2acd879066b874f",
+          "B": "84cfcc6e4bee55c4460a0a3d466ec019ad0cf4d2b6a852708fc79fca8a50c938",
+          "H": "1488ae4831bc507129636c368e4efadf5e23e3ae1e377b1c807ac4bdca8c5238",
+          "I": "745a5c8b7348320eb57347957232c80662297724719d163c53ad2ddea5a68979"
+        },
+        "randomness": "090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728",
+        "scalars": {
+          "a": "c910022dfcfd7877ab7cee675525ce554d33699148bea32ff98cc64db3ca0c0b",
+          "b": "2b98afe75776eafcbaf19936721b498c970daae26454fd73d360b461b4408600",
+          "c": "7af352ffcd516edaa0033da86d0ba3d7e1e7ea3381ea56b8ad34a275b5b6ff05",
+          "d": "c94ef616442df2b78615e01969fbfc222cc22b859d80b0fc87089089b62c790b"
+        }
+      },
+      "result": {
+        "proof": "f092f58fe97ccf79b59c5bab9b133e75b02f7704204bb80e623957ce0714580924b93b13aa35ab5c28c378572b32678aa6354259885ea01fba006986c2677d06e87b969e8c914bcd0a85916cd805c43486ac2fac236459eaa5526825be3ad90a6cdb0b8397829e770b2b0bd3c876802ff8fd58de575e469f6e7f845848132505e0fc0bc0517c16d7ccf34dba239373ca7308cf806aa964c79bb8fb1dcb5f2708"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9",
+        "point": "4aca0c7035d073efafa91d25d66ee4e03432794cdd0af7c8c3cc45275f0a3c45",
+        "randomness": "0a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526272829",
+        "scalar": "c997059a6609bb7d3635597f4f184018a43b15152fb7ecbeb4b4a388e546ec0a"
+      },
+      "result": {
+        "proof": "ed3373c6b9751485fba339c739121fdd22425303b21fcfa8bd7935fc3f4a710ff378e658cef8f04e88313f34b49a0bac798fd298b0b11ba32313084dbdfd7d0a"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbd",
+        "points": {
+          "A": "6e97f4bfbd2489a6bcb73fc8cc9b770633337b542f7f5a1b191c52afad67fa65",
+          "B": "ca490e88ce5ccfef8b0a35ae591d030b8f4578bd2c4f4ad2708f4c1c97163974",
+          "H": "344371c8efaa7a155d5af696de6a3ffee7ea2f55d5bca38b66b841cc7af85d77",
+          "I": "42bf52f1c948eee9f7c67f84358e638c5d81c0301c974c90a71d01592e99b364"
+        },
+        "randomness": "0a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20212223242526272829",
+        "scalars": {
+          "a": "2b1fb354c2812c0346aa044e6c0ebb4eee1556664b4d46038f88919ce6bc6500",
+          "b": "7a7a566c385db0e02bbca7bf67fe149a38f096b767e39f47695c7fb0e732df05",
+          "c": "c9d5f983ae3834be11ce4a3163ee6ee582cad7088479f98b43306dc4e8a8580b",
+          "d": "2b5da73e0ab1a5432143f6ff7fe4e91bcda4185aa00f53d01d045bd8e91ed200"
+        }
+      },
+      "result": {
+        "proof": "51caba4bae90a48d4319eb806647019113f8b773ddab34948b4417423dd86007ac194afbe9ed988ecb01dc981f321e2b302ac8b570c1341f4aee6e508fd8e10d91486ffc6559427e7953115d5462d9fe60e9c43b76b8cf87cc43e6912687ac04114217600996b59844720c95f4baa83831adaa473fb52456e2358f854a78440f4ad4831e3a69ba53d8d4c21b0eb203b41d0ba4136eb00bd7a3c2ded59e99530c"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9ba",
+        "point": "2606c0bdfca3afc6fe83ff30d5834d416c84b2b3b57f18f4c33e1655993e6d4e",
+        "randomness": "0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a",
+        "scalar": "2ba6b6c12c8d6e09d1626f6566012d11451e02ea31468f924ab06ed718394500"
+      },
+      "result": {
+        "proof": "afcdc08b872d51bae9b2650db9f2c4eab7da45db319a703a32b3bb05ee00ca0da10ed1ae01c863e22332ff0a44195b22f81300a71c707011a0834e9900497208"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0",
+        "points": {
+          "A": "9a88f15d90c195bb98fae8046451aac43cc5abeb2438240db1943c96d0ab182d",
+          "B": "ac896bcc43305689bbec624783884bd92f515a999aa74b81ee3ce4df008cd136",
+          "H": "ca5c0ba540afdea75b506ad3037fc5cc2d3184f2e319cdcd719f9370664c7d4c",
+          "I": "46858751940147eef4207b9d6685f2e69db7b4e61a8c0cf308bebc784b0b0f3b"
+        },
+        "randomness": "0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a",
+        "scalars": {
+          "a": "7a015ad9a268f2e6b67412d761f1865c8ff8423b4edce8d624845ceb19afbe05",
+          "b": "c95cfdf0184476c49c86b5485de1e0a7d9d2838c6a72421bff574aff1a25380b",
+          "c": "2be4aaab74bce749acfb60177ad75bde23adc4dd86089c5fd92b38131c9bb100",
+          "d": "7a3f4ec3ea976b27920d048975c7b5296e87052fa39ef5a3b3ff25271d112b06"
+        }
+      },
+      "result": {
+        "proof": "ea2bebc74a03ec87e6294bae46e4fade25515ac1c9243e9363b5222d15830b061b5561046846103047bc0c46d7a818e3a848f70482121ce79f466d2d1b7e220c9f6fec5a35cb2c3871c550479b0ba37add35ae93784ddaf4838800c06ad01606116f2193121c3e4b4314077290b4e848f7d73d09105d4582a48a1bd4ca695c0c8fc9f8e17d05f3986730d4acf791dc23a2b32ca731216be5254fc9f6da8bed07"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacb",
+        "point": "621fad590b90d941474a03fa9571fc8d5e37d83c5f414f4a3bf2809808af1b28",
+        "randomness": "0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b",
+        "scalar": "7a885d460d7434ed412d7dee5be4f81ee600efbe34d53166e0ab39264c2b9e05"
+      },
+      "result": {
+        "proof": "613d87257825df508878680ad6ec1843603b05dd13b90f00563dc635fd26ec0384262848adcce37bdea344a4a040b1b125085b28f085cb8b034dd588e8f4000c"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3",
+        "points": {
+          "A": "22525c2aa5e85df0c657db3e1a02e9e77cc34e530aeeaaa7ceb05fe37f5d005c",
+          "B": "d63fda0739c9bb45871317f3819066640606e6fe89b14761131d543fd07f9a37",
+          "H": "b8e9c06230b58b348a0d783ce70628a537eb7e26b9cc473a7a8ce0bb8d603c68",
+          "I": "e21907d679971f130f939eb4f9f075fa5fb59bd733d7289ee04f27d90fc43961"
+        },
+        "randomness": "0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b",
+        "scalars": {
+          "a": "c9e3005e834fb8ca273f206057d4526a30db2f10516b8baaba7f273a4da1170b",
+          "b": "2b6bae18dfc7295037b4cb2e74cacda07ab570616d01e5ee9453154e4e179100",
+          "c": "7ac6513055a3ad2d1dc66ea06fba27ecc48fb1b289973e336f2703624f8d0a06",
+          "d": "c921f547cb7e310b03d811126baa81370f6af203a62d987749fbf0755003840b"
+        }
+      },
+      "result": {
+        "proof": "4907eabd6808b76295c41c6f5dfcabb787549bbbf9d4356807c39a7648f46b0349b881accc56a388c3658546ef05d8a4943f76854f110cc5acb2117b7c3ee90d9104fd977c604a28ef598f43f8a12e97b737ff532859e946e26901bc6f182007d0cef5b370209fec1271e6b77982623668fafaeaba7873a1e4e26b8fcce653099cb7d4253ab0ccfc938d8fe650588f5e20beec23f2bf321a7bcdcb8cc5d81b02"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdc",
+        "point": "d2d8cedfb321b3becd2ae339b596898c1e380410faa047ecd08a4dbaf35f620d",
+        "randomness": "0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c",
+        "scalar": "c96a04cbed5afad0b2f78a7751c7c42c87e3db933764d43976a704757f1df70a"
+      },
+      "result": {
+        "proof": "ac244e5569e1ea20da88c492eaea09f8a3d9d435f026da9056842e12d1915d0f6c8584044e4d06779afe887d758fc24a7fae7de1488d4896d545871f7849150a"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6",
+        "points": {
+          "A": "e26a4551e360ea19271c7c0905f4e9b529236cb0672eb57a4bf4610e9e12983b",
+          "B": "10600219dd7ab66a1c0555d30d6ea2eedbc21a5c529b6b4382763f40e39b2752",
+          "H": "c4889d57fd47616a4ee34352df9e1bc4d4d6358948910be0b0f339b907558807",
+          "I": "fcb3ede817f63a4e29311baea6f5d87254bf9b7088957da5e9a479610f36ad48"
+        },
+        "randomness": "0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c",
+        "scalars": {
+          "a": "2bf2b18549d36b56c26c36466ebd3f63d1bd1ce553fa2d7e507bf28880937000",
+          "b": "7a4d559dbfaeef33a87ed9b769ad99ae1b985d36709087c22a4fe09c8109ea05",
+          "c": "c9a8f8b4358a73118e907c29659df3f965729e878c26e1060523ceb0827f630b",
+          "d": "2b30a66f9102e5969d0528f881936e30b04cdfd8a8bc3a4bdff6bbc483f5dc00"
+        }
+      },
+      "result": {
+        "proof": "4c567fee263cbf8749a86d4e02e94559ffc4ced9ccc8db42e58046d16eec290f82e66e6c98e173ef0e113ba3ff284fe817e50cb960bfea7e906cde45ff75ac070e356277d39a5820edf308147c38508f2d24b84efe86ad3f509dec5545e1f5025ae5f5c6851b44da576e1b52782705e445fbf0f7e5159778d449f09212067b0e0a6ef4ad60390d73950a157e9d75ec0deb68f0477cd24de2dfd5b747fd27cf00"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebeced",
+        "point": "52adb674a63ab0a5d1d935b1481065cdf9c6dc0acd0ced9d8aa2f6aef907f545",
+        "randomness": "0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d",
+        "scalar": "2b79b5f2b3dead5c4d25a15d68b0b12528c6c8683af3760d0ca3cfc3b20f5000"
+      },
+      "result": {
+        "proof": "8da94d95c790c61ef8549d769212dbba19a6eb73e938f128a1a562557675f3020519218d6e3187570577d59dcddf346d93aef1c8b50f9c30db440825e1b80008"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff00010203040506070809",
+        "points": {
+          "A": "8c60f8f5ab3da5e8501d1ee2eeb56821a5ea71651937613a4ca7b0a763c51019",
+          "B": "302b23a2e9b360dc6e8cbf5e0df3598a20ba5a45c742abdb659967cc69f9177e",
+          "H": "80f6b1ff345ef1e118d637131ebabdb81ec1c8daf93d7cbce42505fb0f948e4f",
+          "I": "901e942bc40ea7d5ce0a060ed77a8a75885bc124514bd708c8499e0b7131436a"
+        },
+        "randomness": "0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d",
+        "scalars": {
+          "a": "7ad4580a2aba313a333744cf63a00b7172a009ba5689d051e676bdd7b385c905",
+          "b": "c92ffc21a095b5171949e7405f9065bcbc7a4a0b731f2a96c04aabebb4fb420b",
+          "c": "2bb7a9dcfb0d279d28be920f7c86e0f206558b5c8fb583da9a1e99ffb571bc00",
+          "d": "7a124df471e9aa7a0ed0358177763a3e512fccadab4bdd1e75f28613b7e73506"
+        }
+      },
+      "result": {
+        "proof": "11d2df485777f008aa9681167c3c316d8082f0f00f2e452f56b99060e40c120eda039ec8cc86f6dfb84767c2c9f9e782d6943e591776a68c7c209c47102ad3026226a1bbf6858bcac1dd3bd13bb1e9901b6b54d01624d0db888ef0195dbcff0336d8cd3892ef5b9058f6169685b58d1aaec38a9115d8a1f0756398bd44b30506fdd9856de4b59838d932323190b5d48d73f1755651fdb1cac26523d77f60780c"
+      }
+    },
+    {
+      "method": "poksho.sign",
+      "params": {
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfe",
+        "point": "6847a216ca232d859780b2763586610a6c62bcb9b762ca44ea10ec292b83d42b",
+        "randomness": "0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e",
+        "scalar": "7a5b5c7794c57340beefaee65d937d33c9a8b53d3d8219e1a19e9a12e601a905"
+      },
+      "result": {
+        "proof": "4cc3b95795616362e1836def93051d69d20c69a4fd03b12894e843ca92b92201925dc9ba0ac9aba918c3dc803087166a401467dcc5a71a456b2ba17d71bed80e"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "H",
+                "scalar": "b"
+              },
+              {
+                "point": "I",
+                "scalar": "c"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "c"
+              },
+              {
+                "point": "I",
+                "scalar": "d"
+              }
+            ]
+          }
+        ],
+        "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c",
+        "points": {
+          "A": "b24ad691386067d9ff1300c5b505b2f5684f42bdd1919572f901037451db3c0e",
+          "B": "be67f2057b53127d914c6800f256a2ef7d1b3eba6ff6fc699e6e8e3ede93ea44",
+          "H": "5ae23ac3aaf5b59f874fda7c78f48188cd327dbac912bff50ba919fbaf33ee0f",
+          "I": "5ecba45ceffd89151a1e9fcb767028cee9a5b9a80c790c47e6a11338de34f209"
+        },
+        "randomness": "0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e",
+        "scalars": {
+          "a": "c9b6ff8e0aa1f71da40152585983d77e1383f68e591873257c728826e777220b",
+          "b": "2b3ead49661969a3b376fd26767952b55d5d37e075aecc695646763ae8ed9b00",
+          "c": "7a995061dcf4ec809988a0987169ac00a8377831924426ae301a644ee9631506",
+          "d": "c9f4f37852d0705e7f9a430a6d59064cf211b982aeda7ff20aee5162ead98e0b"
+        }
+      },
+      "result": {
+        "proof": "85d34308aa29745560d0752dbf310454f1d6e49126129feb62b3e704f7ce4e02b7daf5b8e751c18f05ba24c4d35b6ea2ea759520b30451d55c01352929f62304c60727fba353308b5a0c341187a92e60370bfb98460ae88a3fb571e8f9951b05ab741317c32a6905aa2a657b722224ac0dacbe8fbdc9af1b83d0c23ea7b67e0b439b3fb48e3d4e04adb23a8eaf528a6e92d14af0fd32455fb776d38010caf60e"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              }
+            ]
+          },
+          {
+            "lhs": "B",
+            "terms": [
+              {
+                "point": "H",
+                "scalar": "a"
+              }
+            ]
+          }
+        ],
+        "message": "",
+        "points": {
+          "A": "b87cd52109c60fc052eb36a3d200f32184efa3822ba4dcfbd65fbf7a43c1874e",
+          "B": "f2728c3ad55c1fb0dbfdde6a0961e905370b6ced725d030872f88d285a3b7107",
+          "H": "b8588e174c3c27a4d00a985beebbeaa8dd6ac87b5cf94b25aa6b7f93cfa0ae77"
+        },
+        "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+        "scalars": {
+          "a": "c910022dfcfd7877ab7cee675525ce554d33699148bea32ff98cc64db3ca0c0b"
+        }
+      },
+      "result": {
+        "proof": "a32379b9e08dbbe83d34dcc27a115e080afd8fc668eb7e4ed68461caf4bd5505abae6b65e1cbd1c929196ce37fb09227ba701c3961321f7962a042205a463b08"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "A",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              },
+              {
+                "point": "G",
+                "scalar": "a"
+              }
+            ]
+          }
+        ],
+        "message": "",
+        "points": {
+          "A": "9cff4527918fe841cc0917e2f9bc2686ecc33609a2e7024a8d0bab986f33716f"
+        },
+        "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+        "scalars": {
+          "a": "c910022dfcfd7877ab7cee675525ce554d33699148bea32ff98cc64db3ca0c0b"
+        }
+      },
+      "result": {
+        "proof": "fa95f53850b4766fd093300e91642d51d808f4f68f4a2b82a99a8fdd8f90f909e96c75c3d58b81d1edf040fbf27f4f8d9feba01f5b97b949a434526491d9b00b"
+      }
+    },
+    {
+      "method": "poksho.prove",
+      "params": {
+        "equations": [
+          {
+            "lhs": "G",
+            "terms": [
+              {
+                "point": "G",
+                "scalar": "a"
+              }
+            ]
+          }
+        ],
+        "message": "",
+        "points": {},
+        "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+        "scalars": {
+          "a": "0100000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "result": {
+        "proof": "8c3834f18b4cb7050c7b58d0d7d7d9b975f28ba2b8a2f82ca5c3554fe114f508ebd8385847f4baa573fe0fb40732861fc52ff8dd1169d53cf107c689e2d3ac07"
+      }
+    }
+  ],
+  "conversions": [
+    {
+      "basepoint_multiple": "7c107ed2840904ea12ce0be6d4d774a14c00b91c21f71dc96c1de2b087a33228",
+      "scalar": "7a3c6282f02d37a05023b60d5428e6cc5961d4c31221937adae0b574e4d07205",
+      "uniform": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+      "uniform_point": "2e7c4964f91f5f2b074a9bc147ef973c08dbe29683746f979f11358065a2d155"
+    },
+    {
+      "basepoint_multiple": "0658581492fc518700663ef15975326c4ed345998f4fa16255348bc3ebdc5111",
+      "scalar": "c91e0907d114fd83c1edc396490bb2dafa43c19815b0354e70dc80c317c3cb0a",
+      "uniform": "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40",
+      "uniform_point": "8ef0c509edb80ec02446a432f1c4c8c13372ce3bb5d9760c1f33ba3a0b249536"
+    },
+    {
+      "basepoint_multiple": "4a27f27edc39e0d48c190c0d3c5df9bad40fed223ae1d50035407f79343c1c7b",
+      "scalar": "2b2dba2e9798b00f5c1bda7c60f49ed39b26ae6d183fd82106d84b124bb52400",
+      "uniform": "02030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4041",
+      "uniform_point": "823b1e261c582771bc2ed4e5cdf875003235631c88c3a6e80701d6cff564bd24"
+    },
+    {
+      "basepoint_multiple": "b4f9c7b4f9f17c3ad170d7ee9b0be6b8dbfb967f3b81311f12d3d7611528df7e",
+      "scalar": "7a0f61b3777f76f3cce5e70556d76ae13c099b421bce7af59bd316617ea77d05",
+      "uniform": "030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142",
+      "uniform_point": "08862db4bd5b2eb6b85654e3c0b1bcdeb3589344001800f537fc28af90a3a17f"
+    },
+    {
+      "basepoint_multiple": "32268cef32e62f096c80bd5210c6298902fa07606a6bd4d12759f80be7d6d91f",
+      "scalar": "c9f1073858663cd73db0f58e4bba36efddeb87171e5d1dc931cfe1afb199d60a",
+      "uniform": "0405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243",
+      "uniform_point": "fc94f5c7e44f75c15721a2437f9b2bf7b234a29ad0d3300a2a518ffe596e934b"
+    },
+    {
+      "basepoint_multiple": "503bff723799897dbb1ad1882cdb0c55c13906f2467fd6486b35be67c3d4701c",
+      "scalar": "2b00b95f1eeaef62d8dd0b7562a323e87ece74ec20ecbf9cc7caacfee48b2f00",
+      "uniform": "05060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4041424344",
+      "uniform_point": "9674460e209264acc4498ebb1746a0166f0e4dc51d01643c9a145e01f44aeb0f"
+    },
+    {
+      "basepoint_multiple": "9a74371ef8705c1e1b2aabd0d9bebccb6427cc57805aea02b28d054a487ceb00",
+      "scalar": "7ae25fe4fed0b54649a819fe5786eff51fb161c1237b62705dc6774d187e8805",
+      "uniform": "060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445",
+      "uniform_point": "f8c01dff64a6359298d5cbb0df62adb12e23d08354f4645a020bc5ab1454dd0c"
+    },
+    {
+      "basepoint_multiple": "b692d3bdf426a7ee09f329d17ce06abb39987c2f68e0cf5d0fa3c736797bd777",
+      "scalar": "c9c40669dfb77b2aba7227874d69bb03c1934e96260a0544f3c1429c4b70e10a",
+      "uniform": "0708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243444546",
+      "uniform_point": "4e60228562aac90fea3782ad06424659df18c603d1eefcc07df77f880077b44d"
+    },
+    {
+      "basepoint_multiple": "3444055d7321a270b912535e125f8941765589cc096ee72ebc41fe0fd5dc6964",
+      "scalar": "2bd3b790a53b2fb654a03d6d6452a8fc61763b6b2999a71789bd0deb7e623a00",
+      "uniform": "08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4041424344454647",
+      "uniform_point": "eae20ed112da67d1013b3795183027508f7cb0aaa942b38ed6309203d4b4a404"
+    },
+    {
+      "basepoint_multiple": "3cdd44b7a1379e3f7fdfbd0677f8e4debc6ee6f7835704d606012636a6330b58",
+      "scalar": "7ab55e158622f599c56a4bf65935740a035928402c284aeb1eb9d839b2549305",
+      "uniform": "090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748",
+      "uniform_point": "d2e239ab7340fbf3fdda728d2bf3efb95dca9c3c5b94b5439fe92e8158c83833"
+    },
+    {
+      "basepoint_multiple": "4aca0c7035d073efafa91d25d66ee4e03432794cdd0af7c8c3cc45275f0a3c45",
+      "scalar": "c997059a6609bb7d3635597f4f184018a43b15152fb7ecbeb4b4a388e546ec0a",
+      "uniform": "0a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f40414243444546474849",
+      "uniform_point": "60b0a7aa1506292cfe743520e44bbc1e7635cdda985af0a55073e80e7cccb128"
+    },
+    {
+      "basepoint_multiple": "2606c0bdfca3afc6fe83ff30d5834d416c84b2b3b57f18f4c33e1655993e6d4e",
+      "scalar": "2ba6b6c12c8d6e09d1626f6566012d11451e02ea31468f924ab06ed718394500",
+      "uniform": "0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a",
+      "uniform_point": "d0733592b99325c671e1db074285371e84efb26a954e42773d7db6e8bc785c39"
+    },
+    {
+      "basepoint_multiple": "621fad590b90d941474a03fa9571fc8d5e37d83c5f414f4a3bf2809808af1b28",
+      "scalar": "7a885d460d7434ed412d7dee5be4f81ee600efbe34d53166e0ab39264c2b9e05",
+      "uniform": "0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b",
+      "uniform_point": "46be738170eedd4d9141c75d1679f316277d5adf025f82cb9870a726f6ffd235"
+    },
+    {
+      "basepoint_multiple": "d2d8cedfb321b3becd2ae339b596898c1e380410faa047ecd08a4dbaf35f620d",
+      "scalar": "c96a04cbed5afad0b2f78a7751c7c42c87e3db933764d43976a704757f1df70a",
+      "uniform": "0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c",
+      "uniform_point": "e4200dbc0682c45b1bd23e1ff4732af01589b819a2132e6508f0e2b81ca92114"
+    },
+    {
+      "basepoint_multiple": "52adb674a63ab0a5d1d935b1481065cdf9c6dc0acd0ced9d8aa2f6aef907f545",
+      "scalar": "2b79b5f2b3dead5c4d25a15d68b0b12528c6c8683af3760d0ca3cfc3b20f5000",
+      "uniform": "0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d",
+      "uniform_point": "3836e238285826d9ed5d0e2cac31bd12e2902a186d7b9d4f776e104eb3473e59"
+    },
+    {
+      "basepoint_multiple": "6847a216ca232d859780b2763586610a6c62bcb9b762ca44ea10ec292b83d42b",
+      "scalar": "7a5b5c7794c57340beefaee65d937d33c9a8b53d3d8219e1a19e9a12e601a905",
+      "uniform": "0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e",
+      "uniform_point": "86a77249b45704869aef3642750ee77807d1de4d385eeb8f89c17e2ff4061f7a"
+    }
+  ],
+  "source": "rust/poksho tests and public APIs; fixed byte sequences, no RNG",
+  "upstream_tag": "v0.102.2"
+}

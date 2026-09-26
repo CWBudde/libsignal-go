@@ -49,6 +49,17 @@
       "structural_only_reason": "SVRB service proof and backup-recovery semantics require upstream proof-system and service-boundary packages that are not part of this protocol-core module.",
       "official_app_interop_claim": false,
       "notes": "Tracked as a future proof-system/vector gap for encrypted-spaces-go and Workflow primitives."
+    },
+    {
+      "name": "poksho",
+      "upstream_path": "rust/poksho",
+      "local_path": "poksho",
+      "report_path": "compat/coverage_manifest.json",
+      "coverage_status": "vector-backed",
+      "checksum_path": "compat/vectors/poksho.json",
+      "checksum_sha256": "9a3654ad66312db24acca0e3d0c8125f9e2c0ce3631369f35511f4d9be5f6789",
+      "official_app_interop_claim": false,
+      "notes": "SHO, scalar/point helpers, signatures and linear-relation proofs. Verified with Rust harness vectors and live bidirectional proofs at the pinned version; no group-service claim."
     }
   ]
 }

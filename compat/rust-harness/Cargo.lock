@@ -1412,6 +1412,7 @@ checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
 name = "rust-harness"
 version = "0.1.0"
 dependencies = [
+ "curve25519-dalek",
  "futures",
  "futures-util",
  "hex",
@@ -1419,6 +1420,7 @@ dependencies = [
  "hmac 0.12.1",
  "libcrux-ml-kem",
  "libsignal-protocol",
+ "poksho",
  "rand 0.9.5",
  "rand_chacha",
  "rand_core 0.9.5",

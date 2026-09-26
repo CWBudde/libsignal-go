@@ -38,11 +38,9 @@ var (
 	// this typed error is what IsExpired-aware callers can wrap/match.
 	ErrExpiredCertificate = errors.New("sealedsender: certificate expired")
 	// ErrUnknownServerCertificateID is returned for a SenderCertificate that
-	// references its signing ServerCertificate by id (the space-saving "known
-	// certificate" form) rather than embedding it. The known-certificate table is
-	// not carried in this package yet (it arrives with the sealed-sender v1/v2
-	// encrypt/decrypt layer); only embedded signer certificates are resolvable
-	// here. Mirrors upstream's UnknownSealedSenderServerCertificateId.
+	// references its signing ServerCertificate by an id (the space-saving
+	// "known certificate" form) that is not in the known-certificate table.
+	// Mirrors upstream's UnknownSealedSenderServerCertificateId.
 	ErrUnknownServerCertificateID = errors.New("sealedsender: unknown server certificate id")
 )
 
@@ -343,45 +341,17 @@ func WithClock(now time.Time) ValidateOption {
 }
 
 // Validate reports whether the certificate chain is valid against trustRoot:
-//  1. the signer ServerCertificate validates under trustRoot (and is embedded —
-//     a reference-by-id signer returns ErrUnknownServerCertificateID, since the
-//     known-certificate table is not carried here yet),
+//  1. the signer ServerCertificate (embedded, or a known certificate referenced
+//     by key id) validates under trustRoot,
 //  2. the sender certificate's signature verifies under the signer's key, and
 //  3. the validation time is not past the expiration.
 //
 // A well-formed but invalid chain (bad signature, expired) returns (false, nil);
-// only an unresolvable signer reference returns a non-nil error. Mirrors
-// SenderCertificate::validate. The validation clock is time.Now() unless
-// overridden with WithClock.
+// only an unresolvable signer reference returns a non-nil error
+// (ErrUnknownServerCertificateID). Mirrors SenderCertificate::validate. The
+// validation clock is time.Now() unless overridden with WithClock.
 func (c *SenderCertificate) Validate(trustRoot curve.PublicKey, opts ...ValidateOption) (bool, error) {
-	cfg := validateConfig{now: time.Now()}
-	for _, opt := range opts {
-		opt(&cfg)
-	}
-
-	if c.signer == nil {
-		// Referenced-by-id signer: the known-certificate table that would resolve
-		// it is not available in this package yet.
-		if c.signerID != nil {
-			return false, fmt.Errorf("%w: %#x", ErrUnknownServerCertificateID, *c.signerID)
-		}
-		return false, fmt.Errorf("%w: sender certificate has no signer", ErrInvalidCertificate)
-	}
-
-	// 1. The signer must be signed by the trust root.
-	if !c.signer.Validate(trustRoot) {
-		return false, nil
-	}
-	// 2. The sender certificate must be signed by the signer's key.
-	if !c.signer.PublicKey().VerifySignature(c.signature, c.certificate) {
-		return false, nil
-	}
-	// 3. Expiration: invalid once the validation time is strictly past it,
-	// mirroring upstream's `validation_time > self.expiration`.
-	if cfg.now.After(c.expiration) {
-		return false, nil
-	}
-	return true, nil
+	return c.ValidateWithTrustRoots([]curve.PublicKey{trustRoot}, opts...)
 }
 
 // Signer returns the embedded signing ServerCertificate, or nil when the signer

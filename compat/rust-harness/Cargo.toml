@@ -77,3 +77,7 @@ libcrux-ml-kem = { version = "=0.0.10", default-features = false, features = ["i
 # GF16 mul/div triples — oracle leg (c) for T27 Slice B, pinning the big-endian
 # wire that the erasure property test alone cannot catch.
 spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag = "v1.5.3", features = ["test-utils"] }
+
+# Phase 8.1: same curve version as the pinned upstream poksho crate.
+poksho = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "poksho" }
+curve25519-dalek = "5.0"

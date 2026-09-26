@@ -57,7 +57,11 @@ CDSI, and HPKE.
   the sender and recipient addresses, and the self-session limits. It adds the
   pre-key record types (`session.PreKeyRecord`, `SignedPreKeyRecord`,
   `KyberPreKeyRecord`) and `identity` (key pair serialization,
-  alternate-identity signatures). These are additions: the older
+  alternate-identity signatures), plus the smaller pieces libsignal's bridge
+  exposes: the known server certificates for sender certificates that
+  reference their signer by id, `DecryptionErrorMessageForOriginal` and the
+  Content extraction, `SessionRecord.HasUsableSenderChain`, the message backup
+  key, and a public `aes256gcmsiv` package. These are additions: the older
   `Encrypt`/`Decrypt` stay as they are, to keep upstream merges simple.
 - **Additions.** Pure-Go zkgroup (`poksho`, `zkcredential`, `zkgroup` client
   side), SGX DCAP attestation, Noise NK/NKhfs and HPKE land here as new packages

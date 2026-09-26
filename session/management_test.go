@@ -363,3 +363,36 @@ func TestPreKeyRecordsRoundTrip(t *testing.T) {
 		t.Errorf("garbage: %v, want ErrInvalidRecord", err)
 	}
 }
+
+func TestHasUsableSenderChain(t *testing.T) {
+	ctx := context.Background()
+	alice, bob := newParty(t, aliceACI, 1), newParty(t, bobACI, 2)
+	if rec, _ := alice.sessions.LoadSession(ctx, bob.addr); rec != nil {
+		t.Fatal("unexpected session")
+	}
+	if session.NewFreshSessionRecord().HasUsableSenderChain(time.Now()) {
+		t.Error("a fresh record has a usable sender chain")
+	}
+
+	alice.processBundle(t, bob, bob.bundle(t, 7, 8, 9))
+	rec, err := alice.sessions.LoadSession(ctx, bob.addr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !rec.HasUsableSenderChain(time.Now()) {
+		t.Error("a new session is not usable")
+	}
+	// An unacknowledged session goes stale.
+	if rec.HasUsableSenderChain(time.Now().Add(session.MaxUnacknowledgedSessionAge + time.Hour)) {
+		t.Error("a stale unacknowledged session is usable")
+	}
+
+	// A clone is independent of the original.
+	clone := rec.Clone()
+	if err := clone.ArchiveCurrentState(); err != nil {
+		t.Fatal(err)
+	}
+	if !rec.HasCurrentState() || clone.HasCurrentState() {
+		t.Error("archiving the clone changed the original")
+	}
+}

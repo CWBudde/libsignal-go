@@ -64,6 +64,8 @@ perl -0pi -e 's/\Q$ENV{CURRENT_TAG}\E/$ENV{UPSTREAM_TAG}/g' \
 	compat/rust-harness/Cargo.toml \
 	compat/session_interop_test.go \
 	compat/proof_inventory_test.go \
+	compat/poksho_vectors_test.go \
+	compat/rust-harness/src/poksho_compat.rs \
 	internal/upstream/manifest.json \
 	internal/upstream/manifest_test.go \
 	svr/report_test.go \
@@ -79,13 +81,25 @@ perl -0pi -e 's/\Q$ENV{CURRENT_TAG}\E/$ENV{UPSTREAM_TAG}/g' \
 )
 
 harness="compat/rust-harness/target/release/rust-harness"
-for domain in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links; do
+for domain in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho; do
 	"$harness" gen-vectors "$domain" > "compat/vectors/$domain.json"
 done
 "$harness" gen-vectors mlkem-incremental > internal/mlkem768incr/testdata/libcrux_incremental_mlkem768.json
 "$harness" gen-vectors spqr-chunks > internal/spqr/chunked/testdata/spqr_chunks.json
 
-go test ./compat/ ./internal/mlkem768incr/ ./internal/spqr/chunked/ -v
+python3 - <<'PY'
+import hashlib
+import json
+from pathlib import Path
+p = Path("internal/upstream/manifest.json")
+manifest = json.loads(p.read_text())
+for row in manifest["domains"]:
+    if row["name"] == "poksho":
+        row["checksum_sha256"] = hashlib.sha256(Path(row["checksum_path"]).read_bytes()).hexdigest()
+p.write_text(json.dumps(manifest, indent=2) + "\n")
+PY
+
+go test ./poksho/ ./compat/ ./internal/upstream/ ./internal/mlkem768incr/ ./internal/spqr/chunked/ -v
 go test ./proofreport ./accountkeys ./usernames -run 'Report|Parity|Backup|SVR|Username' -v
 COMPAT_HARNESS_BIN="$PWD/$harness" go test ./compat/ -tags=interop -v
 
