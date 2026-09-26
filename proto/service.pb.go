@@ -190,7 +190,7 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\rsignalservice\"\xe6\x02\n" +
+	"\rservice.proto\x12\x14signal.proto.service\"\xe6\x02\n" +
 	"\aContent\x12!\n" +
 	"\fdata_message\x18\x01 \x01(\fR\vdataMessage\x12!\n" +
 	"\fsync_message\x18\x02 \x01(\fR\vsyncMessage\x12!\n" +
@@ -220,8 +220,8 @@ func file_service_proto_rawDescGZIP() []byte {
 
 var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_service_proto_goTypes = []any{
-	(*Content)(nil),                // 0: signalservice.Content
-	(*DecryptionErrorMessage)(nil), // 1: signalservice.DecryptionErrorMessage
+	(*Content)(nil),                // 0: signal.proto.service.Content
+	(*DecryptionErrorMessage)(nil), // 1: signal.proto.service.DecryptionErrorMessage
 }
 var file_service_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

@@ -4,7 +4,7 @@
 //
 
 syntax = "proto2";
-package signalservice;
+package signal.proto.service;
 
 option go_package = "github.com/cwbudde/libsignal-go/proto";
 
