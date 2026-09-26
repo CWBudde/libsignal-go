@@ -77,6 +77,11 @@ var nowUnixSeconds = func() uint64 {
 // initiator agreement (4 DH + Kyber encapsulation), initialize the Double
 // Ratchet alice session, record the pending pre-key state + registration ids,
 // save the identity, and store the session.
+//
+// Options: WithLocalAddress passes our own address, as upstream does, so that a
+// session with another device of our account is recognised by address as well
+// as by identity key; WithClock sets the time recorded for the pending pre-key
+// message.
 func ProcessPreKeyBundle(
 	ctx context.Context,
 	rng io.Reader,
@@ -84,7 +89,9 @@ func ProcessPreKeyBundle(
 	bundle *PreKeyBundle,
 	sessionStore Store,
 	identityStore stores.IdentityKeyStore,
+	opts ...Option,
 ) error {
+	o := applyOptions(opts)
 	// bundle is a public parameter; a nil pointer must surface as a typed error,
 	// not a panic, across the public API boundary.
 	if bundle == nil {
@@ -150,13 +157,14 @@ func ProcessPreKeyBundle(
 		theirSignedPre: bundle.SignedPreKey(),
 		theirOneTime:   oneTime,
 		theirKyber:     bundle.KyberPreKey(),
+		selfSession:    o.selfSession(ourIdentity.PublicKey, theirIdentity, remoteAddress),
 	})
 	if err != nil {
 		return err
 	}
 
 	// 6. Record the unacknowledged pre-key message + Kyber id + registration ids.
-	state.SetUnacknowledgedPreKeyMessage(oneTimeID, bundle.SignedPreKeyID(), baseKeyPair.PublicKey, nowUnixSeconds())
+	state.SetUnacknowledgedPreKeyMessage(oneTimeID, bundle.SignedPreKeyID(), baseKeyPair.PublicKey, o.unixSeconds())
 	if err := state.SetUnacknowledgedKyberPreKeyID(bundle.KyberPreKeyID()); err != nil {
 		return err
 	}
@@ -184,6 +192,7 @@ type aliceParams struct {
 	theirSignedPre curve.PublicKey
 	theirOneTime   *curve.PublicKey // optional
 	theirKyber     kem.PublicKey
+	selfSession    bool // a session with another device of our own account
 }
 
 // initializeAliceSession runs the PQXDH initiator agreement and Double Ratchet
@@ -242,7 +251,7 @@ func initializeAliceSession(rng io.Reader, p aliceParams) (*SessionState, error)
 	// PQXDH-derived PQR seed. min_version V0 lets a peer that does not speak SPQR
 	// still interoperate. Mirrors ratchet::initialize_alice_session's
 	// spqr::initial_state(Direction::A2B).
-	pqrState, err := pqrInitialState(proto.Direction_A_2_B, initial.PQRSeed, p.ourIdentity.PublicKey, p.theirIdentity)
+	pqrState, err := pqrInitialState(proto.Direction_A_2_B, initial.PQRSeed, p.selfSession)
 	if err != nil {
 		return nil, err
 	}
@@ -273,8 +282,7 @@ func initializeAliceSession(rng io.Reader, p aliceParams) (*SessionState, error)
 // otherwise; max_ooo_keys is MaxMessageKeys. version V1 / min_version V0 enables
 // SPQR while allowing fallback for peers that do not yet speak it. Mirrors
 // ratchet::initialize_{alice,bob}_session's spqr::initial_state call.
-func pqrInitialState(dir proto.Direction, authKey [32]byte, localIdentity, remoteIdentity curve.PublicKey) ([]byte, error) {
-	selfSession := localIdentity.Equal(remoteIdentity)
+func pqrInitialState(dir proto.Direction, authKey [32]byte, selfSession bool) ([]byte, error) {
 	maxJump := uint32(MaxForwardJumps)
 	if selfSession {
 		maxJump = ^uint32(0) // u32::MAX
@@ -312,7 +320,15 @@ type BobParams struct {
 // key + Kyber ciphertext from the PreKeySignalMessage. The returned state has
 // no receiver chain (the first incoming message establishes it) and a sender
 // chain off the recipient's signed pre-key.
+//
+// Whether the session is a self-session (which lifts the SPQR jump limit) is
+// decided by comparing the identity keys; MessageDecryptPreKey also compares the
+// addresses, as upstream does.
 func InitializeBobSession(p BobParams) (*SessionState, error) {
+	return initializeBobSession(p, p.OurIdentity.PublicKey.Equal(p.TheirIdentity))
+}
+
+func initializeBobSession(p BobParams, selfSession bool) (*SessionState, error) {
 	if len(p.KyberCipher) == 0 {
 		return nil, ErrNoKyberPreKey
 	}
@@ -360,7 +376,7 @@ func InitializeBobSession(p BobParams) (*SessionState, error) {
 
 	// SPQR initial state: the recipient is the B2A role. Mirrors
 	// ratchet::initialize_bob_session's spqr::initial_state(Direction::B2A).
-	pqrState, err := pqrInitialState(proto.Direction_B_2_A, initial.PQRSeed, p.OurIdentity.PublicKey, p.TheirIdentity)
+	pqrState, err := pqrInitialState(proto.Direction_B_2_A, initial.PQRSeed, selfSession)
 	if err != nil {
 		return nil, err
 	}

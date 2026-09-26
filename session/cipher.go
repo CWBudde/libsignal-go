@@ -194,7 +194,7 @@ func Decrypt(
 
 	// Clone-then-commit: work on a copy of the current state.
 	working := record.CurrentState().Clone()
-	ptext, err := decryptWithState(working, ciphertext, rng)
+	ptext, err := decryptWithState(working, ciphertext, rng, decryptParams{maxForwardJumps: MaxForwardJumps})
 	if err != nil {
 		return nil, err // stored record untouched
 	}
@@ -212,7 +212,18 @@ func Decrypt(
 // skipped-key handling / duplicate detection / forward-jump cap, MAC verify,
 // AES-256-CBC decrypt. Mirrors decrypt_message_with_state +
 // get_or_create_chain_key + get_or_create_message_key in session_cipher_legacy.
-func decryptWithState(state *SessionState, ciphertext *protocol.SignalMessage, rng io.Reader) ([]byte, error) {
+// decryptParams carries what differs between the legacy Decrypt and the
+// address-aware MessageDecryptSignal / MessageDecryptPreKey.
+type decryptParams struct {
+	// maxForwardJumps caps how far a message counter may skip ahead:
+	// MaxForwardJumps, or no limit for a self-session.
+	maxForwardJumps uint32
+	// sender and recipient, when set, are checked against the addresses a
+	// message carries (VerifyMACWithAddresses).
+	sender, recipient *address.ProtocolAddress
+}
+
+func decryptWithState(state *SessionState, ciphertext *protocol.SignalMessage, rng io.Reader, p decryptParams) ([]byte, error) {
 	if len(state.RootKey()) == 0 {
 		return nil, fmt.Errorf("%w: no session to decrypt with", ErrInvalidMessage)
 	}
@@ -227,7 +238,7 @@ func decryptWithState(state *SessionState, ciphertext *protocol.SignalMessage, r
 	if err != nil {
 		return nil, err
 	}
-	gen, err := getOrCreateMessageKeys(state, theirRatchet, chainKey, counter)
+	gen, err := getOrCreateMessageKeys(state, theirRatchet, chainKey, counter, p.maxForwardJumps)
 	if err != nil {
 		return nil, err
 	}
@@ -252,7 +263,12 @@ func decryptWithState(state *SessionState, ciphertext *protocol.SignalMessage, r
 	if err != nil {
 		return nil, fmt.Errorf("session: local identity: %w", err)
 	}
-	ok, err := ciphertext.VerifyMAC(senderID, receiverID, mk.MACKey())
+	var ok bool
+	if p.sender != nil && p.recipient != nil {
+		ok, err = ciphertext.VerifyMACWithAddresses(*p.sender, *p.recipient, senderID, receiverID, mk.MACKey())
+	} else {
+		ok, err = ciphertext.VerifyMAC(senderID, receiverID, mk.MACKey())
+	}
 	if err != nil {
 		return nil, fmt.Errorf("session: MAC check: %w", err)
 	}
@@ -316,7 +332,7 @@ func getOrCreateChainKey(state *SessionState, theirRatchet curve.PublicKey, rng 
 // chain. If the chain has already advanced past counter, it returns the cached
 // skipped keys (or ErrDuplicateMessage if none). Otherwise it steps the chain
 // to counter, caching each skipped key, capped by MaxForwardJumps.
-func getOrCreateMessageKeys(state *SessionState, theirRatchet curve.PublicKey, chainKey ratchet.ChainKey, counter uint32) (ratchet.MessageKeyGenerator, error) {
+func getOrCreateMessageKeys(state *SessionState, theirRatchet curve.PublicKey, chainKey ratchet.ChainKey, counter, maxForwardJumps uint32) (ratchet.MessageKeyGenerator, error) {
 	chainIndex := chainKey.Index()
 
 	if chainIndex > counter {
@@ -330,8 +346,8 @@ func getOrCreateMessageKeys(state *SessionState, theirRatchet curve.PublicKey, c
 		return gen, nil
 	}
 
-	if counter-chainIndex > MaxForwardJumps {
-		return ratchet.MessageKeyGenerator{}, fmt.Errorf("%w: message too far in the future (jump %d > %d)", ErrInvalidMessage, counter-chainIndex, MaxForwardJumps)
+	if counter-chainIndex > maxForwardJumps {
+		return ratchet.MessageKeyGenerator{}, fmt.Errorf("%w: message too far in the future (jump %d > %d)", ErrInvalidMessage, counter-chainIndex, maxForwardJumps)
 	}
 
 	// Step the chain to counter, caching each skipped message's generator (the

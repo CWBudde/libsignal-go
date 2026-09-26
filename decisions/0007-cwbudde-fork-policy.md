@@ -49,6 +49,16 @@ CDSI, and HPKE.
   `-cw.N` suffix (the first is `v0.7.1-cw.1`, on top of upstream v0.7.0), so
   they never collide with tags fetched from `upstream`. Consumers pin them
   explicitly.
+- **Client API for libsignalgo.** libsignalgo calls upstream's public session
+  API, so the fork ports `session_management.rs` and `session.rs`
+  (`process_prekey`) as `session.MessageEncrypt`, `MessageDecryptSignal` and
+  `MessageDecryptPreKey`: Sesame trial decryption over archived sessions, the
+  recipient session set up from the pre-key stores, pre-key messages bound to
+  the sender and recipient addresses, and the self-session limits. It adds the
+  pre-key record types (`session.PreKeyRecord`, `SignedPreKeyRecord`,
+  `KyberPreKeyRecord`) and `identity` (key pair serialization,
+  alternate-identity signatures). These are additions: the older
+  `Encrypt`/`Decrypt` stay as they are, to keep upstream merges simple.
 - **Additions.** Pure-Go zkgroup (`poksho`, `zkcredential`, `zkgroup` client
   side), SGX DCAP attestation, Noise NK/NKhfs and HPKE land here as new packages
   (go-signal Phases 8–9), each with harness vectors plus live interop. They are

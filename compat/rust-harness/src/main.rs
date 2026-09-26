@@ -1445,17 +1445,18 @@ fn build_prekey_bundle(params: &Value) -> Result<PreKeyBundle, String> {
 /// (2 = Whisper/SignalMessage, 3 = PreKey/PreKeySignalMessage) and the
 /// serialized bytes for the peer to decrypt.
 ///
-/// Params: { handle, remote_name, plaintext: hex }
+/// Params: { handle, remote_name, plaintext: hex, local_name?: str }
 /// Result: { type: u8, serialized: hex }
 fn session_encrypt(params: &Value) -> Result<Value, String> {
     let handle = param_str(params, "handle")?;
     let remote_name = param_str(params, "remote_name")?;
+    let local_name = param_local_name(params);
     let plaintext = param_bytes(params, "plaintext")?;
 
     with_store(&handle, |store| {
         let mut rng = interop_rng();
         let remote = protocol_address(&remote_name);
-        let local = protocol_address("self");
+        let local = protocol_address(&local_name);
         let ct = message_encrypt(
             &plaintext,
             &remote,
@@ -1479,11 +1480,12 @@ fn session_encrypt(params: &Value) -> Result<Value, String> {
 /// `remote_name`. `type` selects the wire form (2 = Whisper, 3 = PreKey);
 /// message_decrypt establishes the session from a PreKey message if needed.
 ///
-/// Params: { handle, remote_name, type: u8, serialized: hex }
+/// Params: { handle, remote_name, type: u8, serialized: hex, local_name?: str }
 /// Result: { plaintext: hex }
 fn session_decrypt(params: &Value) -> Result<Value, String> {
     let handle = param_str(params, "handle")?;
     let remote_name = param_str(params, "remote_name")?;
+    let local_name = param_local_name(params);
     let msg_type = param_u32(params, "type")? as u8;
     let serialized = param_bytes(params, "serialized")?;
 
@@ -1504,7 +1506,7 @@ fn session_decrypt(params: &Value) -> Result<Value, String> {
     with_store(&handle, |store| {
         let mut rng = interop_rng();
         let remote = protocol_address(&remote_name);
-        let local = protocol_address("self");
+        let local = protocol_address(&local_name);
         let plaintext = message_decrypt(
             &ciphertext,
             &remote,
@@ -2211,6 +2213,18 @@ fn param_array<const N: usize>(params: &Value, name: &str) -> Result<[u8; N], St
 }
 
 /// Extracts a named plain-string parameter (not hex-decoded).
+/// The optional `local_name` of session.encrypt / session.decrypt: our own
+/// address name. It defaults to "self", which is not a service ID, so messages
+/// carry no addresses; a service-ID name binds pre-key messages to both
+/// addresses, as a real client does.
+fn param_local_name(params: &Value) -> String {
+    params
+        .get("local_name")
+        .and_then(Value::as_str)
+        .unwrap_or("self")
+        .to_string()
+}
+
 fn param_str(params: &Value, name: &str) -> Result<String, String> {
     params
         .get(name)

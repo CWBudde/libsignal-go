@@ -128,6 +128,7 @@ deliberate non-goals for this module.
 | Symmetric primitives (AES-CBC/CTR/GCM, HKDF, HMAC) | ✅ implemented | [`internal/crypto`](internal/crypto/) | internal building blocks |
 | Double Ratchet keys + session state + stores | ✅ implemented | [`ratchet`](ratchet/), [`session`](session/), [`stores`](stores/) | KDF + state KATs |
 | PQXDH session establishment + session cipher | ✅ implemented | [`session`](session/) | both roles, with/without one-time pre-key, interop |
+| Client session API (message_encrypt / message_decrypt, Sesame, address binding, pre-key records, identity key pair) | ✅ implemented | [`session`](session/), [`identity`](identity/) | both roles against upstream's message API with service-ID addresses, interop |
 | Group messaging (sender keys + group cipher) | ✅ implemented | [`groups`](groups/) | SKDM + cipher, both directions, interop |
 | Sealed sender v1 + v2 | ✅ implemented | [`sealedsender`](sealedsender/) | certificate chain + USMC + seal/decrypt, both versions, interop |
 | AES-256-GCM-SIV (RFC 8452) | ✅ implemented | [`internal/crypto/gcmsiv`](internal/crypto/gcmsiv/) | nonce-misuse-resistant AEAD for sealed sender v2 |

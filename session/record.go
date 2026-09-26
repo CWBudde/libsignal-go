@@ -1,6 +1,7 @@
 package session
 
 import (
+	"crypto/subtle"
 	"fmt"
 
 	googleproto "google.golang.org/protobuf/proto"
@@ -147,4 +148,46 @@ func DeserializeSessionRecord(b []byte) (*SessionRecord, error) {
 		r.current = NewSessionState(cs)
 	}
 	return r, nil
+}
+
+// previousState decodes the archived session at index i (newest first).
+func (r *SessionRecord) previousState(i int) (*SessionState, error) {
+	var s proto.SessionStructure
+	if err := googleproto.Unmarshal(r.previousSessions[i], &s); err != nil {
+		return nil, fmt.Errorf("session: decoding archived session %d: %w", i, err)
+	}
+	return NewSessionState(&s), nil
+}
+
+// promoteOldSessionWithState removes the archived session at index i and
+// installs state (that session, updated by a successful decrypt) as the current
+// one, archiving the previous current session
+// (SessionRecord::promote_old_session).
+func (r *SessionRecord) promoteOldSessionWithState(i int, state *SessionState) error {
+	r.previousSessions = append(r.previousSessions[:i:i], r.previousSessions[i+1:]...)
+	return r.PromoteState(state)
+}
+
+// PromoteMatchingSession looks for a session with the given version whose
+// alice_base_key equals baseKey. If the current session matches it reports
+// true; if an archived one does, that one is promoted to current and it
+// reports true. Mirrors SessionRecord::promote_matching_session, which lets a
+// repeated pre-key message reuse the session it already set up.
+func (r *SessionRecord) PromoteMatchingSession(version uint32, baseKey []byte) (bool, error) {
+	matches := func(s *SessionState) bool {
+		return s.SessionVersion() == version && subtle.ConstantTimeCompare(baseKey, s.AliceBaseKey()) == 1
+	}
+	if r.current != nil && matches(r.current) {
+		return true, nil
+	}
+	for i := range r.previousSessions {
+		state, err := r.previousState(i)
+		if err != nil {
+			return false, err
+		}
+		if matches(state) {
+			return true, r.promoteOldSessionWithState(i, state)
+		}
+	}
+	return false, nil
 }
