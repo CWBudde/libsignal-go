@@ -87,3 +87,6 @@ curve25519-dalek = "5.0"
 # Phase 8.2 crypto-layer oracle (same upstream pin).
 zkgroup = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "zkgroup" }
 libsignal-core = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "libsignal-core" }
+
+zkcredential = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "zkcredential" }
+bincode = "1"

@@ -171,8 +171,8 @@ candidates, plus all three upstream hardcoded system-parameter sets.
 negative tests check malformed points, lengths, basepoint E1, wrong UUIDs and
 wrong group keys. Two regenerations must be byte-identical.
 
-This fixture covers attribute crypto only. Generic zkcredential,
-API wrappers and the Signal group-service shim are still pending. The pinned
+This fixture covers attribute crypto only; generic zkcredential has a separate
+fixture. API wrappers and the Signal group-service shim are still pending. The pinned
 Rust implementation rejects profile keys whose masked map is the identity
 (including all-zero): duplicate inverse candidates violate its exactly-one
 match requirement. Go preserves that behavior.
@@ -193,5 +193,23 @@ adapters with the original counts; upstream KeyPair performs the derivation.
 Live tests compare fresh inputs and reject changed metadata/keys/ciphertexts.
 Go's exact-length parsers are intentionally stricter than the pinned upstream
 in-place decoder on trailing bytes; a dedicated differential test records this
-exception without modifying the Rust oracle. Generic zkcredential and the
-higher-level API/shim are still outside this milestone.
+exception without modifying the Rust oracle. Generic zkcredential is covered
+separately below; the higher-level API/shim is still pending.
+
+### Generic zkcredential
+
+`gen-vectors zkcredential` calls the pinned crate's public APIs to emit 52
+complete flows. It covers all supported arities, standard/legacy modes,
+domain encryption and inverse keys, clear/blinded/mixed issuance, revealed
+attributes, repeated/distinct encryption domains, both presentation key policies,
+and batch endorsement issuance, combination, removal and tokens. Live RPCs
+`zkcredential` and `zkcredential.verify` compare fresh inputs and bidirectional
+verification. A regression test demonstrates the standard mode's individual
+public-key binding, which legacy mode lacks. Two regenerations check fixture
+stability; malformed encoding and proof-input mutation tests check rejection.
+
+The generic oracle uses bincode fixed-integer decoding with exact consumption;
+it does not use the legacy zkgroup decoder with its trailing-data quirk. Go
+additionally bounds presentation commitments to seven and rejects empty batch
+endorsement operations instead of panicking. See `zkcredential/README.md` for
+caller policy requirements and the distinction from Signal group API wrappers.

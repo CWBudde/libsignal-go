@@ -25,6 +25,7 @@
 //! `hmac`, `sha2`) so the bytes match upstream exactly.
 
 mod poksho_compat;
+mod zkcredential_compat;
 mod zkgroup_credentials_compat;
 mod zkgroup_crypto_compat;
 
@@ -166,6 +167,13 @@ fn gen_vectors(domain: &str) -> Result<(), String> {
     // Every batch carries a {domain, seed} header. Most domains add a flat
     // `cases` array; hkdf instead adds a `subdomains` object keyed by
     // sub-domain name (the T12 gate inspects `.subdomains | keys`).
+    if domain == "zkcredential" {
+        let mut out = io::stdout().lock();
+        serde_json::to_writer_pretty(&mut out, &zkcredential_compat::vectors())
+            .map_err(|e| e.to_string())?;
+        writeln!(out).map_err(|e| e.to_string())?;
+        return Ok(());
+    }
     if domain == "zkgroup-credentials" {
         let mut out = io::stdout().lock();
         serde_json::to_writer_pretty(&mut out, &zkgroup_credentials_compat::vectors())
@@ -1944,6 +1952,8 @@ fn error_response(id: Value, message: &str) -> Value {
 /// Unknown methods return `Err`, surfaced as an error response (not a crash).
 fn dispatch(method: &str, params: &Value) -> Result<Value, String> {
     match method {
+        "zkcredential" => zkcredential_compat::generate(params),
+        "zkcredential.verify" => zkcredential_compat::verify(params),
         "zkgroup.credentials" => zkgroup_credentials_compat::generate(params),
         "zkgroup.credentials.verify" => zkgroup_credentials_compat::verify(params),
         method if method.starts_with("zkgroup.") => zkgroup_crypto_compat::dispatch(method, params),

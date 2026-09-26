@@ -82,6 +82,17 @@
       "checksum_sha256": "9a0b974441d49820f9746e1d661ba35e1fb3142c39edfba7e35e96adc1c1323c",
       "official_app_interop_claim": false,
       "notes": "Legacy credential crypto and all active request/issuance/presentation proofs, tested against upstream APIs. Exact-length Go parsing intentionally rejects trailing data accepted by pinned Rust. Does not claim generic zkcredential or Signal group-service interoperability."
+    },
+    {
+      "name": "zkcredential",
+      "upstream_path": "rust/zkcredential",
+      "local_path": "zkcredential",
+      "report_path": "compat/coverage_manifest.json",
+      "coverage_status": "vector-backed",
+      "checksum_path": "compat/vectors/zkcredential.json",
+      "checksum_sha256": "e99974750af84ccd31c7174320a3084d6daa2622f8f0e996ce8d0f8f7ad5fe88",
+      "official_app_interop_claim": false,
+      "notes": "Generic credential and endorsement primitives, both compatibility modes, tested against pinned Rust public APIs. Exact-length bounded parsers; no Signal group-service or application redemption policy claim."
     }
   ]
 }

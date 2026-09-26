@@ -67,6 +67,11 @@ perl -0pi -e 's/\Q$ENV{CURRENT_TAG}\E/$ENV{UPSTREAM_TAG}/g' \
 	compat/poksho_vectors_test.go \
 	compat/zkgroup_crypto_vectors_test.go \
 	compat/zkgroup_credentials_vectors_test.go \
+	compat/zkcredential_vectors_test.go \
+	compat/rust-harness/src/zkcredential_compat.rs \
+	zkcredential/core.go \
+	zkcredential/README.md \
+	zkcredential/CONSTANT_TIME.md \
 	compat/rust-harness/src/zkgroup_credentials_compat.rs \
 	compat/rust-harness/src/zkgroup_crypto_compat.rs \
 	zkgroup/zkcrypto/README.md \
@@ -87,7 +92,7 @@ perl -0pi -e 's/\Q$ENV{CURRENT_TAG}\E/$ENV{UPSTREAM_TAG}/g' \
 )
 
 harness="compat/rust-harness/target/release/rust-harness"
-for domain in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho zkgroup-crypto zkgroup-credentials; do
+for domain in curve kem-decaps hkdf messages fingerprint sessions groups sealedsender username-links poksho zkgroup-crypto zkgroup-credentials zkcredential; do
 	"$harness" gen-vectors "$domain" > "compat/vectors/$domain.json"
 done
 "$harness" gen-vectors mlkem-incremental > internal/mlkem768incr/testdata/libcrux_incremental_mlkem768.json
@@ -100,12 +105,12 @@ from pathlib import Path
 p = Path("internal/upstream/manifest.json")
 manifest = json.loads(p.read_text())
 for row in manifest["domains"]:
-    if row["name"] in ("poksho", "zkgroup-crypto", "zkgroup-credentials"):
+    if row["name"] in ("poksho", "zkgroup-crypto", "zkgroup-credentials", "zkcredential"):
         row["checksum_sha256"] = hashlib.sha256(Path(row["checksum_path"]).read_bytes()).hexdigest()
 p.write_text(json.dumps(manifest, indent=2) + "\n")
 PY
 
-go test ./poksho/ ./zkgroup/... ./internal/ristrettolizard/ ./compat/ ./internal/upstream/ ./internal/mlkem768incr/ ./internal/spqr/chunked/ -v
+go test ./poksho/ ./zkcredential/ ./zkgroup/... ./internal/ristrettolizard/ ./compat/ ./internal/upstream/ ./internal/mlkem768incr/ ./internal/spqr/chunked/ -v
 go test ./proofreport ./accountkeys ./usernames -run 'Report|Parity|Backup|SVR|Username' -v
 COMPAT_HARNESS_BIN="$PWD/$harness" go test ./compat/ -tags=interop -v
 

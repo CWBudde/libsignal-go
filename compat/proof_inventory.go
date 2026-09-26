@@ -9,7 +9,7 @@ import (
 	"slices"
 )
 
-//go:embed coverage_manifest.json vectors/account-keys.json vectors/username-links.json vectors/poksho.json vectors/zkgroup-crypto.json vectors/zkgroup-credentials.json
+//go:embed coverage_manifest.json vectors/account-keys.json vectors/username-links.json vectors/poksho.json vectors/zkgroup-crypto.json vectors/zkgroup-credentials.json vectors/zkcredential.json
 var coverageManifestFS embed.FS
 
 // CoverageStatus classifies how strongly a proof or backup domain is covered.

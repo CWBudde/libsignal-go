@@ -3,9 +3,10 @@
 This package ports the UID/profile-key attribute, encryption, profile-key
 commitment and timestamp portion of `rust/zkgroup/src/crypto` at **v0.102.2**.
 It also ports the legacy KVAC credentials, profile and receipt blinding requests,
-server signatures, and all active request/issuance/presentation proofs. Generic
-zkcredential, the versioned group/profile API and the mautrix-signal shim remain
-separate steps of go-signal PLAN.md Phases 8.2–8.4.
+server signatures, and all active request/issuance/presentation proofs.
+Generic credentials are implemented in the separate `zkcredential` package.
+The versioned group/profile API and the mautrix-signal shim remain
+separate steps of go-signal PLAN.md Phases 8.3–8.4.
 
 The byte encodings match Rust's fixed-width, little-endian bincode fields.
 Ciphertexts here are two compressed Ristretto points (64 bytes); higher-level
