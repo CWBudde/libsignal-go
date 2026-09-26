@@ -16,6 +16,22 @@ import (
 // TCB info and QE identities (constants.rs SGX_TCB_EVALUATION_DATA_NUMBER_MIN).
 const TCBEvaluationDataNumberMin = 21
 
+// veryExpiredTestEvalNumber is the TCB evaluation data number of upstream's
+// oldest recorded blobs (cds2_test, dcap_v3), which upstream accepts only
+// under cfg(test) (endorsements.rs
+// SGX_TCB_EVALUATION_NUMBER_USED_ONLY_IN_TESTS_THAT_WILL_NEVER_VALIDATE_SINCE_IT_IS_VERY_EXPIRED).
+const veryExpiredTestEvalNumber = 12
+
+// acceptVeryExpiredTestEvalNumber is set only by this package's tests
+// (export_test.go); production builds never accept that number.
+var acceptVeryExpiredTestEvalNumber bool
+
+// evalNumberOK reports whether a TCB evaluation data number is recent enough.
+func evalNumberOK(n uint16) bool {
+	return n >= TCBEvaluationDataNumberMin ||
+		(acceptVeryExpiredTestEvalNumber && n == veryExpiredTestEvalNumber)
+}
+
 // Open Enclave endorsements layout (oe_endorsements_t and
 // oe_sgx_endorsements_fields_t, endorsements.rs).
 const (
@@ -431,7 +447,7 @@ func (l *TCBLevel) decodeTCBV3(data []byte) error {
 // evaluation data number is recent enough. The issue date is ignored: it
 // may be very recent, and clocks skew.
 func (i *TCBInfo) ValidAt(t time.Time) bool {
-	return i.TCBEvaluationDataNumber >= TCBEvaluationDataNumberMin && !t.After(i.NextUpdate)
+	return evalNumberOK(i.TCBEvaluationDataNumber) && !t.After(i.NextUpdate)
 }
 
 const enclaveIdentityV2 = 2
@@ -591,5 +607,5 @@ func (id *EnclaveIdentity) TCBStatus(reportISVSVN uint16) QETCBStatus {
 // ValidAt reports whether t is not after NextUpdate and the TCB
 // evaluation data number is recent enough.
 func (id *EnclaveIdentity) ValidAt(t time.Time) bool {
-	return id.TCBEvaluationDataNumber >= TCBEvaluationDataNumberMin && !t.After(id.NextUpdate)
+	return evalNumberOK(id.TCBEvaluationDataNumber) && !t.After(id.NextUpdate)
 }

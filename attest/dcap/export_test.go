@@ -49,3 +49,20 @@ const (
 	QuoteReportBodyOffset = 48
 	QuoteQEVendorIDOffset = 12
 )
+
+// VeryExpiredTestEvalNumberDefault is the exception's setting before this
+// file turned it on: its production value. Upstream accepts the very
+// expired test evaluation number in every cfg(test) build; so do this
+// package's tests.
+var VeryExpiredTestEvalNumberDefault = func() bool {
+	was := acceptVeryExpiredTestEvalNumber
+	acceptVeryExpiredTestEvalNumber = true
+	return was
+}()
+
+// SetAcceptVeryExpiredTestEvalNumber switches that test-only exception and
+// returns the previous setting. Tests using it must not run in parallel.
+func SetAcceptVeryExpiredTestEvalNumber(on bool) (was bool) {
+	was, acceptVeryExpiredTestEvalNumber = acceptVeryExpiredTestEvalNumber, on
+	return was
+}
