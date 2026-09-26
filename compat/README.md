@@ -192,3 +192,28 @@ cd compat/rust-harness && cargo build --release && cd ../..
 COMPAT_HARNESS_BIN="$PWD/compat/rust-harness/target/release/rust-harness" \
   go test -tags interop ./compat -run Poksho
 ```
+
+## zkgroup attribute crypto (Phase 8.2)
+
+`gen-vectors zkgroup-crypto` calls the pinned upstream zkgroup crypto APIs.
+`zkgroup.crypto`, `zkgroup.decrypt_uid`, `zkgroup.decrypt_profile` and
+`zkgroup.inverse` provide live compatibility checks. Hex inputs include `seed`
+(group master key), `uuid` (16 bytes), `profile_key` (32 bytes); `pni` is boolean
+and `timestamp` is an unsigned 64-bit integer. Decrypt calls take raw 64-byte
+`ciphertext`, plus `seed` and (for profiles) `uuid`. The inverse call takes a
+32-byte `point` encoding.
+
+The fixture has 40 cases, including all eight combinations of profile-key bits
+omitted by the reversible encoding, all-zero/all-ones keys, ACI/PNI, and boundary
+timestamps. It compares serialized attributes, key pairs, ciphertexts,
+commitments, secret nonces, timestamps, single Elligator maps and inverse
+candidates, plus all three upstream hardcoded system-parameter sets.
+`TestZKGroupCryptoInterop` includes fresh random inputs and mutual decryption;
+negative tests check malformed points, lengths, basepoint E1, wrong UUIDs and
+wrong group keys. Two regenerations must be byte-identical.
+
+This covers attribute crypto only. Credential issuance/proofs, zkcredential,
+API wrappers and the Signal group-service shim are still pending. The pinned
+Rust implementation rejects profile keys whose masked map is the identity
+(including all-zero): duplicate inverse candidates violate its exactly-one
+match requirement. Go preserves that behavior.

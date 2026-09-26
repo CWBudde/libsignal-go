@@ -81,3 +81,7 @@ spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag 
 # Phase 8.1: same curve version as the pinned upstream poksho crate.
 poksho = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "poksho" }
 curve25519-dalek = "5.0"
+
+# Phase 8.2 crypto-layer oracle (same upstream pin).
+zkgroup = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "zkgroup" }
+libsignal-core = { git = "https://github.com/signalapp/libsignal", tag = "v0.102.2", package = "libsignal-core" }

@@ -139,7 +139,8 @@ deliberate non-goals for this module.
 | X3DH v3 session *initiation* | ⛔ excluded | — | v3 *decrypt*/state compat retained; v0.102.2 cannot initiate v3 |
 | ML-KEM-1024 *activation* | ⛔ excluded | — | wire type `0x0A` parsing reserved only |
 | poksho | ✅ implemented | [`poksho`](poksho/) | v0.102.2 SHO, Ristretto Schnorr statements and signatures; committed Rust vectors and bidirectional live harness verification |
-| zkgroup / zkcredential | staged | — | go-signal Phases 8.2–8.4; credentials and group endorsements remain unimplemented |
+| zkgroup attribute crypto | ✅ implemented | [`zkgroup/zkcrypto`](zkgroup/zkcrypto/) | UID/profile-key encryption, commitments and timestamps; Rust vectors and mutual decryption |
+| zkgroup credentials / zkcredential / group API | staged | — | Remaining go-signal Phases 8.2–8.4; credential proofs, API wrappers and group endorsements remain unimplemented |
 | username proof, key transparency, SVR/svrb | 🚧 deferred | — | tracked in `compat.ProofInventory()` / `compat/coverage_manifest.json`; account-key/SVR-key and username reserve-hash derivations remain vector-backed here, proof-system semantics move to encrypted-spaces-go |
 | backup manifest, message backup, device transfer, media, net | 🚧 deferred / ⛔ excluded | — | backup/message-backup rows are tracked in `compat.ProofInventory()` with required upstream inputs; the remaining app/service surfaces are non-goals |
 | `incremental_mac`, HPKE, `session_cipher_legacy` | ⛔ excluded | — | upstream test-only |

@@ -60,6 +60,17 @@
       "checksum_sha256": "9a3654ad66312db24acca0e3d0c8125f9e2c0ce3631369f35511f4d9be5f6789",
       "official_app_interop_claim": false,
       "notes": "SHO, scalar/point helpers, signatures and linear-relation proofs. Verified with Rust harness vectors and live bidirectional proofs at the pinned version; no group-service claim."
+    },
+    {
+      "name": "zkgroup-crypto",
+      "upstream_path": "rust/zkgroup/src/crypto",
+      "local_path": "zkgroup/zkcrypto",
+      "report_path": "compat/coverage_manifest.json",
+      "coverage_status": "vector-backed",
+      "checksum_path": "compat/vectors/zkgroup-crypto.json",
+      "checksum_sha256": "21a8aee8632927b9929e2429d8e2adb6caf9757dbfc419cdefb0fb9a2b3b87bd",
+      "official_app_interop_claim": false,
+      "notes": "Phase 8.2 attribute/encryption primitives only, plus internal reversible Ristretto encoding from curve25519-dalek 5.0.0. Does not claim credential or Signal group-service interoperability."
     }
   ]
 }

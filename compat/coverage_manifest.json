@@ -82,6 +82,16 @@
       "vector": "vectors/poksho.json",
       "packages": ["poksho"],
       "notes": "Both SHO variants, scalar/point conversions, Schnorr signatures and multi-equation proofs at v0.102.2; bidirectional live Rust interoperability. Does not implement zkgroup, zkcredential, or username proofs."
+    },
+    {
+      "name": "zkgroup-crypto",
+      "status": "vector-backed",
+      "vector": "vectors/zkgroup-crypto.json",
+      "packages": [
+        "zkgroup/zkcrypto",
+        "internal/ristrettolizard"
+      ],
+      "notes": "UID/profile-key attributes, encryption, commitments, timestamps and reversible Ristretto maps at v0.102.2. Credential issuance, proofs, zkcredential and group API/shim are still deferred."
     }
   ]
 }

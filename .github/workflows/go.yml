@@ -38,8 +38,8 @@ jobs:
             echo "$unformatted"
             exit 1
           fi
-      - name: pure-Go poksho and vector tests
-        run: CGO_ENABLED=0 go test ./poksho ./compat
+      - name: pure-Go proof, zkgroup primitive and vector tests
+        run: CGO_ENABLED=0 go test ./poksho ./zkgroup/... ./internal/ristrettolizard ./compat
       - name: test
         run: go test -race ./...
 
