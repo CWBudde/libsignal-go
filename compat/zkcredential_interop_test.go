@@ -150,7 +150,7 @@ func TestZKCredentialVectorRegeneration(t *testing.T) {
 	want, e := os.ReadFile("vectors/zkcredential.json")
 	legacyCheck(t, e)
 	for range 2 {
-		got, e := exec.Command(bin, "gen-vectors", "zkcredential").Output()
+		got, e := exec.Command(bin, "gen-vectors", "zkcredential").Output() //nolint:gosec // G204: operator-supplied compatibility harness.
 		legacyCheck(t, e)
 		if !bytes.Equal(bytes.TrimSpace(got), bytes.TrimSpace(want)) {
 			var v genericVectors
