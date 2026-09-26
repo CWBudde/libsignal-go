@@ -27,6 +27,7 @@
 mod poksho_compat;
 mod zkcredential_compat;
 mod zkgroup_api_compat;
+mod group_send_compat;
 mod zkgroup_credentials_compat;
 mod zkgroup_crypto_compat;
 
@@ -178,6 +179,13 @@ fn gen_vectors(domain: &str) -> Result<(), String> {
     if domain == "zkgroup-credentials" {
         let mut out = io::stdout().lock();
         serde_json::to_writer_pretty(&mut out, &zkgroup_credentials_compat::vectors())
+            .map_err(|e| e.to_string())?;
+        writeln!(out).map_err(|e| e.to_string())?;
+        return Ok(());
+    }
+    if domain == "group-send" {
+        let mut out = io::stdout().lock();
+        serde_json::to_writer_pretty(&mut out, &group_send_compat::vectors())
             .map_err(|e| e.to_string())?;
         writeln!(out).map_err(|e| e.to_string())?;
         return Ok(());
@@ -1963,6 +1971,8 @@ fn dispatch(method: &str, params: &Value) -> Result<Value, String> {
     match method {
         "zkcredential" => zkcredential_compat::generate(params),
         "zkcredential.verify" => zkcredential_compat::verify(params),
+        "zkgroup.group_send" => group_send_compat::generate(params),
+        "zkgroup.group_send.verify" => group_send_compat::verify(params),
         "zkgroup.api" => zkgroup_api_compat::generate(params),
         "zkgroup.api.verify" => zkgroup_api_compat::verify(params),
         "zkgroup.credentials" => zkgroup_credentials_compat::generate(params),
