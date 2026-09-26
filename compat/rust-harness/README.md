@@ -152,6 +152,15 @@ Signature requests use singular `scalar` and `point`. Creation returns
 the request shapes. Invalid builder inputs and SHO transitions produce errors
 before calling upstream APIs that would panic.
 
+## noise
+
+`gen-vectors noise` runs both Noise patterns of `rust/attest` on snow 0.10.0
+(`src/noise_compat.rs`, a copy of attest's resolver with seeded randomness).
+RPC methods are `noise.initiator` (`pattern`, `remote_static`, `seed`,
+`payload0`, optional `message1`) and `noise.responder` (`pattern`,
+`static_private`, `seed`, `message0`, `payload1`); both take optional `inbound`
+and `outbound` lists of hex transport messages. `pattern` is `NK` or `NKhfs`.
+
 ## zkgroup attribute crypto (Phase 8.2)
 
 `gen-vectors zkgroup-crypto` calls the pinned upstream zkgroup crypto APIs.
