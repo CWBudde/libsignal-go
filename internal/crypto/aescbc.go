@@ -53,6 +53,8 @@ func DecryptCBC(ciphertext, key, iv []byte) ([]byte, error) {
 
 	unpadded, ok := pkcs7Unpad(out)
 	if !ok {
+		// Best-effort hygiene: the rejected plaintext is never returned, so wipe it.
+		clear(out)
 		return nil, fmt.Errorf("%w: invalid PKCS#7 padding", ErrBadCiphertext)
 	}
 	return unpadded, nil
