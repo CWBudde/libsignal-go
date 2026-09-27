@@ -3,7 +3,10 @@
 This page records the review of the module's secret-dependent code paths, and states
 what the module does, and does not do, about wiping key material. It covers the
 module's own non-test code. The dependencies are covered by their own stated
-guarantees (see [Dependencies](#dependencies)).
+guarantees (see [Dependencies](#dependencies)). go-signal's
+`docs/constant-time-review.md` is the fuller review of the whole pure-Go backend,
+including this module at `v0.7.1-cw.4`, the shim's `Destroy` methods, and the
+build-tag interaction. Its finding IDs (CT-01 to CT-03) are used here.
 
 A side channel counts as a finding when timing or the memory access pattern depends on
 a secret that an attacker doesn't already have: key material, MAC tags that are still
@@ -45,12 +48,17 @@ ciphertexts, attestation evidence and anything else sent in the clear are public
 
 ## Result
 
-One fix. There are no other findings. Everything else is constant time, or handles public
-data, or is an accepted residual listed below.
+Three findings: one fixed, two open. The open ones are go-signal's CT-01 and CT-02
+(go-signal `docs/constant-time-review.md`, PLAN.md §10.2), and they block the pure-Go
+backend from becoming go-signal's default. The package-level reviews in
+`poksho/CONSTANT_TIME.md`, `zkcredential/CONSTANT_TIME.md`, `zkgroup/CONSTANT_TIME.md`
+and `zkgroup/zkcrypto/CONSTANT_TIME.md` still apply to those packages.
 
 | Site | Finding | Resolution |
 | --- | --- | --- |
-| `internal/crypto/aescbc.go` `pkcs7Unpad` | The padding bytes were checked in constant time, but the pad value's range (`pad == 0 \|\| pad > 16`) returned early, which branched on the last plaintext byte. | Fixed: the range check is folded into the same constant-time mask, and only the length is branched on. `TestPKCS7UnpadMatchesReference` checks all 256 final byte values, each correct and with each padding byte corrupted, against a plain reference. |
+| `internal/mlkem768incr/incremental.go` `FixEncapsStateEndianness` | **Open (CT-01).** It scans the secret e₂ noise coefficients up to the first decisive value, then branches and allocates depending on it. `toBalanced`/`fromBalanced` also branch on secret coefficients and use a signed `% q`. `Encapsulate2` runs it on every SPQR completion. | To fix: scan all 256 coefficients, select the classification and the swap with masks, and make the balanced conversions branch-free and division-free. Then check the amd64 and arm64 output. |
+| `crypto/aes`, used by the CBC, CTR, GCM and GCM-SIV paths | **Open (CT-02).** Go's generic AES indexes tables with secret values. The `purego` build tag, which go-signal uses to select its backend, also removes the standard library's assembly (`aes_asm.go` is `!purego`), so AES is table-driven even on CPUs with AES-NI or ARMv8 AES. | To fix in go-signal and the mautrix fork: select the backend with a tag other than `purego`, and require AES hardware or a reviewed constant-time fallback. This module can't fix it by itself. |
+| `internal/crypto/aescbc.go` `pkcs7Unpad` | **Fixed (CT-03).** The padding bytes were checked in constant time, but the pad value's range (`pad == 0 \|\| pad > 16`) returned early, which branched on the last plaintext byte. | Fixed: the range check is folded into the same constant-time mask, and only the length is branched on. `TestPKCS7UnpadMatchesReference` checks all 256 final byte values, each correct and with each padding byte corrupted, against a plain reference. |
 
 The early return was not reachable as an oracle: all three callers (`session/cipher.go`,
 `groups/cipher.go`, `usernames` link decryption) verify a MAC or signature before
@@ -107,12 +115,13 @@ These are the 19 sites `scripts/ctscan` reports. None of them handles a secret.
 
 - **POLYVAL** (`internal/crypto/gcmsiv/polyval.go`): the carry-less multiply and the
   reduction are masks, shifts and XORs. There are no tables, and the only branch is on
-  the public loop index. AES itself comes from `crypto/aes`.
+  the public loop index. AES itself comes from `crypto/aes`, so it carries CT-02.
 - **ML-KEM-768** (`internal/mlkem768incr`): re-derived from the standard library's FIPS
   203 code. Barrett reduction, `fieldReduceOnce`, `compress` and `decompress` are
   branch-free. `fieldCheckReduced` branches only on public encapsulation-key
   coefficients, and rejection sampling on the public matrix seed. Decapsulation uses
-  implicit rejection with `ConstantTimeCopy`.
+  implicit rejection with `ConstantTimeCopy`. The SPQR state codec around it is not
+  constant time (CT-01).
 - **Ristretto and Lizard** (`internal/ristrettolizard`): the field operations are from
   `filippo.io/edwards25519/field`. `Inverse` evaluates all four Jacobi quartic points,
   and `Decode` checks all eight candidates with `subtle` and no early exit.
@@ -135,8 +144,9 @@ These are the 19 sites `scripts/ctscan` reports. None of them handles a secret.
 These are trusted for constant-time behaviour on secrets, as their documentation
 states:
 
-- **Standard library:** `crypto/aes` (hardware AES, or a constant-time software
-  fallback), `crypto/cipher` (GCM, CBC, CTR), `crypto/hmac`, `crypto/hkdf`,
+- **Standard library:** `crypto/aes` only when hardware AES is in use: the generic
+  fallback indexes tables with secret values, and the `purego` build tag forces it
+  (CT-02). Also `crypto/cipher` (GCM, CBC, CTR), `crypto/hmac`, `crypto/hkdf`,
   `crypto/sha256`, `crypto/sha512`, `crypto/ecdh`, `crypto/mlkem`, `crypto/ecdsa` and
   `crypto/rsa`.
 - **`golang.org/x/crypto`:** `curve25519` and `chacha20poly1305`.
@@ -149,9 +159,12 @@ states:
 
 These match upstream's behaviour, and changing them would buy little:
 
+- **Argon2id** in the SVR PIN derivation uses data-dependent memory access by design.
+- **Usernames:** parsing, formatting and candidate deduplication are variable time on
+  the name.
 - **Parsing the account entropy pool** (`ParseAccountEntropyPool`) branches per
-  character when it validates the alphabet, and generating one rejection-samples bytes
-  of 252 or more. Upstream Rust does the same. Parsing leaks at most which character
+  character when it validates the alphabet. Generating one rejection-samples bytes of
+  252 or more, then indexes the 36-character alphabet with the accepted value. Upstream Rust does the same. Parsing leaks at most which character
   class an invalid input fell into.
 - **Hex and base64:** the PHC string of the local PIN hash (`LocalPINHash`) and the
   profile key version (`zkgroup/profiles.go`) use the standard library's table-driven
@@ -199,6 +212,10 @@ What it deliberately doesn't do:
   can't give, so the module has none. This matches the README's scope note ("FIPS
   certification and key-material zeroization guarantees beyond the documented Go
   posture are out of scope").
+- **Wipe what it drops.** Removing old keys (for example `spqr/chain.go`
+  `keyHistory.clear`, which shortens a slice) deletes them logically, not physically.
+  In the same way, the `Destroy` methods of go-signal's mautrix shim release
+  references and don't wipe anything.
 
 What callers should do instead:
 
