@@ -40,3 +40,8 @@ apps/services; the cross-implementation compatibility harness's third-party
 build dependencies (report those to their respective projects); and findings
 that only restate documented, deliberate scope exclusions (see the README scope
 matrix).
+
+[`docs/constant-time.md`](docs/constant-time.md) records the constant-time review
+of the secret-dependent code paths and the key-material zeroization posture. A
+timing side channel on a secret that isn't listed there as an accepted residual
+is in scope.

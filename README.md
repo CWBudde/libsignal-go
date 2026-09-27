@@ -152,7 +152,8 @@ deliberate non-goals for this module.
 
 Legend: ✅ implemented (v0.102.2 compat) · 🚧 staged to a later phase · ⛔
 excluded (deliberate non-goal). FIPS certification and key-material zeroization
-guarantees beyond the documented Go posture are also out of scope.
+guarantees beyond the documented Go posture
+([`docs/constant-time.md`](docs/constant-time.md)) are also out of scope.
 
 **No ⛔ row is a client-protocol gap.** Every capability a Signal client needs to
 send and receive messages — 1:1 sessions (PQXDH), group messaging, sealed sender
