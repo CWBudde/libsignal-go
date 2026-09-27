@@ -48,15 +48,15 @@ ciphertexts, attestation evidence and anything else sent in the clear are public
 
 ## Result
 
-Three findings: one fixed, two open. The open ones are go-signal's CT-01 and CT-02
-(go-signal `docs/constant-time-review.md`, PLAN.md §10.2), and they block the pure-Go
-backend from becoming go-signal's default. The package-level reviews in
+Three findings: two fixed here (CT-01, CT-03), one open (CT-02). The IDs are go-signal's
+(`docs/constant-time-review.md`, PLAN.md §10.2). CT-02 blocks the pure-Go backend from
+becoming go-signal's default, and it has to be fixed in go-signal's build configuration. The package-level reviews in
 `poksho/CONSTANT_TIME.md`, `zkcredential/CONSTANT_TIME.md`, `zkgroup/CONSTANT_TIME.md`
 and `zkgroup/zkcrypto/CONSTANT_TIME.md` still apply to those packages.
 
 | Site | Finding | Resolution |
 | --- | --- | --- |
-| `internal/mlkem768incr/incremental.go` `FixEncapsStateEndianness` | **Open (CT-01).** It scans the secret e₂ noise coefficients up to the first decisive value, then branches and allocates depending on it. `toBalanced`/`fromBalanced` also branch on secret coefficients and use a signed `% q`. `Encapsulate2` runs it on every SPQR completion. | To fix: scan all 256 coefficients, select the classification and the swap with masks, and make the balanced conversions branch-free and division-free. Then check the amd64 and arm64 output. |
+| `internal/mlkem768incr/incremental.go` `FixEncapsStateEndianness` | **Fixed (CT-01).** It scanned the secret e₂ noise coefficients up to the first decisive value, then branched and allocated depending on it. `toBalanced`/`fromBalanced` also branched on secret coefficients and used a signed `% q`. `Encapsulate2` runs it on every SPQR completion. | Fixed: all 256 coefficients are classified with `subtle` masks, and the result is always a fresh copy swapped under a mask (the input is never modified). `toBalanced` subtracts q under a sign mask; `fromBalanced` adds 10q and uses the Barrett `fieldReduce`. `ct_test.go` compares them with the branching references: every decisive position × 11 value classes (correct, swapped, unexpected) with arbitrary later values, the all-ambiguous state, all 3329 and all 65536 conversion inputs. Optimized Go 1.26 output (amd64 `GOAMD64=v1`, arm64) of `FixEncapsStateEndianness`, `polyFromRawI16LE` and `encodeEncapsState` has no division and uses `SETcc`/`CMOV`/`CSET`/`CSEL`/`SAR` on coefficients; its conditional jumps test the length, loop counters and bounds. |
 | `crypto/aes`, used by the CBC, CTR, GCM and GCM-SIV paths | **Open (CT-02).** Go's generic AES indexes tables with secret values. The `purego` build tag, which go-signal uses to select its backend, also removes the standard library's assembly (`aes_asm.go` is `!purego`), so AES is table-driven even on CPUs with AES-NI or ARMv8 AES. | To fix in go-signal and the mautrix fork: select the backend with a tag other than `purego`, and require AES hardware or a reviewed constant-time fallback. This module can't fix it by itself. |
 | `internal/crypto/aescbc.go` `pkcs7Unpad` | **Fixed (CT-03).** The padding bytes were checked in constant time, but the pad value's range (`pad == 0 \|\| pad > 16`) returned early, which branched on the last plaintext byte. | Fixed: the range check is folded into the same constant-time mask, and only the length is branched on. `TestPKCS7UnpadMatchesReference` checks all 256 final byte values, each correct and with each padding byte corrupted, against a plain reference. Optimized Go 1.26 output (amd64 `GOAMD64=v1`, arm64) uses only `SETcc`/`CMOV`/`CSEL` on the pad byte; it branches on the length, the fixed 16-step loop counter and once on the overall result. `DecryptCBC` clears the decrypted buffer when the padding is rejected. |
 
@@ -120,8 +120,8 @@ These are the 19 sites `scripts/ctscan` reports. None of them handles a secret.
   203 code. Barrett reduction, `fieldReduceOnce`, `compress` and `decompress` are
   branch-free. `fieldCheckReduced` branches only on public encapsulation-key
   coefficients, and rejection sampling on the public matrix seed. Decapsulation uses
-  implicit rejection with `ConstantTimeCopy`. The SPQR state codec around it is not
-  constant time (CT-01).
+  implicit rejection with `ConstantTimeCopy`. The SPQR state codec around it
+  (endianness repair, balanced conversions) is masked as well (CT-01).
 - **Ristretto and Lizard** (`internal/ristrettolizard`): the field operations are from
   `filippo.io/edwards25519/field`. `Inverse` evaluates all four Jacobi quartic points,
   and `Decode` checks all eight candidates with `subtle` and no early exit.

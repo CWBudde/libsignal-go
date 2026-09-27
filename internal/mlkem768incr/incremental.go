@@ -394,23 +394,21 @@ func polyFromRawI16LE(b []byte) ringElement {
 }
 
 // toBalanced maps a canonical field element in [0,q) to libcrux's balanced
-// int16 representative in [-(q-1)/2, (q-1)/2].
+// int16 representative in [-(q-1)/2, (q-1)/2]. The coefficients are secret, so
+// the subtraction is selected with a mask instead of a branch.
 func toBalanced(c fieldElement) int16 {
-	v := int16(c)
-	if int(c) > (q-1)/2 {
-		v -= q
-	}
-	return v
+	v := int32(c)
+	// (q-1)/2 - v is negative, and the shift gives all ones, when v > (q-1)/2.
+	mask := ((q-1)/2 - v) >> 31
+	return int16(v - q&mask)
 }
 
 // fromBalanced reduces a signed int16 (the libcrux on-wire representative) into
-// the canonical field element in [0,q).
+// the canonical field element in [0,q). Adding 10q makes every input positive
+// (10q > 2¹⁵), and fieldReduce is a branch-free Barrett reduction, so there is
+// no secret branch and no variable-latency division.
 func fromBalanced(v int16) fieldElement {
-	r := int32(v) % q
-	if r < 0 {
-		r += q
-	}
-	return fieldElement(r)
+	return fieldReduce(uint32(int32(v) + 10*q))
 }
 
 // --- libcrux issue-1275 endianness fix (SPQR
@@ -421,50 +419,48 @@ func fromBalanced(v int16) fieldElement {
 // (cryspen/libcrux#1275). It inspects the e₂ region (state[1536:2048]), whose
 // coefficients are CBD η2 samples — all in [-2,2]. Read as little-endian int16,
 // a correct encoding shows only {0, 1, 2, -1, -2}; a byte-swapped one shows the
-// swapped images {0x0100, 0x0200, 0xFEFF}. On the first decisive coefficient we
-// either keep the state (correct) or swap every int16 pair in state[0:len-32]
-// (the trailing 32 random bytes have no endianness and are never swapped). A
-// state of all-ambiguous {0,-1} values, or any unexpected value, is left as-is
-// (matching SPQR's keep-and-warn fallback).
+// swapped images {0x0100, 0x0200, 0xFEFF}. The first decisive coefficient either
+// keeps the state (correct) or swaps every int16 pair in state[0:len-32] (the
+// trailing 32 random bytes have no endianness and are never swapped). A state of
+// all-ambiguous {0,-1} values, or any unexpected value, is left as-is (matching
+// SPQR's keep-and-warn fallback).
+//
+// e₂ is secret noise, so the work must not depend on it: every coefficient is
+// classified with masks, and the result is always a fresh copy that is swapped
+// under a mask. The input is never modified.
 func FixEncapsStateEndianness(state []byte) ([]byte, error) {
 	if len(state) != EncapsStateSize {
 		return nil, errors.New("mlkem768incr: invalid encaps state length")
 	}
 	const (
-		// Correct little-endian images of the η2-range values {0,1,2,-1,-2}.
-		// 0 (0x0000) and -1 (0xFFFF) are byte-palindromes, so they don't decide.
-		goodPos1 = int16(1)  // 0x0001
-		goodPos2 = int16(2)  // 0x0002
-		goodNeg2 = int16(-2) // 0xFFFE
-		// Their byte-swapped images, as produced by a buggy SIMD backend.
-		badPos1 = int16(0x0100)  // swapped 0x0001 → 256
-		badPos2 = int16(0x0200)  // swapped 0x0002 → 512
-		badNeg2 = int16(-0x0101) // swapped 0xFFFE → 0xFEFF → -257
+		// Byte-swapped images of the η2-range values 1, 2 and -2, as produced
+		// by a buggy SIMD backend. 0 (0x0000) and -1 (0xFFFF) are
+		// byte-palindromes, so they don't decide.
+		badPos1 = 0x0100  // swapped 0x0001 → 256
+		badPos2 = 0x0200  // swapped 0x0002 → 512
+		badNeg2 = -0x0101 // swapped 0xFFFE → 0xFEFF → -257
 	)
 	e2Start := k * rawPolyI16Size // 1536
 	e2End := EncapsStateSize - messageSize
-	flip := false
-	for i := e2Start; i+1 < e2End; i += 2 {
-		v := int16(binary.LittleEndian.Uint16(state[i : i+2]))
-		switch v {
-		case 0, int16(-1):
-			continue // palindrome byte pair; undecided, look at the next
-		case goodPos1, goodPos2, goodNeg2:
-			flip = false
-		case badPos1, badPos2, badNeg2:
-			flip = true
-		default:
-			flip = false // unexpected value — keep as-is (SPQR warns + keeps)
-		}
-		break
-	}
-	if !flip {
-		return state, nil
+	decided, flip := 0, 0
+	for i := e2Start; i < e2End; i += 2 {
+		v := int32(int16(binary.LittleEndian.Uint16(state[i : i+2])))
+		ambiguous := subtle.ConstantTimeEq(v, 0) | subtle.ConstantTimeEq(v, -1)
+		swapped := subtle.ConstantTimeEq(v, badPos1) | subtle.ConstantTimeEq(v, badPos2) |
+			subtle.ConstantTimeEq(v, badNeg2)
+		// The first coefficient that is not ambiguous decides; any value other
+		// than a swapped image means keep.
+		first := (1 ^ decided) & (1 ^ ambiguous)
+		flip = subtle.ConstantTimeSelect(first, swapped, flip)
+		decided |= first
 	}
 	out := make([]byte, EncapsStateSize)
 	copy(out, state)
-	for i := 0; i+1 < EncapsStateSize-messageSize; i += 2 {
-		out[i], out[i+1] = out[i+1], out[i]
+	mask := byte(subtle.ConstantTimeSelect(flip, 0xff, 0))
+	for i := 0; i < e2End; i += 2 {
+		t := (out[i] ^ out[i+1]) & mask
+		out[i] ^= t
+		out[i+1] ^= t
 	}
 	return out, nil
 }
