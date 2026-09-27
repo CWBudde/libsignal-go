@@ -3,10 +3,14 @@
 
 // Package gcmsiv implements AES-256-GCM-SIV, the nonce-misuse-resistant AEAD of
 // RFC 8452. It is a self-contained pure-Go implementation (no cgo): AES is the
-// standard library's constant-time/hardware AES, and the POLYVAL universal hash
-// is implemented here with a constant-time, limb-based carry-less multiply (see
-// polyval.go and design note D4 — this is the project's riskiest self-written
-// crypto surface).
+// standard library's crypto/aes, and the POLYVAL universal hash is implemented
+// here with a constant-time, limb-based carry-less multiply (see polyval.go and
+// design note D4 — this is the project's riskiest self-written crypto surface).
+//
+// crypto/aes is constant time only when it uses AES hardware (AES-NI, ARMv8
+// AES). Its generic fallback indexes tables with secret values, and building
+// with the purego tag selects that fallback on every CPU (docs/constant-time.md,
+// CT-02).
 //
 // Only the 256-bit key variant is provided, the only one the Signal protocol's
 // sealed-sender v2 uses. Every step cites the relevant RFC 8452 section.
