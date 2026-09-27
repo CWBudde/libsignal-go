@@ -265,6 +265,10 @@ func (s *v1State) recvCt2ChunkEkSent(chunk *chunked.Chunk) (ns *v1State, key *ep
 	if decoded == nil {
 		return s, nil, false, nil
 	}
+	if len(decoded) != mlkem768incr.Ciphertext2Size+authMACSize {
+		// Only a corrupted stored decoder (pts_needed) gets here.
+		return nil, nil, false, fmt.Errorf("%w: ct2 decoder yields %d bytes", ErrInvalidState, len(decoded))
+	}
 	ct2 := decoded[:mlkem768incr.Ciphertext2Size]
 	mac := decoded[mlkem768incr.Ciphertext2Size:]
 
@@ -301,6 +305,10 @@ func (s *v1State) recvHdrChunk(chunk *chunked.Chunk) (ns *v1State, ok bool, err 
 	decoded := s.recvingHdr.DecodedMessage()
 	if decoded == nil {
 		return s, false, nil
+	}
+	if len(decoded) != mlkem768incr.PublicKey1Size+authMACSize {
+		// Only a corrupted stored decoder (pts_needed) gets here.
+		return nil, false, fmt.Errorf("%w: header decoder yields %d bytes", ErrInvalidState, len(decoded))
 	}
 	hdr := decoded[:mlkem768incr.PublicKey1Size]
 	mac := decoded[mlkem768incr.PublicKey1Size:]
