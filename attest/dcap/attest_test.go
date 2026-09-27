@@ -247,14 +247,14 @@ type recordedHandshake struct {
 	advisories             []string
 }
 
-func loadCDSI(t *testing.T) recordedHandshake {
+func loadCDSI(t testing.TB) recordedHandshake {
 	t.Helper()
 	return loadHandshake(t, "cdsi")
 }
 
 // loadHandshake reads name.handshakestart, .timestamp, .mrenclave and
 // .advisories.
-func loadHandshake(t *testing.T, name string) recordedHandshake {
+func loadHandshake(t testing.TB, name string) recordedHandshake {
 	t.Helper()
 	var h recordedHandshake
 	msg := readTestdata(t, name+".handshakestart")

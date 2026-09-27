@@ -1,0 +1,60 @@
+name: fuzz
+
+# Runs every native Go fuzz target (scripts/fuzz.sh, docs/fuzzing.md) for a
+# short budget on pull requests and pushes to main, and for a longer one
+# weekly. The seed corpora already run as unit tests in go.yml; this adds the
+# mutation phase. A failing target's reproducer is uploaded as an artifact:
+# commit it under <pkg>/testdata/fuzz/<FuzzName>/ with the fix, so it stays a
+# regression test.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    # Sundays 03:00 UTC.
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+    inputs:
+      fuzztime:
+        description: Budget per fuzz target (go test -fuzztime)
+        required: false
+        default: 2m
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fuzz-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  fuzz:
+    name: fuzz (shard ${{ matrix.shard }}/4)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    env:
+      FUZZ_SHARD: ${{ matrix.shard }}/4
+      FUZZTIME: ${{ inputs.fuzztime || (github.event_name == 'schedule' && '2m') || '10s' }}
+      FUZZ_ARTIFACT_DIR: ${{ github.workspace }}/fuzz-reproducers
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          check-latest: true
+      - name: fuzz
+        run: scripts/fuzz.sh
+      - name: upload reproducers
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fuzz-reproducers-shard-${{ matrix.shard }}
+          path: fuzz-reproducers/
+          if-no-files-found: ignore
+          retention-days: 30

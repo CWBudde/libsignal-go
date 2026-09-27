@@ -194,8 +194,9 @@ func TestSealV2MixedIdentityKeysInGroup(t *testing.T) {
 }
 
 // FuzzDecryptToUSMC confirms the v1 and v2 sealed-sender decrypt entry never
-// panics on arbitrary bytes. Seeds with a valid v1 and a valid v2 received
-// message plus a fresh recipient key.
+// panics on arbitrary bytes, with and without sender-certificate validation.
+// Seeds with a valid v1 and a valid v2 received message plus a fresh
+// recipient key.
 func FuzzDecryptToUSMC(f *testing.F) {
 	recipient, err := seedKey(160)
 	if err == nil {
@@ -208,8 +209,13 @@ func FuzzDecryptToUSMC(f *testing.F) {
 	f.Add([]byte{0x11})
 	f.Add([]byte{0x22})
 	f.Add([]byte{0x23, 0x01})
+	// buildSealedSeeds signs with trust root seedKey(161) and certificates
+	// that expire at 2_000_000_000_000 ms.
+	trustRoot, _ := seedKey(161)
+	validationTime := time.UnixMilli(1_900_000_000_000)
 	f.Fuzz(func(_ *testing.T, data []byte) {
 		_, _ = DecryptToUSMC(data, recipient)
+		_, _ = DecryptToUSMCAndValidate(data, recipient, trustRoot.PublicKey, validationTime)
 	})
 }
 
