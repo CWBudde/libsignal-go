@@ -80,26 +80,26 @@ func pkcs7Pad(data []byte) []byte {
 	return out
 }
 
-// pkcs7Unpad removes PKCS#7 padding. It validates the padding in constant time
-// with respect to the padding byte value to avoid a padding-oracle side channel,
-// and returns ok=false on any malformed padding.
+// pkcs7Unpad removes PKCS#7 padding and returns ok=false on any malformed
+// padding. It branches only on the (public) length: the pad range and the
+// padding bytes are checked in constant time with respect to the padding byte
+// value, to avoid a padding-oracle side channel.
 func pkcs7Unpad(data []byte) ([]byte, bool) {
 	n := len(data)
 	if n == 0 || n%blockSize != 0 {
 		return nil, false
 	}
-	pad := int(data[n-1])
-	if pad == 0 || pad > blockSize {
-		return nil, false
-	}
-	// Constant-time check that the last `pad` bytes all equal `pad`. We always
-	// scan a full block so the work is independent of the (secret) pad value.
-	good := 1
+	padByte := data[n-1]
+	pad := int(padByte)
+	good := subtle.ConstantTimeLessOrEq(1, pad) & subtle.ConstantTimeLessOrEq(pad, blockSize)
+	// Check that the last `pad` bytes all equal `pad`. We always scan a full
+	// block so the work is independent of the pad value.
 	for i := 0; i < blockSize; i++ {
 		b := data[n-blockSize+i]
-		// This position is part of the padding when i >= blockSize-pad.
-		inPad := subtle.ConstantTimeLessOrEq(blockSize-pad, i)
-		isPadByte := subtle.ConstantTimeByteEq(b, byte(pad))
+		// This position is part of the padding when i >= blockSize-pad. Written
+		// as blockSize <= i+pad so that both operands stay non-negative.
+		inPad := subtle.ConstantTimeLessOrEq(blockSize, i+pad)
+		isPadByte := subtle.ConstantTimeByteEq(b, padByte)
 		// Outside the padding region, contribute 1 (no constraint).
 		good &= subtle.ConstantTimeSelect(inPad, isPadByte, 1)
 	}

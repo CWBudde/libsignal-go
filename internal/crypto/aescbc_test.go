@@ -119,3 +119,42 @@ func TestCBCRoundTripVariousLengths(t *testing.T) {
 		}
 	}
 }
+
+// referenceUnpad is the plain (variable-time) PKCS#7 check pkcs7Unpad must agree with.
+func referenceUnpad(data []byte) ([]byte, bool) {
+	if len(data) == 0 || len(data)%blockSize != 0 {
+		return nil, false
+	}
+	pad := int(data[len(data)-1])
+	if pad == 0 || pad > blockSize {
+		return nil, false
+	}
+	for _, b := range data[len(data)-pad:] {
+		if int(b) != pad {
+			return nil, false
+		}
+	}
+	return data[:len(data)-pad], true
+}
+
+// TestPKCS7UnpadMatchesReference checks every final byte value, each with correct
+// padding and with each padding byte corrupted in turn.
+func TestPKCS7UnpadMatchesReference(t *testing.T) {
+	for last := range 256 {
+		for corrupt := -1; corrupt < blockSize-1; corrupt++ {
+			data := bytes.Repeat([]byte{0xaa}, 2*blockSize)
+			tail := data[blockSize:]
+			for i := range tail {
+				tail[i] = byte(last)
+			}
+			if corrupt >= 0 {
+				tail[corrupt] ^= 0x01
+			}
+			got, gotOK := pkcs7Unpad(data)
+			want, wantOK := referenceUnpad(data)
+			if gotOK != wantOK || !bytes.Equal(got, want) {
+				t.Fatalf("last=%d corrupt=%d: got (%x, %v), want (%x, %v)", last, corrupt, got, gotOK, want, wantOK)
+			}
+		}
+	}
+}
