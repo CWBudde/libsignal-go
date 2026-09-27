@@ -48,16 +48,15 @@ ciphertexts, attestation evidence and anything else sent in the clear are public
 
 ## Result
 
-Three findings: two fixed here (CT-01, CT-03), one open (CT-02). The IDs are go-signal's
-(`docs/constant-time-review.md`, PLAN.md §10.2). CT-02 blocks the pure-Go backend from
-becoming go-signal's default, and it has to be fixed in go-signal's build configuration. The package-level reviews in
+Three findings: two fixed here (CT-01, CT-03), and CT-02 fixed in go-signal's build
+configuration. The IDs are go-signal's (`docs/constant-time-review.md`, PLAN.md §10.2). The package-level reviews in
 `poksho/CONSTANT_TIME.md`, `zkcredential/CONSTANT_TIME.md`, `zkgroup/CONSTANT_TIME.md`
 and `zkgroup/zkcrypto/CONSTANT_TIME.md` still apply to those packages.
 
 | Site | Finding | Resolution |
 | --- | --- | --- |
 | `internal/mlkem768incr/incremental.go` `FixEncapsStateEndianness` | **Fixed (CT-01).** It scanned the secret e₂ noise coefficients up to the first decisive value, then branched and allocated depending on it. `toBalanced`/`fromBalanced` also branched on secret coefficients and used a signed `% q`. `Encapsulate2` runs it on every SPQR completion. | Fixed: all 256 coefficients are classified with `subtle` masks, and the result is always a fresh copy swapped under a mask (the input is never modified). `toBalanced` subtracts q under a sign mask; `fromBalanced` adds 10q and uses the Barrett `fieldReduce`. `ct_test.go` compares them with the branching references: every decisive position × 11 value classes (correct, swapped, unexpected) with arbitrary later values, the all-ambiguous state, all 3329 and all 65536 conversion inputs. Optimized Go 1.26 output (amd64 `GOAMD64=v1`, arm64) of `FixEncapsStateEndianness`, `polyFromRawI16LE` and `encodeEncapsState` has no division and uses `SETcc`/`CMOV`/`CSET`/`CSEL`/`SAR` on coefficients; its conditional jumps test the length, loop counters and bounds. |
-| `crypto/aes`, used by the CBC, CTR, GCM and GCM-SIV paths | **Open (CT-02).** Go's generic AES indexes tables with secret values. The `purego` build tag, which go-signal uses to select its backend, also removes the standard library's assembly (`aes_asm.go` is `!purego`), so AES is table-driven even on CPUs with AES-NI or ARMv8 AES. | To fix in go-signal and the mautrix fork: select the backend with a tag other than `purego`, and require AES hardware or a reviewed constant-time fallback. This module can't fix it by itself. |
+| `crypto/aes`, used by the CBC, CTR, GCM and GCM-SIV paths | **Fixed in the consumer (CT-02).** Go's generic AES indexes tables with secret values, and the `purego` build tag removes the standard library's assembly (`aes_asm.go` is `!purego`), so AES is table-driven even on CPUs with AES-NI or ARMv8 AES. | go-signal and its mautrix fork now select the backend with `libsignal_go` (`v0.2609.0-purego.7`), assert the AES assembly in release builds, and warn on CPUs without AES instructions. Callers of this module that build with `purego` still get the table AES. |
 | `internal/crypto/aescbc.go` `pkcs7Unpad` | **Fixed (CT-03).** The padding bytes were checked in constant time, but the pad value's range (`pad == 0 \|\| pad > 16`) returned early, which branched on the last plaintext byte. | Fixed: the range check is folded into the same constant-time mask, and only the length is branched on. `TestPKCS7UnpadMatchesReference` checks all 256 final byte values, each correct and with each padding byte corrupted, against a plain reference. Optimized Go 1.26 output (amd64 `GOAMD64=v1`, arm64) uses only `SETcc`/`CMOV`/`CSEL` on the pad byte; it branches on the length, the fixed 16-step loop counter and once on the overall result. `DecryptCBC` clears the decrypted buffer when the padding is rejected. |
 
 The early return was not reachable as an oracle: all three callers (`session/cipher.go`,
